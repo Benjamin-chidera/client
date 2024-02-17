@@ -3,7 +3,7 @@ import { reviews } from "../../data/Reviews";
 
 export const ReviewsCard = () => {
   return (
-    <div className=" space-y-10 bg-[#181818] p-5">
+    <div className=" space-y-10">
       {reviews.map((r) => {
         const { id, name, body, rating, time } = r;
 

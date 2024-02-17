@@ -1,4 +1,4 @@
-import home from "../assets/Image/home.png"
+import home from "../assets/Image/home.png";
 
 export const property = [
   {
@@ -19,6 +19,7 @@ export const property = [
       garage: true,
       squareFeet: 5,
     },
+    propertyType: "Sold",
   },
   {
     _id: 2,
@@ -38,6 +39,7 @@ export const property = [
       garage: false,
       squareFeet: 0,
     },
+    propertyType: "Available",
   },
   {
     _id: 3,
@@ -57,6 +59,7 @@ export const property = [
       garage: true,
       squareFeet: 5,
     },
+    propertyType: "Sold",
   },
   {
     _id: 4,
@@ -76,6 +79,7 @@ export const property = [
       garage: true,
       squareFeet: 3,
     },
+    propertyType: "Available",
   },
   {
     _id: 5,
@@ -95,6 +99,7 @@ export const property = [
       garage: false,
       squareFeet: 5,
     },
+    propertyType: "Sold",
   },
   {
     _id: 6,
@@ -114,6 +119,7 @@ export const property = [
       garage: false,
       squareFeet: 0,
     },
+    propertyType: "Sold",
   },
   {
     _id: 7,
@@ -133,6 +139,7 @@ export const property = [
       garage: false,
       squareFeet: 5,
     },
+    propertyType: "Sold",
   },
   {
     _id: 8,
@@ -152,6 +159,7 @@ export const property = [
       garage: false,
       squareFeet: 5,
     },
+    propertyType: "Available",
   },
   {
     _id: 9,
@@ -171,6 +179,7 @@ export const property = [
       garage: true,
       squareFeet: 4,
     },
+    propertyType: "Available",
   },
   {
     _id: 10,
@@ -190,5 +199,6 @@ export const property = [
       garage: true,
       squareFeet: 6,
     },
+    propertyType: "Sold",
   },
 ];
