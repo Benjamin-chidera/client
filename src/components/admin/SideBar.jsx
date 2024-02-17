@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 
 export const SideBar = () => {
   return (
-    <div className="bg-[#181818] z-10 h-screen w-[253px] text-center space-y-10 hidden md:block container fixed top-24 pt-5">
+    <div className="bg-[#181818] z-10 h-screen w-[253px] text-center space-y-14 hidden md:block container fixed top-24 pt-5 ">
       <div className="active:bg-black">
         <Link
-          to={"/admin/dashboard"}
-          className="py-3 focus:text-white active:text-[#F78214] active:bg-black text-[#A5A5A5] cursor-pointer"
+          to={"/admin"}
+          className="py-3 focus:text-[#F78214] active:text-[#F78214] active:bg-black text-[#A5A5A5] cursor-pointer"
         >
           <img
             src={dash}
@@ -23,7 +23,7 @@ export const SideBar = () => {
       <div className="active:bg-black">
         <Link
           to={"/admin/all-properties"}
-          className="py-3 focus:text-white active:bg-black active:text-[#F78214] text-[#A5A5A5] cursor-pointer "
+          className="py-3 focus:text-[#F78214] active:bg-black active:text-[#F78214] text-[#A5A5A5] cursor-pointer "
         >
           <img
             src={all}
@@ -36,7 +36,7 @@ export const SideBar = () => {
 
       <div className="active:bg-black">
         <Link
-          className="py-3 focus:text-white active:text-[#F78214] active:bg-black text-[#A5A5A5] cursor-pointer"
+          className="py-3 focus:text-[#F78214] active:text-[#F78214] active:bg-black text-[#A5A5A5] cursor-pointer"
           to={"/admin/add-new-properties"}
         >
           <img
@@ -48,7 +48,7 @@ export const SideBar = () => {
         </Link>
       </div>
 
-      <p className="text-[#A5A5A5] pt-40">Copyright &copy;2024 Yemsays</p>
+      <p className="text-[#A5A5A5] pt-20">Copyright &copy;2024 Yemsays</p>
     </div>
   );
 };

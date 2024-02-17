@@ -5,6 +5,7 @@ import admin from "./../../assets/Image/admin.png";
 import dash from "../../assets/Image/dash.png";
 import all from "../../assets/Image/all.png";
 import add from "../../assets/Image/add.png";
+import { IoSearchSharp } from "react-icons/io5";
 
 import { Squash as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
@@ -16,6 +17,11 @@ export const Navbar = () => {
     setOpen(false);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOpen(false);
+  };
+
   return (
     <nav>
       <main className=" flex justify-between px-5 bg-[#181818] h-24 items-center fixed w-full top-0 z-10">
@@ -23,8 +29,17 @@ export const Navbar = () => {
           <img src={logo} alt="Company-Logo" />
 
           <div className="hidden md:block">
-            <form>
-              <input type="text" />
+            <form className="relative" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Search Here"
+                className="w-[391px] h-[35px] ps-3 pe-8 bg-transparent border border-gray-600 rounded-2xl relative outline-none"
+              />
+
+              <IoSearchSharp
+                className="absolute top-2 right-3"
+                color="#F78214"
+              />
             </form>
           </div>
         </div>
@@ -47,7 +62,7 @@ export const Navbar = () => {
       </main>
 
       {isOpen && (
-        <section className="p-5 bg-[#403b3b] h-screen w-[200px] fixed top-0 md:hidden z-10">
+        <section className="p-5 bg-[#403b3b] h-screen w-[250px] fixed top-0 md:hidden z-10 ">
           {/* menu bar for admin-mobile devices */}
           <div className="flex gap-3 items-center">
             <img src={bell} alt="" />
@@ -61,15 +76,24 @@ export const Navbar = () => {
           </div>
 
           <div className="mt-5">
-            <form>
-              <input type="text" className="max-w-[100%]" />
+            <form className="relative" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Search Here"
+                className="w-[391px] h-[35px] max-w-full ps-3 pe-8 bg-transparent border border-gray-600 rounded-2xl relative outline-none"
+              />
+
+              <IoSearchSharp
+                className="absolute top-2 right-3"
+                color="#F78214"
+              />
             </form>
           </div>
 
-          <section className="mt-5 text-center space-y-5">
+          <section className="mt-5 text-center space-y-14">
             <div className="active:bg-black">
               <Link
-                to={"/admin/dashboard"}
+                to={"/admin"}
                 className="py-3 focus:text-white active:text-[#F78214] active:bg-black text-[#A5A5A5] cursor-pointer"
                 onClick={handleClose}
               >

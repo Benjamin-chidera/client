@@ -17,6 +17,11 @@ import { Button } from "@material-tailwind/react";
 import { IoCameraOutline } from "react-icons/io5";
 
 export const EditProperty = () => {
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <section className="container mx-auto w-full">
       <div className="flex justify-between items-center flex-wrap">
@@ -34,7 +39,7 @@ export const EditProperty = () => {
           </div>
         </header>
       </div>
-      <form>
+      <form onSubmit={handleEdit}>
         <main>
           <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] p-5 rounded-lg">
             <div>
@@ -132,7 +137,8 @@ export const EditProperty = () => {
                   <label className="text-[#8D8D8D] text-xs">Tags</label>
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs"
+                    placeholder="Select Tags"
                   />
                 </div>
                 <div className="mb-4 flex flex-col">
@@ -142,7 +148,7 @@ export const EditProperty = () => {
                   <select
                     name=""
                     id=""
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] h-[43px] w-[150px] py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] h-[43px] w-[150px] md:w-[200px] py-2 px-3 outline-none my-1"
                   >
                     <option value="" className=" bg-black">
                       Land
@@ -154,13 +160,14 @@ export const EditProperty = () => {
                 </div>
               </section>
 
-              <section className="flex justify-between">
+              <section className="flex gap-5">
                 <div className="mb-4 flex flex-col">
                   <label className="text-[#8D8D8D] text-xs">Title</label>
 
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[180px] py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[180px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs"
+                    placeholder="Select Title"
                   />
                 </div>
 
@@ -169,7 +176,8 @@ export const EditProperty = () => {
 
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] md:w-[200px] py-2 px-3 outline-none my-1 placeholder:text-xs"
+                    placeholder="Select Price"
                   />
                 </div>
               </section>
@@ -179,7 +187,8 @@ export const EditProperty = () => {
 
                 <input
                   type="text"
-                  className=" bg-transparent border rounded-md border-[#8D8D8D] w-[350px] py-2 px-3 outline-none my-1"
+                  className=" bg-transparent border rounded-md border-[#8D8D8D] w-[350px] md:w-[540px] py-2 px-3 outline-none my-1 placeholder:text-xs"
+                  placeholder="Select Location"
                 />
               </div>
 
@@ -189,7 +198,8 @@ export const EditProperty = () => {
 
                   <textarea
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 h-[320px] resize-none"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 h-[320px] resize-none placeholder:text-xs"
+                    placeholder="Select Descriptions..."
                   />
                 </div>
               </div>
@@ -200,28 +210,32 @@ export const EditProperty = () => {
                   <div className=" relative">
                     <input
                       type="number"
-                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6"
+                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
+                      placeholder="Select Bedrooms"
                     />
                     <IoBedOutline className="absolute top-4 left-2" />
                   </div>
                   <div className=" relative">
                     <input
                       type="number"
-                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6"
+                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
+                      placeholder="Select Bathrooms"
                     />
                     <LuBath className="absolute top-4 left-2" />
                   </div>
                   <div className=" relative">
                     <input
                       type="text"
-                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6"
+                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
+                      placeholder="Select Garage"
                     />
                     <GiHomeGarage className="absolute top-4 left-2" />
                   </div>
                   <div className=" relative">
                     <input
                       type="number"
-                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6"
+                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
+                      placeholder="Select Square Feet"
                     />
                     <FaRegSquare className="absolute top-4 left-2" />
                   </div>
@@ -270,7 +284,8 @@ export const EditProperty = () => {
 
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
+                    placeholder="Select Title"
                   />
                 </div>
                 <div className="mb-4 flex flex-col mt-3 text-start">
@@ -280,7 +295,8 @@ export const EditProperty = () => {
 
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
+                    placeholder="Select What'sApp number"
                   />
                 </div>
                 <div className="mb-4 flex flex-col mt-3 text-start">
@@ -290,7 +306,8 @@ export const EditProperty = () => {
 
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
+                    placeholder="Select Phone Number"
                   />
                 </div>
               </div>
