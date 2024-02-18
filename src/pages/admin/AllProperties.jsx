@@ -10,7 +10,7 @@ export const AllProperties = () => {
   };
 
   return (
-    <main className=" text-white container mx-auto w-full">
+    <main className=" text-white container mx-auto w-full overflow-x-hidden">
       <header className="flex items-center justify-between">
         <h1 className="font-semibold text-2xl">Properties</h1>
         <div className="flex gap-2 items-center">
@@ -35,11 +35,11 @@ export const AllProperties = () => {
             </div>
           </section>
 
-          <section className="flex items-center gap-10">
+          <section className="flex items-center gap-5 ">
             <select
               name=""
               id=""
-              className="bg-[#181818] text-[#F78214] w-[80px] h-[60px]  rounded-2xl outline-none text-sm"
+              className="bg-[#181818] text-[#F78214] w-[80px] ps-3 h-[50px]  rounded-2xl outline-none text-sm"
             >
               <option value="">Land</option>
               <option value="">House</option>

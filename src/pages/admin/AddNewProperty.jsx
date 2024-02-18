@@ -1,19 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiArrowDropLeftFill } from "react-icons/ri";
 import { PiHouse } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import d1 from "../../assets/Image/d1.png";
+// import d1 from "../../assets/Image/d1.png";
 import black from "../../assets/Image/black.png";
-import d2 from "../../assets/Image/d2.png";
+// import d2 from "../../assets/Image/d2.png";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
 import { IoBedOutline } from "react-icons/io5";
 import { Button } from "@material-tailwind/react";
 import { IoCameraOutline } from "react-icons/io5";
+import ReactPlayer from "react-player";
 
 export const AddNewProperty = () => {
-  
+  const [imgPreview, setImgPreview] = useState({
+    img1: black,
+    img2: black,
+    img3: black,
+    img4: black,
+    img5: black,
+    avatar: black,
+    video:
+      "https://res.cloudinary.com/dlb8nbz13/video/upload/c_scale,h_390,q_91,w_618/v1706177257/WhatsApp_Video_2024-01-25_at_11.05.54_eb4762c7_paf2hg.mp4",
+  });
+
+  const handleChange = (e) => {
+    // Handle changes if needed
+  };
+
+  const handleImage = (id) => {
+    let fileInput = document.getElementById(id);
+    fileInput.click();
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setImgPreview((prevState) => ({
+          ...prevState,
+          [id]: URL.createObjectURL(file),
+        }));
+      }
+    };
+  };
+
   const handleAddNewProperty = (e) => {
     e.preventDefault();
   };
@@ -59,11 +88,25 @@ export const AddNewProperty = () => {
 
           <section className="flex gap-3">
             <div className=" relative cursor-pointer">
-              <img
-                src={black}
-                alt=""
+              <div
+                onClick={() => handleImage("img1")}
                 className=" object-cover w-[176px] h-[224px] md:w-[560px] md:h-[373px] relative"
-              />
+              >
+                <input
+                  type="file"
+                  style={{ display: "none" }}
+                  accept="image/*"
+                  id="img1"
+                  onChange={handleChange} // If you need handleChange, you can keep it here
+                />
+                {imgPreview.img1 && (
+                  <img
+                    src={imgPreview.img1}
+                    alt="Preview"
+                    className=" object-cover w-[176px] h-[224px] md:w-[560px] md:h-[373px] relative"
+                  />
+                )}
+              </div>
 
               <div className="text-center absolute top-[40%] left-[20%] md:top-[40%] md:left-[35%]">
                 <IoCameraOutline className="w-[40px] h-[40px] md:w-[70px] mx-auto md:h-[70px]" />
@@ -75,11 +118,26 @@ export const AddNewProperty = () => {
 
             <div className=" object-cover flex flex-col gap-3">
               <div className=" relative cursor-pointer">
-                <img
-                  src={black}
-                  alt=""
-                  className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] relative"
-                />
+                {/* img-col-1 */}
+                <div
+                  onClick={() => handleImage("img2")}
+                  className=" object-cover w-[176px] h-[66px] md:w-[320px] md:h-[116px] relative"
+                >
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    id="img2"
+                    onChange={handleChange}
+                  />
+                  {imgPreview.img2 && (
+                    <img
+                      src={imgPreview.img2}
+                      alt="Preview"
+                      className=" object-cover w-[176px] h-[66px] md:w-[320px] md:h-[116px] relative"
+                    />
+                  )}
+                </div>
 
                 <div className="text-center absolute top-[20%] left-[20%] md:top-[20%] md:left-[35%]">
                   <IoCameraOutline className="w-[20px] h-[20px] md:w-[40px] mx-auto md:h-[40px]" />
@@ -89,11 +147,26 @@ export const AddNewProperty = () => {
                 </div>
               </div>
               <div className=" relative cursor-pointer">
-                <img
-                  src={black}
-                  alt=""
-                  className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] relative"
-                />
+                {/* img-col-2 */}
+                <div
+                  onClick={() => handleImage("img3")}
+                  className=" object-cover w-[176px] h-[66px] md:w-[320px] md:h-[116px] relative"
+                >
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    id="img3"
+                    onChange={handleChange}
+                  />
+                  {imgPreview.img3 && (
+                    <img
+                      src={imgPreview.img3}
+                      alt="Preview"
+                      className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] relative"
+                    />
+                  )}
+                </div>
 
                 <div className="text-center absolute top-[20%] left-[20%] md:top-[20%] md:left-[35%]">
                   <IoCameraOutline className="w-[20px] h-[20px] md:w-[40px] mx-auto md:h-[40px]" />
@@ -103,11 +176,26 @@ export const AddNewProperty = () => {
                 </div>
               </div>
               <div className=" relative cursor-pointer">
-                <img
-                  src={black}
-                  alt=""
-                  className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] relative"
-                />
+                {/* img-col-3 */}
+                <div
+                  onClick={() => handleImage("img4")}
+                  className=" object-cover w-[176px] h-[66px] md:w-[320px] md:h-[116px] relative"
+                >
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    id="img4"
+                    onChange={handleChange}
+                  />
+                  {imgPreview.img4 && (
+                    <img
+                      src={imgPreview.img4}
+                      alt="Preview"
+                      className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] relative"
+                    />
+                  )}
+                </div>
 
                 <div className="text-center absolute top-[20%] left-[20%] md:top-[20%] md:left-[35%]">
                   <IoCameraOutline className="w-[20px] h-[20px] md:w-[40px] mx-auto md:h-[40px]" />
@@ -239,11 +327,32 @@ export const AddNewProperty = () => {
               <div className="border p-3 rounded-xl md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
                 <p className="text-xl mb-5">Property Video</p>
                 <div className=" relative cursor-pointer">
-                  <img
-                    src={black}
-                    alt=""
+                  <div
+                    onClick={() => handleImage("video")}
                     className=" object-cover w-full h-[224px] md:h-[373px] relative"
-                  />
+                  >
+                    <input
+                      type="file"
+                      style={{ display: "none" }}
+                      accept="video/*"
+                      id="video"
+                      onChange={handleChange}
+                    />
+
+                    {imgPreview.video && (
+                      // <video className="h-full w-full rounded-lg" controls>
+                      //   <source src={imgPreview.video} type="video/mp4" />
+                      // </video>
+
+                      <div className=" object-cover w-full h-[224px] md:h-[373px] relative">
+                        <ReactPlayer
+                          url={imgPreview.video}
+                          width={"100%"}
+                          controls
+                        />
+                      </div>
+                    )}
+                  </div>
 
                   <div className="text-center absolute top-[40%] left-[35%] md:top-[40%] md:left-[30%]">
                     <IoCameraOutline className="w-[40px] h-[40px] md:w-[70px] mx-auto md:h-[70px]" />
@@ -260,11 +369,25 @@ export const AddNewProperty = () => {
                 {/* sale support */}
 
                 <div className=" relative cursor-pointer">
-                  <img
-                    src={black}
-                    alt=""
+                  <div
+                    onClick={() => handleImage("avatar")}
                     className=" object-cover w-[114px] mx-auto h-[114px] md:h-[114px] relative rounded-full"
-                  />
+                  >
+                    <input
+                      type="file"
+                      style={{ display: "none" }}
+                      accept="image/*"
+                      id="avatar"
+                      onChange={handleChange}
+                    />
+                    {imgPreview.avatar && (
+                      <img
+                        src={imgPreview.avatar}
+                        alt="Preview"
+                        className=" object-cover w-[114px] mx-auto h-[114px] md:h-[114px] relative rounded-full"
+                      />
+                    )}
+                  </div>
 
                   <div className="text-center absolute top-[37%] left-[45%] md:top-[35%] md:left-[43%]">
                     <IoCameraOutline className="w-[30px] h-[30px] md:w-[40px] mx-auto md:h-[40px]" />

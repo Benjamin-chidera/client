@@ -9,6 +9,8 @@ import { IoSearchSharp } from "react-icons/io5";
 
 import { Squash as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
+import { Unsold } from "../Modal/Admin/Unsold";
+import { UnsoldSuccess } from "../Modal/Admin/UnsoldSuccess";
 
 export const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -44,7 +46,10 @@ export const Navbar = () => {
           </div>
         </div>
 
-        <div className="hidden md:flex gap-3 items-center">
+        {/* <Unsold/> */}
+        {/* <UnsoldSuccess /> */}
+
+        <div className="hidden lg:flex gap-3 items-center">
           <img src={bell} alt="" />
 
           <div>
@@ -62,7 +67,7 @@ export const Navbar = () => {
       </main>
 
       {isOpen && (
-        <section className="p-5 bg-[#403b3b] h-screen w-[250px] fixed top-0 md:hidden z-10 ">
+        <section className="p-5 bg-[#403b3b] h-full w-[250px] fixed top-0 md:hidden z-10 ">
           {/* menu bar for admin-mobile devices */}
           <div className="flex gap-3 items-center">
             <img src={bell} alt="" />

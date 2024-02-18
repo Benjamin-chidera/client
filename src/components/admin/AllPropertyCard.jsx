@@ -24,7 +24,7 @@ export const AllPropertyCard = () => {
 
   return (
     <main className="">
-      <div className=" grid md:grid-cols-3 w-full bg-[#181818] my-5 px-5">
+      <div className=" grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 md:place-items-center w-full bg-[#181818] place-items-center mt-3">
         {property.map((p) => {
           const {
             image,
