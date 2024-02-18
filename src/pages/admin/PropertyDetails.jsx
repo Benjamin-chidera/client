@@ -55,11 +55,11 @@ export const PropertyDetails = () => {
       </section>
 
       <section className="flex gap-3">
-        <div>
+        <div className="">
           <img
             src={d1}
             alt=""
-            className=" object-cover w-[176px] h-[224px] md:w-[560px] md:h-[373px]"
+            className=" object-cover w-[176px] h-[224px] md:w-[560px] md:h-[373px] pic-one"
           />
         </div>
 
@@ -67,17 +67,17 @@ export const PropertyDetails = () => {
           <img
             src={d2}
             alt=""
-            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px]"
+            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
           <img
             src={d2}
             alt=""
-            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px]"
+            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
           <img
             src={d2}
             alt=""
-            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px]"
+            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
         </div>
       </section>

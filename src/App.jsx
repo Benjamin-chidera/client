@@ -10,6 +10,7 @@ import { EditProperty } from "./pages/admin/EditProperty";
 import { SignUp } from "./pages/admin/SignUp";
 import { SignIn } from "./pages/admin/signIn";
 import { Unsold } from "./components/Modal/Admin/Unsold";
+import { ErrorPage } from "./pages/admin/ErrorPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="add-new-properties" element={<AddNewProperty />} />
             <Route path="propertyDetails" element={<PropertyDetails />} />
             <Route path="edit-property" element={<EditProperty />} />
+          <Route path="*" element={<ErrorPage />} />
           </Route>
           <Route path="admin/signUp" element={<SignUp />} />
           <Route path="admin/signIn" element={<SignIn />} />
