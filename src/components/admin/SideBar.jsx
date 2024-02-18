@@ -48,7 +48,7 @@ export const SideBar = () => {
         </Link>
       </div>
 
-      <p className="text-[#A5A5A5] pt-20">Copyright &copy;2024 Yemsays</p>
+      <p className="text-[#A5A5A5] pt-[50px]">Copyright &copy;2024 Yemsays</p>
     </div>
   );
 };

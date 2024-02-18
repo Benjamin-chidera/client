@@ -14,6 +14,7 @@ import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
 import { property } from "../../data/Property";
+import { Link } from "react-router-dom";
 
 export function PropertyCard() {
   const two = property.slice(0, 2);
@@ -95,9 +96,12 @@ export function PropertyCard() {
                 </div>
               </section>
 
-              <Button className="bg-[#F78214] w-[314px] max-w-[100%]">
+              <Link
+                className="bg-[#F78214] max-w-[100%] text-white py-3 rounded-xl px-[85px] mx-auto"
+                to={"/admin/propertyDetails"}
+              >
                 View Details
-              </Button>
+              </Link>
             </CardFooter>
           </Card>
         );

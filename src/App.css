@@ -166,25 +166,25 @@ body {
   }
 }
 
-@media (min-width: 1320px) {
+@media (min-width: 1100px) {
   .pic-one {
-    width: 550px;
+    width: 450px;
     height: 400px;
     max-width: 100%;
   }
 
   .pic-two {
-    width: 480px;
+    width: 380px;
     height: 125px;
     max-width: 100%;
   }
 
   .tags {
-    width: 380px !important;
+    width: 270px !important;
   }
 
   .location {
-    width: 600px !important;
+    width: 485px !important;
   }
 
   .pic-one-cam {

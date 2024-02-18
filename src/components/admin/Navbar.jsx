@@ -53,8 +53,8 @@ export const Navbar = () => {
           <img src={bell} alt="" />
 
           <div>
-            <h1>Chidera</h1>
-            <p>Admin</p>
+            <h1 className="font-semibold text-lg">Chidera</h1>
+            <p className="text-sm text-[#BDB7B7]">Admin</p>
           </div>
 
           <img src={admin} alt="admin-pic" />
