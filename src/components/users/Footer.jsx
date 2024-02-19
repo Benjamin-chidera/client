@@ -90,7 +90,7 @@ export const Footer = () => {
         </div>
       </main>
       <div className="w-[300px] md:w-[1100px] h-0.5 mx-auto mt-7 bg-[#8D8D8D]" />
-      <p className="mt-5 text-center text-sm text-[#8D8D8D]">
+      <p className="mt-6 text-center text-sm text-[#8D8D8D]">
         &copy; 2023 Yemsays All Rights Reserved
       </p>
     </footer>
