@@ -12,6 +12,7 @@ import { SignIn } from "./pages/admin/signIn";
 import { Unsold } from "./components/Modal/Admin/Unsold";
 import { ErrorPage } from "./pages/admin/ErrorPage";
 import { UserLayout } from "./components/users/UserLayout";
+import { Home } from "./pages/users/Home";
 
 function App() {
   return (
@@ -33,7 +34,9 @@ function App() {
 
           {/* this is for user */}
 
-          <Route path="/" element={<UserLayout />}></Route>
+          <Route path="/" element={<UserLayout />}>
+            <Route index element={<Home />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
@@ -41,3 +44,17 @@ function App() {
 }
 
 export default App;
+
+
+    // <div className=" relative">
+    //   <img
+    //     src={us1}
+    //     alt=""
+    //     className="w-[250px] md:w-[350px] h-[350px] md:h-[500px] object-cover md:rounded-[40px] relative"
+    //   />
+    //   <img
+    //     src={us2}
+    //     alt=""
+    //     className="w-[200px] md:w-[250px] h-[200px] object-cover md:rounded-[20px] absolute bottom-[-50px] md:bottom-[-60px] right-0 md:right-[-60px]"
+    //   />
+    // </div>;
