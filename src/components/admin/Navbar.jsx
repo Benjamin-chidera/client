@@ -9,8 +9,6 @@ import { IoSearchSharp } from "react-icons/io5";
 
 import { Squash as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
-import { Unsold } from "../Modal/Admin/Unsold";
-import { UnsoldSuccess } from "../Modal/Admin/UnsoldSuccess";
 
 export const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -45,9 +43,6 @@ export const Navbar = () => {
             </form>
           </div>
         </div>
-
-        {/* <Unsold/> */}
-        {/* <UnsoldSuccess /> */}
 
         <div className="hidden lg:flex gap-3 items-center">
           <img src={bell} alt="" />

@@ -11,11 +11,11 @@ import { SignUp } from "./pages/admin/SignUp";
 import { SignIn } from "./pages/admin/signIn";
 import { Unsold } from "./components/Modal/Admin/Unsold";
 import { ErrorPage } from "./pages/admin/ErrorPage";
+import { UserLayout } from "./components/users/UserLayout";
 
 function App() {
   return (
     <div>
-     
       <BrowserRouter>
         <Routes>
           {/* this is for admin */}
@@ -25,11 +25,15 @@ function App() {
             <Route path="add-new-properties" element={<AddNewProperty />} />
             <Route path="propertyDetails" element={<PropertyDetails />} />
             <Route path="edit-property" element={<EditProperty />} />
-          <Route path="*" element={<ErrorPage />} />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
           <Route path="admin/signUp" element={<SignUp />} />
           <Route path="admin/signIn" element={<SignIn />} />
           {/* this is for admin */}
+
+          {/* this is for user */}
+
+          <Route path="/" element={<UserLayout />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
