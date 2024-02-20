@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <footer className="mb-10">
-      <section className="flex justify-center items-center flex-wrap p-5 gap-5 rounded-lg md:w-[1000px] mx-auto bg-[#F78214] mb-5">
+    <footer className="my-10">
+      <section className="flex justify-center items-center flex-wrap p-5 gap-5 rounded-lg w-[280px] md:w-[1000px] mx-auto bg-[#F78214] mb-5">
         <div>
           <h1 className="font-semibold md:text-xl">
             Do you have any questions?
@@ -21,11 +21,11 @@ export const Footer = () => {
           <form className=" top-0 left-0 right-0 bottom-0">
             <input
               type="email"
-              className="w-[300px] ps-4 py-3 md:w-[482px] max-w-full outline-none placeholder:text-[#8D8D8D] relative top-0 left-0 right-0 bottom-0 text-[#8D8D8D] pe-32 rounded-lg"
+              className="w-[250px] ps-4 py-3 md:w-[482px] max-w-full outline-none placeholder:text-[#8D8D8D] relative top-0 left-0 right-0 bottom-0 text-[#8D8D8D] pe-24 md:pe-32 rounded-lg"
               placeholder="Enter email address"
             />
             <button
-              className="bg-[#F78214] absolute right-1 top-1 rounded-lg py-2 px-7"
+              className="bg-[#F78214] absolute right-1 top-1.5 rounded-lg text-sm py-2 px-4  md:py-2 md:px-7"
               type="submit"
             >
               Continue

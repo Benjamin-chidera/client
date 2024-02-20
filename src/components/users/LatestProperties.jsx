@@ -18,12 +18,12 @@ export const LatestProperties = () => {
         return (
           <div
             key={_id}
-            className="flex gap-5 bg-white p-3 md:p-5 w-[300px] md:w-[529px] md:h-[230px] rounded-3xl"
+            className="md:flex gap-5 bg-white p-3 md:py-5 w-[240px] md:w-[455px] md:h-[230px] rounded-3xl "
           >
             <img
               src={image}
               alt=""
-              className="w-[100px] h- md:h-[200px] md:w-[200px] object-cover md:object-fill"
+              className="w-[100%] h- md:h-[200px] md:w-[200px] object-cover md:object-fill mb-3 md:mb-0"
             />
 
             <section className="text-start">

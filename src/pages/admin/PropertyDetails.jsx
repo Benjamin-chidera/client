@@ -34,13 +34,13 @@ export const PropertyDetails = () => {
         </header>
       </div>
 
-      <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] p-5 rounded-lg">
+      <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] p-5 rounded-lg ">
         <div>
           <h1 className="font-semibold text-xl">Residential Land</h1>
           <p className="text-[#F78214] font-semibold mt-3">Listed Property</p>
         </div>
 
-        <div className="flex gap-4 mt-3">
+        <div className="flex gap-4 mt-3 ">
           <Link
             to={"/admin/edit-property"}
             className="bg-[#F78214] rounded-lg w-[100px] h-[50px] p-3 font-semibold flex justify-center items-center"
@@ -48,7 +48,7 @@ export const PropertyDetails = () => {
             Edit
           </Link>
 
-          <Link className="border text-[#F78214] border-[#F78214] rounded-lg w-[150px] h-[50px] p-3 font-semibold flex justify-center items-center">
+          <Link className="border text-[#F78214] border-[#F78214] rounded-lg w-[130px] text-sm h-[50px] p-3 font-semibold flex justify-center items-center">
             Unlist Property
           </Link>
         </div>
@@ -102,7 +102,7 @@ export const PropertyDetails = () => {
 
             <div>
               <p className="text-[#8D8D8D] text-sm">Sales Price</p>
-              <p className="font-semibold text-xl">$29,630</p>
+              <p className="font-semibold text-lg md:text-xl">$29,630</p>
             </div>
           </section>
 
@@ -159,7 +159,7 @@ export const PropertyDetails = () => {
         </section>
 
         <section>
-          <div className="border border-[#343434] w-[340px] md:w-[300px] h-[358px] md:mt-5 p-5 rounded-xl text-center">
+          <div className="border border-[#343434] w-[270px] md:w-[300px] h-[358px] md:mt-5 p-5 rounded-xl text-center">
             {/* sale support */}
 
             <img src={sale} alt="" className="w-[100px] mx-auto" />
@@ -173,7 +173,7 @@ export const PropertyDetails = () => {
             </p>
           </div>
 
-          <div className="border border-[#343434] w-[340px] md:w-[300px] h-[320px] mt-5 p-5 rounded-xl text-center">
+          <div className="border border-[#343434] ww-[270px] md:w-[300px] h-[320px] mt-5 p-5 rounded-xl text-center">
             {/* sale support */}
 
             <h1 className="font-semibold text-xl mt-5 max-w-60 mx-auto">
@@ -181,10 +181,10 @@ export const PropertyDetails = () => {
               sold?
             </h1>
 
-            <Button className="bg-[#F78214] w-[247px] h-[44px]  mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg">
+            <Button className="bg-[#F78214] w-[227px] h-[44px]  mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg">
               Mark as Sold
             </Button>
-            <Button className="border border-[#F78214] w-[247px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg">
+            <Button className="border border-[#F78214] w-[227px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg">
               Delete Property
             </Button>
           </div>

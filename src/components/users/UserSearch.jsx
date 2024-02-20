@@ -15,7 +15,7 @@ export const UserSearch = () => {
         </div>
       </section>
 
-      <section className="bg-[#070707] w-[330px] md:w-[800px] md:h-[100px] mx-auto max-w-[100%] px-3 pb-3 md:pb-0 pt-5">
+      <section className="bg-[#070707] w-[1200px] md:w-[800px] md:h-[100px] mx-auto max-w-[100%] px-3 pb-3 md:pb-0 pt-5 ">
         <form className="flex items-center justify-center gap-3 flex-wrap">
           <div className="flex flex-col  ">
             <label htmlFor="" className="font-semibold">

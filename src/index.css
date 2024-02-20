@@ -6,7 +6,7 @@
 .home-bg{
     background-image: url(../src/assets/Image/home-bg.png);
     height: 470px;
-    width: 100%;
+  
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -30,4 +30,13 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+}
+
+.about-bg{
+    background-image: url(../src/assets/Image/about-bg.png);
+    height: 470px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }

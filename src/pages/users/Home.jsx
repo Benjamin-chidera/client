@@ -8,6 +8,7 @@ import { UserSearch } from "../../components/users/UserSearch";
 import { UsersNumHouses } from "../../components/users/UsersNumHouses";
 import { LatestProperties } from "../../components/users/LatestProperties";
 import { UserCustomerTestimonials } from "../../components/users/userCustomerTestimonials";
+import { BackToTop } from "../../components/users/BackToTop";
 
 export const Home = () => {
   return (
@@ -81,16 +82,16 @@ export const Home = () => {
       </section>
 
       <section className="md:flex justify-center gap-20 mt-24 mb-20 md:mb-40">
-        <div className="relative w-[350px] mb-20">
+        <div className="relative w-[350px] mb-20 hidden md:block">
           <img
             src={us1}
             alt=""
-            className="w-[250px] md:w-[350px] h-[350px] md:h-[500px] object-cover md:rounded-[40px] relative mx-auto"
+            className="w-[200px] md:w-[350px] h-[350px] md:h-[500px] object-cover md:rounded-[40px] relative mx-auto"
           />
           <img
             src={us2}
             alt=""
-            className="w-[200px] md:w-[250px] h-[200px] mx-auto object-cover md:rounded-[20px] absolute bottom-[-40px] right-[-10px] md:right-[-80px]"
+            className="w-[200px] md:w-[250px] h-[200px] mx-auto object-cover md:rounded-[20px] absolute bottom-[-40px] left-[100px] md:right-[-80px]"
           />
         </div>
 
@@ -121,16 +122,8 @@ export const Home = () => {
         <LatestProperties />
       </section>
 
-      <section className="text-center container mx-auto">
-        <h1 className="text-[#F78214] font-semibold">Testimonials</h1>
-        <h2 className="font-semibold text-lg md:text-3xl">
-          That’s what our client says
-        </h2>
-
-        <div className="mt-10">
-          <UserCustomerTestimonials />
-        </div>
-      </section>
+      <UserCustomerTestimonials />
+      <BackToTop/>
     </main>
   );
 };

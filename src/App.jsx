@@ -1,4 +1,3 @@
-import { Button } from "@material-tailwind/react";
 import "./App.css";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -9,10 +8,12 @@ import { PropertyDetails } from "./pages/admin/PropertyDetails";
 import { EditProperty } from "./pages/admin/EditProperty";
 import { SignUp } from "./pages/admin/SignUp";
 import { SignIn } from "./pages/admin/signIn";
-import { Unsold } from "./components/Modal/Admin/Unsold";
 import { ErrorPage } from "./pages/admin/ErrorPage";
 import { UserLayout } from "./components/users/UserLayout";
 import { Home } from "./pages/users/Home";
+import { About } from "./pages/users/About";
+import { Properties } from "./pages/users/Properties";
+import { PropertyDetail } from "./pages/users/PropertyDetails";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
 
           <Route path="/" element={<UserLayout />}>
             <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="properties" element={<Properties />} />
+            <Route path="propertyDetails" element={<PropertyDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -44,17 +48,3 @@ function App() {
 }
 
 export default App;
-
-
-    // <div className=" relative">
-    //   <img
-    //     src={us1}
-    //     alt=""
-    //     className="w-[250px] md:w-[350px] h-[350px] md:h-[500px] object-cover md:rounded-[40px] relative"
-    //   />
-    //   <img
-    //     src={us2}
-    //     alt=""
-    //     className="w-[200px] md:w-[250px] h-[200px] object-cover md:rounded-[20px] absolute bottom-[-50px] md:bottom-[-60px] right-0 md:right-[-60px]"
-    //   />
-    // </div>;

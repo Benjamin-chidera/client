@@ -42,7 +42,13 @@ export const UserCustomerTestimonials = () => {
    };
 
   return (
-    <main className="w-[70%] mx-auto space-y-4">
+    <main className="w-[70%] mx-auto space-y-4 text-center container mt-20">
+      <div>
+        <h1 className="text-[#F78214] font-semibold">Testimonials</h1>
+        <h2 className="font-semibold text-lg md:text-3xl">
+          That’s what our client says
+        </h2>
+      </div>
       <Slider {...settings} className="bg-[#1F1F1F] rounded-3xl">
         {Testimonial.map((t) => {
           const { name, review, image, _id } = t;

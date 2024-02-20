@@ -28,21 +28,21 @@ export const Pagination = () => {
   };
  
   return (
-    <div className="flex justify-center items-center text-xs ">
+    <div className="flex justify-center items-center text-xs mt-10">
       <Button
         variant="text"
-        className="flex items-center gap-1 active:bg-white"
+        className="flex items-center  active:bg-white"
         onClick={prev}
         disabled={active === 1}
       >
         <IoIosArrowBack color="gray" size={20} />
       </Button>
-      <div className="flex items-center gap-1 text-xs">
-        <IconButton {...getItemProps(1)}>1</IconButton>
-        <IconButton {...getItemProps(2)}>2</IconButton>
-        <IconButton {...getItemProps(3)}>3</IconButton>
-        <IconButton {...getItemProps(4)}>4</IconButton>
-        <IconButton {...getItemProps(5)}>5</IconButton>
+      <div className="flex items-center  text-xs">
+        <IconButton {...getItemProps(1)} size='sm'>1</IconButton>
+        <IconButton {...getItemProps(2)} size='sm'>2</IconButton>
+        <IconButton {...getItemProps(3)} size='sm'>3</IconButton>
+        <IconButton {...getItemProps(4)} size='sm'>4</IconButton>
+        <IconButton {...getItemProps(5)} size='sm'>5</IconButton>
       </div>
       <Button
         variant="text"
