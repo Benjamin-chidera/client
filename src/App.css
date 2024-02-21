@@ -1,0 +1,297 @@
+
+body {
+  background: #121212;
+  color: white !important;
+}
+
+@media (min-width: 320px) {
+  .pic-one {
+    width: 170px;
+    height: 205px;
+    max-width: 100%;
+  }
+
+  .pic-two {
+    width: 160px;
+    height: 60px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 425px) {
+  .pic-one {
+    width: 180px;
+    height: 250px;
+    max-width: 100%;
+  }
+
+  .pic-two {
+    width: 200px;
+    height: 75px;
+    max-width: 100%;
+  }
+
+  .tags {
+    width: 190px !important;
+  }
+
+  .location {
+    width: 380px !important;
+  }
+
+  /* .sales {
+    width: 380px !important;
+  } */
+}
+
+@media (min-width: 720px) {
+  .pic-one {
+    width: 225px;
+    height: 250px;
+    max-width: 100%;
+  }
+
+  .pic-two {
+    width: 210px;
+    height: 75px;
+    max-width: 100%;
+  }
+
+  .tags {
+    width: 230px !important;
+    max-width: 100%;
+  }
+
+  .location {
+    width: 450px !important;
+    max-width: 100%;
+  }
+  
+
+  .pic-one-cam {
+    top: 20% !important;
+    left: 15% !important;
+  }
+
+  .pic-two-cam {
+    top: 5% !important;
+    left: 20% !important;
+    
+  }
+
+  .sales-cam {
+    top: 33% !important;
+    left: 43% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .pic-one {
+    width: 220px;
+    height: 300px;
+    max-width: 100%;
+  }
+
+  .pic-two {
+    width: 250px;
+    height: 92px;
+    max-width: 100%;
+  }
+
+  .tags {
+    width: 240px !important;
+  }
+
+  .location {
+    width: 480px !important;
+  }
+
+  /* .sales {
+    width: 480px !important;
+  } */
+
+  .pic-one-cam {
+    top: 30% !important;
+    left: 10% !important;
+  }
+
+  .pic-two-cam {
+    top: 20% !important;
+    left: 25% !important;
+  }
+
+  .sales-cam {
+    top: 30% !important;
+    left: 45% !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pic-one {
+    width: 375px;
+    height: 400px;
+    max-width: 100%;
+  }
+
+  .pic-two {
+    width: 350px;
+    height: 125px;
+    max-width: 100%;
+  }
+
+  .tags {
+    width: 380px !important;
+  }
+
+  .location {
+    width: 600px !important;
+  }
+
+  /* .sales {
+    width: 600px !important;
+  } */
+
+  .pic-one-cam {
+    top: 35% !important;
+    left: 25% !important;
+  }
+
+  .pic-two-cam {
+    top: 25% !important;
+    left: 35% !important;
+  }
+
+  .sales-cam {
+    top: 33% !important;
+    left: 46% !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  .pic-one {
+    width: 450px;
+    height: 400px;
+    max-width: 100%;
+  }
+
+  .pic-two {
+    width: 380px;
+    height: 125px;
+    max-width: 100%;
+  }
+
+  .tags {
+    width: 270px !important;
+  }
+
+  .location {
+    width: 485px !important;
+  }
+
+  .pic-one-cam {
+    top: 40% !important;
+    left: 35% !important;
+  }
+
+  .pic-two-cam {
+    top: 25% !important;
+    left: 35% !important;
+  }
+
+  .sales-cam {
+    top: 33% !important;
+    left: 43% !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .pic-one {
+    width: 700px !important;
+    height: 500px !important;
+  }
+
+  .pic-two {
+    width: 440px !important;
+    height: 158.5px !important;
+  }
+
+  .pic-one-cam {
+    top: 40% !important;
+    left: 40% !important;
+  }
+
+  .tags {
+    width: 480px !important;
+  }
+
+  .location {
+    width: 700px !important;
+  }
+
+  /* .sales {
+    width: 400px !important;
+  } */
+
+  .sales-cam {
+    top: 30% !important;
+    left: 45% !important;
+  }
+}
+
+@media (min-width: 2560px) {
+  .pic-one {
+    width: 800px !important;
+    height: 600px !important;
+  }
+
+  .pic-two {
+    width: 500px !important;
+    height: 192px !important;
+  }
+
+  .pic-one-cam {
+    top: 40% !important;
+    left: 40% !important;
+  }
+
+  .tags {
+    width: 580px !important;
+  }
+
+  .location {
+    width: 800px !important;
+  }
+
+  /* .sales {
+    width: 450px !important;
+  } */
+
+  .sales-cam {
+    top: 30% !important;
+    left: 45% !important;
+  }
+}
+
+
+
+
+.slide-in-left-enter {
+  transform: translateX(-100%);
+}
+
+.slide-in-left-enter-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition: all 200ms;
+}
+
+.slide-in-left-exit {
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.slide-in-left-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: all 200ms;
+}
