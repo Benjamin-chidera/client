@@ -14,6 +14,8 @@ import { Home } from "./pages/users/Home";
 import { About } from "./pages/users/About";
 import { Properties } from "./pages/users/Properties";
 import { PropertyDetail } from "./pages/users/PropertyDetails";
+import { Contact } from "./pages/users/Contact";
+import { Booking } from "./pages/Booking";
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="properties" element={<Properties />} />
             <Route path="propertyDetails" element={<PropertyDetail />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="booking" element={<Booking />} />
           </Route>
         </Routes>
       </BrowserRouter>
