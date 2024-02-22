@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export const SideBar = () => {
   return (
-    <div className="bg-[#181818] z-10 h-screen w-[240px] text-center space-y-14 hidden md:block container fixed top-24 pt-5 ">
+    <div className="bg-[#181818] z-10 h-screen w-[240px] text-center space-y-7 hidden md:block container fixed top-24 pt-5 ">
       <div className="active:bg-black">
         <Link
           to={"/admin"}
@@ -45,6 +45,19 @@ export const SideBar = () => {
             className=" w-[32px] mx-auto"
           />
           <p className="">Add New Property</p>
+        </Link>
+      </div>
+      <div className="active:bg-black">
+        <Link
+          className="py-3 focus:text-[#F78214] active:text-[#F78214] active:bg-black text-[#A5A5A5] cursor-pointer"
+          to={"/admin/inspection"}
+        >
+          <img
+            src={add}
+            alt="Admin-dashboard-sidebar"
+            className=" w-[32px] mx-auto"
+          />
+          <p className="">Inspection</p>
         </Link>
       </div>
 

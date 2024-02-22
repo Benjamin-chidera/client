@@ -22,15 +22,22 @@ export const Navbar = () => {
           </Link>
         </div>
         <section className="hidden md:flex items-center gap-5">
-          <Link className="focus:text-[#F78214]" to={"/"}>Home</Link>
+          <Link className="focus:text-[#F78214]" to={"/"}>
+            Home
+          </Link>
           <Link to={"/about"} className="focus:text-[#F78214]">
             About Us
           </Link>
           <Link className="focus:text-[#F78214]" to={"/properties"}>
             Properties
           </Link>
-          <Link className="focus:text-[#F78214]">Contact</Link>
-          <Link className="bg-[#F78214] py-2 text-sm px-2 rounded-md">
+          <Link className="focus:text-[#F78214]" to={"/contact"}>
+            Contact
+          </Link>
+          <Link
+            className="bg-[#F78214] py-2 text-sm px-2 rounded-md"
+            to={"/booking"}
+          >
             Book Now
           </Link>
         </section>
@@ -73,12 +80,17 @@ export const Navbar = () => {
             >
               Properties
             </Link>
-            <Link onClick={handleClose} className="focus:text-[#F78214]">
+            <Link
+              onClick={handleClose}
+              className="focus:text-[#F78214]"
+              to={"/contact"}
+            >
               Contact
             </Link>
             <Link
               onClick={handleClose}
               className="bg-[#F78214] py-2 text-sm px-2 rounded-md w-fit mx-auto"
+              to={"/booking"}
             >
               Book Now
             </Link>
