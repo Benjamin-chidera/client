@@ -15,7 +15,10 @@ import { About } from "./pages/users/About";
 import { Properties } from "./pages/users/Properties";
 import { PropertyDetail } from "./pages/users/PropertyDetails";
 import { Contact } from "./pages/users/Contact";
-import { Booking } from "./pages/Booking";
+import { Booking } from "./pages/users/Booking";
+import { Inspection } from "./pages/admin/Inspection";
+
+
 
 function App() {
   return (
@@ -30,6 +33,7 @@ function App() {
             <Route path="propertyDetails" element={<PropertyDetails />} />
             <Route path="edit-property" element={<EditProperty />} />
             <Route path="*" element={<ErrorPage />} />
+            <Route path="inspection" element={<Inspection />} />
           </Route>
           <Route path="admin/signUp" element={<SignUp />} />
           <Route path="admin/signIn" element={<SignIn />} />
