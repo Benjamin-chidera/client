@@ -4,6 +4,10 @@ body {
   color: white !important;
 }
 
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 @media (min-width: 320px) {
   .pic-one {
     width: 170px;

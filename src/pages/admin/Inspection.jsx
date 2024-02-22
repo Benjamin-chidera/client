@@ -1,74 +1,72 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import dot from "../../assets/Image/dot_icon.svg"
+import { inspections} from '../../data/Inspection';
+import { CiMenuKebab } from "react-icons/ci";
 
 export const Inspection = () => {
   return (
-    <main>
+    <main style={{maxWidth: '1600px', margin: "auto"}}>
       <div className="topsec">
         {/* <ToastContainer /> */}
-        <div className="d-flex gap-4 justify-content-start  justify-content-md-between align-items-center pe-2 inpectionHome my-2">
+        <div className="flex gap-4 flex-col lg:flex-row items-start  justify-between lg:items-center pe-2 inpectionHome my-4">
           <h4>Inspection History</h4>
-          <div className="d-flex align-items-center gap-1">
+          <div className="flex items-center gap-1">
             {/* <GoHome /> */}
-            <Link>Home</Link> / <Link>Inspection History</Link>
+            <Link to="/admin">Home</Link> / <Link>Inspection History</Link>
           </div>
         </div>
-        <h5>Scheduled Inspections</h5>
+        <h2 className='font-bold text-xl mb-2'>Scheduled Inspections</h2>
       </div>
       <hr />
       <div>
-        <p className="dots fw-bold">
-          <span>
-            {/* <img src={Vector} alt="" className="me-2" /> */}
-          </span>
+        <p className="dots flex items-center gap-5 my-3 fw-bold">
+        <CiMenuKebab className='text-3xl'/>
           History
         </p>
       </div>
 
-      <div className="table-responsive-md">
-        <table className="table">
-          <thead>
-            <tr className="table-success">
-              <th scope="col">#</th>
-              <th scope="col">Customer</th>
-              <th scope="col">Emails</th>
-              <th scope="col">Location</th>
-              <th scope="col">Date/Time</th>
+      <div className=" mt-4 overflow-x-scroll scroll-hidden">
+        <table className="table mx-auto w-[1240px]">
+          <thead className='bg-[#f78214a1] my-3 h-12 rounded-xl'>
+            <tr className="table-success text-left">
+              <th className='ps-3'>#</th>
+              <th>Customer</th>
+              <th>Emails</th>
+              <th>Location</th>
+              <th>Date/Time</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='w-full'>
             {/* {
                 !isLoading && inspections.length > 1 && <h1 className="text-center fw-bold mt-3 fs-6 text-danger">No Inspection Booked yet</h1>
               } */}
-            {/* {isLoading ? (
-              <Loading />
-            ) : (
+            {
               inspections.map((i, index) => {
                 return (
-                  <tr key={index}>
-                    <th scope="row"> {index + 1} </th>
+                  <tr key={index} className=' h-20'>
+                    <th scope="row" className='text-left ps-2'> {index + 1} </th>
                     <td className="data1">
                       {" "}
-                      <p className="fw-bold mb-0">
+                      <p className="font-bold">
                         {" "}
-                        {i.firstName}
-                        {i.lastName}{" "}
+                        {i.name}
                       </p>{" "}
-                      <p className="my-0 fw-light ">{i.phoneNumber} </p>{" "}
+                      <p className="fw-light ">{i.phoneNumber} </p>{" "}
                     </td>
-                    <td className="fw-bold"> {i.email} </td>
-                    <td className="fw-bold"> {i.location} </td>
+                    <td className="font-bold"> {i.email} </td>
+                    <td className="font-bold"> {i.location} </td>
                     <td>
                       {" "}
-                      <p className="fw-bold mb-0">
-                        {new Date(i.inspectionDate).toDateString()}
+                      <p className="font-bold">
+                        {i.date}
                       </p>
-                      <p className="my-0 fw-light ">{i.inspectionTime}</p>{" "}
+                      <p className="font-normal ">{i.time}</p>{" "}
                     </td>
                   </tr>
                 );
               })
-            )} */}
+            }
           </tbody>
         </table>
       </div>
