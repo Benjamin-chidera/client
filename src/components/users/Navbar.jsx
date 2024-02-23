@@ -56,7 +56,7 @@ export const Navbar = () => {
         unmountOnExit
         classNames="slide-in-left"
       >
-        <section className="p-5 bg-[#403b3b] h-full w-[250px] fixed top-0 md:hidden z-10">
+        <section className="p-5 bg-[#403b3b] h-full w-[220px] fixed top-0 md:hidden z-10">
           {/* menu bar for admin-mobile devices */}
 
           <section className="mt-5 text-center space-y-12 flex flex-col">

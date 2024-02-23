@@ -195,6 +195,7 @@ export const Booking = () => {
                 name="inspectionTime"
                 value={bookings.inspectionTime}
                 onChange={handleInspection}
+                
               />
               <FaRegClock
                 className=" absolute top-2.5 left-2"

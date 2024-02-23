@@ -1,11 +1,13 @@
-import React from 'react'
-import { UserSearch } from '../../components/users/UserSearch';
-import { AllProperties } from '../../components/users/AllProperties';
-import { Pagination } from '../../components/admin/Pagination';
-import { BackToTop } from '../../components/users/BackToTop';
-
+import React from "react";
+import { UserSearch } from "../../components/users/UserSearch";
+import { AllProperties } from "../../components/users/AllProperties";
+import { Pagination } from "../../components/admin/Pagination";
+import { BackToTop } from "../../components/users/BackToTop";
+import { useGlobalContext } from "../../context/context";
 
 export const Properties = () => {
+  const { properties, loading } = useGlobalContext();
+
   return (
     <main className="mt-24 p-5 text-center container mx-auto w-full">
       <h1 className="font-semibold text-3xl">Properties</h1>
@@ -17,9 +19,10 @@ export const Properties = () => {
       <UserSearch />
 
       <section>
-        <h2 className="font-semibold text-xl md:text-3xl mt-14">
-          Property Listings - Lands
-        </h2>
+        {/* <h2 className="font-semibold text-xl md:text-3xl mt-14">
+          Property Listings -{" "}
+          {properties.propertyType === "house" ? "House" : "Land"}
+        </h2> */}
 
         <div>
           <AllProperties />
@@ -30,7 +33,7 @@ export const Properties = () => {
         <Pagination />
       </div>
 
-      <BackToTop/>
+      <BackToTop />
     </main>
   );
-}
+};

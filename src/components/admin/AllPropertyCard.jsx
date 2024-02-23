@@ -20,21 +20,21 @@ import sold from "../../assets/Image/SOLD.png";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
 
-export const AllPropertyCard = () => {
+export const AllPropertyCard = ({ filterByType, setFilters }) => {
   const navigate = useNavigate();
 
-  const { getProperties, properties } = useGlobalContext();
+  // const { getProperties, properties } = useGlobalContext();
 
-  console.log(properties);
+  // console.log(properties);
 
-  useEffect(() => {
-    getProperties();
-  }, []);
+  // useEffect(() => {
+  //   getProperties();
+  // }, []);
 
   return (
     <main className="">
       <div className=" grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 md:place-items-center w-full place-items-center mt-3 gap-5">
-        {properties.map((p) => {
+        {filterByType.map((p) => {
           const {
             _id,
             title,
@@ -47,7 +47,7 @@ export const AllPropertyCard = () => {
             squareFeet,
             updatedAt,
             tags,
-            // propertyStatus,
+            propertyStatus,
           } = p;
 
           return (
@@ -70,7 +70,8 @@ export const AllPropertyCard = () => {
               <h1 className="text-lg font-semibold">{title}</h1>
 
               <address className="flex gap-2 items-center text-sm font-semibold not-italic">
-                <IoLocation /> <span className="text-[#8D8D8D]">{location}</span>
+                <IoLocation />{" "}
+                <span className="text-[#8D8D8D]">{location}</span>
               </address>
 
               <p className="text-[#8D8D8D] font-semibold text-2xl">${price}</p>
@@ -115,7 +116,7 @@ export const AllPropertyCard = () => {
                 </Button>
               </section>
 
-              {/* {propertyStatus === "Sold" && (
+              {/* {propertyStatus === "sold" && (
                 <div className=" absolute top-11 left-[30%] bg-red-400">
                   <img src={sold} alt="" className="w-[150px] z-10" />
                 </div>
@@ -126,7 +127,6 @@ export const AllPropertyCard = () => {
       </div>
 
       <div className="">
-        
         <Pagination />
       </div>
     </main>

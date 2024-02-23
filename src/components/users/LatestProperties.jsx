@@ -12,7 +12,6 @@ import { useEffect } from "react";
 export const LatestProperties = () => {
   const { BASE_URL, getLatestProperties, latest } = useGlobalContext();
 
-  const four = property.slice(0, 4);
 
   useEffect(() => {
     getLatestProperties();

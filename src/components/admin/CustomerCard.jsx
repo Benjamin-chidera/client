@@ -61,7 +61,9 @@ export const CustomerCard = () => {
               <p className="text-[#8D8D8D] [text-[16px]">
                 {new Date(inspectionDate).toDateString()}
               </p>
-              <p className="text-[#8D8D8D text-[16px] ">{inspectionTime}</p>
+              <p className="text-[#8D8D8D text-[16px] ">
+                {inspectionTime.toLocaleString()}
+              </p>
             </div>
           </section>
         );
