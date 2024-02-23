@@ -1,6 +1,4 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
-import dot from "../../assets/Image/dot_icon.svg"
 import { inspections} from '../../data/Inspection';
 import { CiMenuKebab } from "react-icons/ci";
 
