@@ -22,20 +22,20 @@ export const AllProperties = () => {
       </header>
 
       <section className="mt-4">
-        <div className="flex justify-between items-center flex-wrap gap-5 ">
-          <section className="flex items-center gap-20 bg-[#181818] w-[378px] h-[60px] rounded-xl justify-center">
-            <div className="focus:border-b-4 cursor-pointer md:text-[20px] font-semibold">
+        <div className="md:flex justify-between items-center gap-5 ">
+          <section className="flex items-center gap-10 md:gap-20 bg-[#181818] md:w-[378px] h-[60px] rounded-xl justify-center">
+            <div className="focus:border-b-4 cursor-pointer text-sm md:text-[20px] font-semibold">
               <button>Listed</button>
             </div>
-            <div className="focus:border-b-4 cursor-pointer md:text-[20px] font-semibold">
+            <div className="focus:border-b-4 cursor-pointer text-sm md:text-[20px] font-semibold">
               <button>Unlisted</button>
             </div>
-            <div className="focus:border-b-4 cursor-pointer md:text-[20px] font-semibold">
+            <div className="focus:border-b-4 cursor-pointer text-sm md:text-[20px] font-semibold">
               <button>Sold</button>
             </div>
           </section>
 
-          <section className="flex items-center gap-5 ">
+          <section className="flex items-center justify-center gap-10 mt-3 md:mt-0">
             <select
               name=""
               id=""
@@ -44,10 +44,10 @@ export const AllProperties = () => {
               <option value="">Land</option>
               <option value="">House</option>
             </select>
-            <button className="border border-[#F78214] w-[80px] h-[50px] rounded-2xl flex justify-center items-center shadow-inner active:shadow-white">
-              <LuRefreshCcw color="#F78214" size={30} />
+            <button className="border border-[#F78214] text-xl md:text-3xl w-[40px] h-[40px] md:w-[80px] md:h-[50px] rounded-2xl flex justify-center items-center shadow-inner active:shadow-white">
+              <LuRefreshCcw color="#F78214" />
             </button>
-            <Link className="bg-[#F78214] w-[100px] flex justify-center items-center font-semibold rounded-2xl h-[60px]">
+            <Link className="bg-[#F78214] text-xs md:w-[100px] flex justify-center items-center font-semibold rounded-2xl md:h-[60px] w-[80px] h-[50px]">
               + Add New
             </Link>
           </section>

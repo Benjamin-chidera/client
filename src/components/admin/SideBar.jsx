@@ -47,19 +47,6 @@ export const SideBar = () => {
           <p className="">Add New Property</p>
         </Link>
       </div>
-      <div className="active:bg-black">
-        <Link
-          className="py-3 focus:text-[#F78214] active:text-[#F78214] active:bg-black text-[#A5A5A5] cursor-pointer"
-          to={"/admin/inspection"}
-        >
-          <img
-            src={add}
-            alt="Admin-dashboard-sidebar"
-            className=" w-[32px] mx-auto"
-          />
-          <p className="">Inspection</p>
-        </Link>
-      </div>
 
       <p className="text-[#A5A5A5] pt-[50px]">Copyright &copy;2024 Yemsays</p>
     </div>

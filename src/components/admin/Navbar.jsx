@@ -62,7 +62,7 @@ export const Navbar = () => {
       </main>
 
       {isOpen && (
-        <section className="p-5 bg-[#403b3b] h-full w-[250px] fixed top-0 md:hidden z-10 ">
+        <section className="p-5 bg-[#403b3b] h-full w-[230px] fixed top-0 md:hidden z-10 ">
           {/* menu bar for admin-mobile devices */}
           <div className="flex gap-3 items-center">
             <img src={bell} alt="" />
@@ -90,7 +90,7 @@ export const Navbar = () => {
             </form>
           </div>
 
-          <section className="mt-5 text-center space-y-14">
+          <section className="mt-5 text-center space-y-10">
             <div className="active:bg-black">
               <Link
                 to={"/admin"}

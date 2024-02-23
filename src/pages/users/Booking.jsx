@@ -12,9 +12,10 @@ import { SuccessFullBooking } from "../../components/Modal/user/SuccessfulBookin
 import toast, { Toaster } from "react-hot-toast";
 
 export const Booking = () => {
-  const { BASE_URL } = useGlobalContext();
+  const { URL } = useGlobalContext();
   const [open, setOpen] = useState(false);
   const [successData, setSuccessData] = useState(null);
+
 
   const handleOpen = () => setOpen(!open);
 
@@ -48,7 +49,7 @@ export const Booking = () => {
         return toast.error("Please fill all required fields");
       }
 
-      const { data } = await axios.post(BASE_URL, { ...bookings });
+      const { data } = await axios.post(URL, { ...bookings });
       if (data) {
         if (data) {
           // If data is received, set the success data and open the modal

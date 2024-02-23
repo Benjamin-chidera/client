@@ -40,6 +40,7 @@ export const Navbar = () => {
           >
             Book Now
           </Link>
+          
         </section>
 
         <div className=" md:hidden">

@@ -6,14 +6,34 @@ import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
+import { useGlobalContext } from "../../context/context";
+import { useEffect } from "react";
 
 export const LatestProperties = () => {
+  const { BASE_URL, getLatestProperties, latest } = useGlobalContext();
+
   const four = property.slice(0, 4);
+
+  useEffect(() => {
+    getLatestProperties();
+  }, []);
+
+  console.log(latest);
 
   return (
     <div className="grid md:grid-cols-2 place-items-center gap-5 md:gap-10 mt-10">
-      {four.map((l) => {
-        const { _id, title, image, price, location, features, tags } = l;
+      {latest.map((l) => {
+        const {
+          _id,
+          title,
+          media: { images },
+          price,
+          location,
+          bathroom,
+          bedroom,
+          garage,
+          squareFeet,
+        } = l;
 
         return (
           <div
@@ -21,7 +41,7 @@ export const LatestProperties = () => {
             className="md:flex gap-5 bg-white p-3 md:py-5 w-[240px] md:w-[455px] md:h-[230px] rounded-3xl "
           >
             <img
-              src={image}
+              src={images[0]}
               alt=""
               className="w-[100%] h- md:h-[200px] md:w-[200px] object-cover md:object-fill mb-3 md:mb-0"
             />
@@ -45,20 +65,20 @@ export const LatestProperties = () => {
                   {/* 1 */}
                   <IoBedOutline />
                   <p className="text-[#8D8D8D] font-medium text-[12px]">
-                    {features.bedroom} Bedrooms
+                    {bedroom} Bedrooms
                   </p>
                 </div>
                 <div className="flex gap-2 items-center">
                   {/* 2 */}
                   <LuBath />
                   <p className="text-[#8D8D8D] font-medium text-[12px]">
-                    {features.bathroom} Bathrooms
+                    {bathroom} Bathrooms
                   </p>
                 </div>
                 <div className="flex gap-2 items-center">
                   {/* 3 */}
                   <GiHomeGarage />
-                  {features.garage ? (
+                  {garage ? (
                     <p className="text-[#8D8D8D] font-medium text-[12px]">
                       Garage
                     </p>
@@ -70,7 +90,7 @@ export const LatestProperties = () => {
                   {/* 4*/}
                   <FaRegSquare />
                   <p className="text-[#8D8D8D] font-medium text-[12px]">
-                    {features.squareFeet} Square Feet
+                    {squareFeet} Square Feet
                   </p>
                 </div>
               </section>
