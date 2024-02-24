@@ -3,7 +3,7 @@ import { ThreeCircles } from "react-loader-spinner";
 
 export const AdminBtnSave = () => {
   return (
-    <div>
+    <div className="flex justify-center">
       <ThreeCircles
         visible={true}
         height="20"

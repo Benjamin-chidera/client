@@ -1,49 +1,58 @@
 import React, { useState } from "react";
-import {
-  Card,
-  Input,
-  Button,
-  Typography,
-  checkbox,
-  Checkbox,
-} from "@material-tailwind/react";
+import { Card, Input, Button, Typography } from "@material-tailwind/react";
 import logo from "../../assets/Image/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
-import Cookies from "js-cookie";
 
-export const SignIn = () => {
-  const url = "http://localhost:3000/api/v1/signin";
+export const UserSignUp = () => {
+  const url = "http://localhost:3000/api/v1/signup";
   const [user, setUser] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
+    // role: "admin",
   });
-  const navigate = useNavigate();
-  const [save, setSave] = useState(false);
+  const navigate = useNavigate()
+  const [save, setSave] = useState(false)
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSignIn = async (e) => {
+  const handleSignUp = async(e) => {
     e.preventDefault();
 
-    if (!user.password || !user.email) {
-      toast.error("Please fill all required fields");
+    if (!user.password || !user.confirmPassword || !user.email) {
+       toast.error("Please fill all required fields");
+       setSave(false)
+    }
+
+    if (user.password !== user.confirmPassword) {
       setSave(false);
+       toast.error("Passwords do not match");
+    }
+
+    if (user.password.length < 7) {
+      setSave(false);
+       toast.error("Password must be at least 7 characters");
     }
 
     try {
       setSave(true);
-      const {
-        data: { users },
-      } = await axios.post(url, { ...user });
+      const {data: {users}} = await axios.post(url, {...user})
+
       if (users) {
-        navigate("/admin");
+        console.log(users);
         setSave(false);
-        Cookies.set("token", users.token);
+        navigate("/signIn")
+        setUser({
+          email: "",
+          password: "",
+          confirmPassword: "",
+          // role: "admin",
+        });
       }
     } catch (error) {
       setSave(false);
@@ -65,16 +74,16 @@ export const SignIn = () => {
           color="blue-gray"
           className="flex justify-center"
         >
-          <Link to={"/admin"}>
+          <Link to={"/"}>
             <img src={logo} alt="company-logo" />
           </Link>
         </Typography>
         <Typography color="gray" className="mt-3 font-normal text-center">
-          Sign into your admin account.
+          Create an admin account
         </Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
-          onSubmit={handleSignIn}
+          onSubmit={handleSignUp}
         >
           <div className="mb-1 flex flex-col gap-4">
             <Typography
@@ -114,38 +123,39 @@ export const SignIn = () => {
                 className: "before:content-none after:content-none",
               }}
             />
-
-            <div className="flex justify-between items-center">
-              <Checkbox
-                label={
-                  <Typography
-                    variant="small"
-                    color="gray"
-                    className="flex items-center font-normal"
-                  >
-                    Remember Me
-                  </Typography>
-                }
-                containerProps={{ className: "-ml-2.5" }}
-                required
-              />
-
-              <Link className="text-[#E92727]">Forgot Password?</Link>
-            </div>
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3 text-white"
+            >
+              Confirm Password
+            </Typography>
+            <Input
+              type="password"
+              size="lg"
+              placeholder="********"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-white"
+              name="confirmPassword"
+              value={user.confirmPassword}
+              onChange={handleChange}
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
+            />
           </div>
           <Button className="mt-6 bg-[#F78214]" fullWidth type="submit">
-            {save ? <AdminBtnSave /> : "sign in"}
+            {save ? <AdminBtnSave /> : "sign up"}
           </Button>
           <Typography
             color="gray"
             className="mt-4 text-center font-normal text-white"
           >
-            New User?
+            Already a user?
             <Link
               className="font-medium ms-3 text-[#F78214]"
-              to={"/admin/signUp"}
+              to={"/admin/signIn"}
             >
-              Sign Up
+              Sign In
             </Link>
           </Typography>
         </form>

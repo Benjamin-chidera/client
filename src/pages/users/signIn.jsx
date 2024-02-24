@@ -14,7 +14,7 @@ import axios from "axios";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 import Cookies from "js-cookie";
 
-export const SignIn = () => {
+export const UserSignIn = () => {
   const url = "http://localhost:3000/api/v1/signin";
   const [user, setUser] = useState({
     email: "",
@@ -27,7 +27,7 @@ export const SignIn = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSignIn = async (e) => {
+  const handleSignIn = async(e) => {
     e.preventDefault();
 
     if (!user.password || !user.email) {
@@ -36,19 +36,17 @@ export const SignIn = () => {
     }
 
     try {
-      setSave(true);
-      const {
-        data: { users },
-      } = await axios.post(url, { ...user });
+        setSave(true);
+      const {data: {users}} = await axios.post(url, {...user})
       if (users) {
-        navigate("/admin");
-        setSave(false);
+        navigate("/")
+          setSave(false);
         Cookies.set("token", users.token);
       }
     } catch (error) {
-      setSave(false);
-      console.log(error?.response?.data?.err);
-      toast.error(error?.response?.data?.err);
+        setSave(false);
+        console.log(error?.response?.data?.err);
+        toast.error(error?.response?.data?.err);
     }
   };
 
@@ -65,7 +63,7 @@ export const SignIn = () => {
           color="blue-gray"
           className="flex justify-center"
         >
-          <Link to={"/admin"}>
+          <Link to={"/"}>
             <img src={logo} alt="company-logo" />
           </Link>
         </Typography>

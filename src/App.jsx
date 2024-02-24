@@ -17,7 +17,9 @@ import { PropertyDetail } from "./pages/users/PropertyDetails";
 import { Contact } from "./pages/users/Contact";
 import { Booking } from "./pages/users/Booking";
 import { Inspection } from "./pages/admin/Inspection";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { UserSignUp } from "./pages/users/SignUp";
+import { UserSignIn } from "./pages/users/signIn";
+// import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {
   return (
@@ -58,6 +60,8 @@ function App() {
             <Route path="contact" element={<Contact />} />
             <Route path="booking" element={<Booking />} />
           </Route>
+          <Route path="signUp" element={<UserSignUp />} />
+          <Route path="signIn" element={<UserSignIn />} />
         </Routes>
       </BrowserRouter>
       {/* </SkeletonTheme> */}
