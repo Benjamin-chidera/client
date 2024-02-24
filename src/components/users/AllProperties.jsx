@@ -7,7 +7,7 @@ import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
 
 export const AllProperties = () => {
@@ -100,7 +100,7 @@ export const AllProperties = () => {
                   </section>
                   <Link
                     className="bg-[#F78214] text-xs px-2 rounded-md py-2"
-                    to={"/propertyDetails"}
+                    to={`/propertyDetails/${_id}`}
                   >
                     View Properties
                   </Link>

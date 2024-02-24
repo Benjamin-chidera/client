@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiArrowDropLeftFill } from "react-icons/ri";
 import { PiHouse } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import d1 from "../../assets/Image/d1.png";
 import vi from "../../assets/Image/vi.png";
 import d2 from "../../assets/Image/d2.png";
@@ -16,9 +16,38 @@ import { IoBedOutline } from "react-icons/io5";
 import { Button } from "@material-tailwind/react";
 import { IoCameraOutline } from "react-icons/io5";
 import ReactPlayer from "react-player";
+import axios from "axios";
+import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 
 export const EditProperty = () => {
-  const [imgPreview, setImgPreview] = useState({
+  const { propertyId } = useParams();
+   const [saved, setSave] = useState(false);
+  const url = "http://localhost:3000/api/v1/properties";
+
+
+ const [property, setProperty] = useState({
+   title: "",
+   price: "",
+   location: "",
+   description: "",
+   tags: "",
+   propertyType: "",
+   bedroom: 0, // Default value for numeric inputs
+   bathroom: 0, // Default value for numeric inputs
+   squareFeet: "",
+   name: "",
+   whatsappNumber: "",
+   phoneNumber: "",
+   garage: "",
+   video: "",
+   avatar: "",
+   img1: "",
+   img2: "",
+   img3: "",
+   img4: "",
+ });
+
+   const [imgPreview, setImgPreview] = useState({
     img1: d1,
     img2: d1,
     img3: d1,
@@ -29,27 +58,89 @@ export const EditProperty = () => {
       "https://res.cloudinary.com/dlb8nbz13/video/upload/c_scale,h_390,q_91,w_618/v1706177257/WhatsApp_Video_2024-01-25_at_11.05.54_eb4762c7_paf2hg.mp4",
   });
 
+
   const handleChange = (e) => {
-    // Handle changes if needed
+    const { name, value, type } = e.target;
+    setProperty((prevProperty) => ({
+      ...prevProperty,
+      [name]: type === "file" ? e.target.files[0] : value,
+    }));
   };
 
-  const handleImage = (id) => {
-    let fileInput = document.getElementById(id);
-    fileInput.click();
-    fileInput.onchange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        setImgPreview((prevState) => ({
-          ...prevState,
-          [id]: URL.createObjectURL(file),
-        }));
-      }
-    };
+const handleImage = (id) => {
+  let fileInput = document.getElementById(id);
+  fileInput.click();
+  fileInput.onchange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImgPreview((prevState) => ({
+        ...prevState,
+        [id]: URL.createObjectURL(file),
+      }));
+
+      setProperty((prevProperty) => ({
+        ...prevProperty,
+        [id]: file,
+      }));
+    }
+  };
+};
+
+
+
+  
+
+  const getProperties = async () => {
+    try {
+      const {
+        data: { property },
+      } = await axios(`${url}/${propertyId}`);
+      setProperty(property);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = async (e) => {
+    setSave(true)
     e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("title", property.title);
+      formData.append("price", property.price);
+      formData.append("location", property.location);
+      formData.append("description", property.description);
+      formData.append("tags", property.tags);
+      formData.append("propertyType", property.propertyType);
+      formData.append("bedroom", property.bedroom);
+      formData.append("bathroom", property.bathroom);
+      formData.append("squareFeet", property.squareFeet);
+      formData.append("name", property.name);
+      formData.append("whatsappNumber", property.whatsappNumber);
+      formData.append("phoneNumber", property.phoneNumber);
+      formData.append("garage", property.garage);
+      formData.append("video", property.video);
+      formData.append("avatar", property.avatar);
+      formData.append("img1", property.img1);
+      formData.append("img2", property.img2);
+      formData.append("img3", property.img3);
+      formData.append("img4", property.img4);
+
+      await axios.put(`${url}/${propertyId}`, formData);
+      // Optionally, you can handle success or navigate to another page after editing.
+      console.log("Property updated successfully!");
+      setSave(false)
+    } catch (error) {
+      setSave(false)
+      console.error("Error updating property:", error);
+    }
   };
+
+  useEffect(() => {
+    getProperties();
+  }, [propertyId]);
+
+  // console.log(property);
 
   return (
     <section className="container mx-auto w-full">
@@ -77,10 +168,7 @@ export const EditProperty = () => {
                 <p className="text-[#F78214] font-semibold text-sm">
                   Listed Property
                 </p>
-                /
-                <p className="text-[#8D8D8D] text-xs">
-                  3, Ogunlesi Street, Lagos 100252
-                </p>
+                /<p className="text-[#8D8D8D] text-xs">Location</p>
               </div>
             </div>
 
@@ -90,7 +178,7 @@ export const EditProperty = () => {
                 className="bg-[#F78214] text-sm rounded-lg px-10"
                 type="submit"
               >
-                Save
+                {saved ? <AdminBtnSave /> : "Saved"}
               </Button>
             </div>
           </section>
@@ -103,11 +191,10 @@ export const EditProperty = () => {
                   style={{ display: "none" }}
                   accept="image/*"
                   id="img1"
-                  onChange={handleChange} // If you need handleChange, you can keep it here
                 />
                 {imgPreview.img1 && (
                   <img
-                    src={imgPreview.img1}
+                    src={property?.media?.images[0]}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
@@ -135,7 +222,7 @@ export const EditProperty = () => {
                   />
                   {imgPreview.img2 && (
                     <img
-                      src={imgPreview.img2}
+                      src={property?.media?.images[1]}
                       alt="Preview"
                       className="w-full h-full object-cover"
                     />
@@ -161,7 +248,7 @@ export const EditProperty = () => {
                   />
                   {imgPreview.img3 && (
                     <img
-                      src={imgPreview.img3}
+                      src={property?.media?.images[2]}
                       alt="Preview"
                       className="w-full h-full object-cover"
                     />
@@ -187,7 +274,7 @@ export const EditProperty = () => {
                   />
                   {imgPreview.img4 && (
                     <img
-                      src={imgPreview.img4}
+                      src={property?.media?.images[3]}
                       alt="Preview"
                       className="w-full h-full object-cover"
                     />
@@ -215,6 +302,9 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
                     placeholder="Select Tags"
+                    value={property?.tags}
+                    onChange={handleChange}
+                    name="tags"
                   />
                 </div>
                 <div className="mb-4 flex flex-col">
@@ -222,17 +312,19 @@ export const EditProperty = () => {
                     Property Type
                   </label>
                   <select
-                    name=""
                     id=""
                     className=" bg-transparent border rounded-md border-[#8D8D8D] h-[43px] w-[150px] md:w-[200px] py-2 px-3 outline-none my-1"
+                    value={property?.propertyType}
+                    onChange={handleChange}
+                    name="propertyType"
                   >
                     <option value="" className=" bg-black" disabled>
                       Select Property Type
                     </option>
-                    <option value="" className=" bg-black">
+                    <option value="land" className=" bg-black">
                       Land
                     </option>
-                    <option value="" className=" bg-black">
+                    <option value="house" className=" bg-black">
                       House
                     </option>
                   </select>
@@ -247,6 +339,9 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D] w-[180px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
                     placeholder="Select Title"
+                    value={property?.title}
+                    onChange={handleChange}
+                    name="title"
                   />
                 </div>
 
@@ -257,6 +352,9 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent max-w-full border rounded-md border-[#8D8D8D] w-[120px] md:w-[200px] py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Price"
+                    value={property?.price}
+                    onChange={handleChange}
+                    name="price"
                   />
                 </div>
               </section>
@@ -268,6 +366,9 @@ export const EditProperty = () => {
                   type="text"
                   className=" bg-transparent border rounded-md border-[#8D8D8D] w-[320px] md:w-[540px] max-w-full py-2 px-3 outline-none my-1 placeholder:text-xs location"
                   placeholder="Select Location"
+                  value={property?.location}
+                  onChange={handleChange}
+                  name="location"
                 />
               </div>
 
@@ -279,6 +380,9 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 h-[320px] max-w-full resize-none placeholder:text-xs "
                     placeholder="Select Descriptions..."
+                    value={property?.description}
+                    onChange={handleChange}
+                    name="description"
                   />
                 </div>
               </div>
@@ -291,6 +395,9 @@ export const EditProperty = () => {
                       type="number"
                       className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
                       placeholder="Select Bedroom"
+                      value={property?.bedroom}
+                      onChange={handleChange}
+                      name="bedroom"
                     />
                     <IoBedOutline className="absolute top-4 left-2" />
                   </div>
@@ -299,15 +406,30 @@ export const EditProperty = () => {
                       type="number"
                       className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
                       placeholder="Select Bathroom"
+                      value={property?.bathroom}
+                      onChange={handleChange}
+                      name="bathroom"
                     />
                     <LuBath className="absolute top-4 left-2" />
                   </div>
                   <div className=" relative">
-                    <input
-                      type="text"
-                      className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
-                      placeholder="Select Garage"
-                    />
+                    <select
+                      id=""
+                      className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2  outline-none my-1 relative px-6 placeholder:text-xs "
+                      name="garage"
+                      value={property.garage}
+                      onChange={handleChange}
+                    >
+                      <option value="" className="bg-black">
+                        Select Garage
+                      </option>
+                      <option value="yes" className="bg-black">
+                        Yes
+                      </option>
+                      <option value="no" className="bg-black">
+                        No
+                      </option>
+                    </select>
                     <GiHomeGarage className="absolute top-4 left-2" />
                   </div>
                   <div className=" relative">
@@ -315,6 +437,9 @@ export const EditProperty = () => {
                       type="number"
                       className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
                       placeholder="Select Square Feet"
+                      value={property?.squareFeet}
+                      onChange={handleChange}
+                      name="squareFeet"
                     />
                     <FaRegSquare className="absolute top-4 left-2" />
                   </div>
@@ -333,13 +458,12 @@ export const EditProperty = () => {
                       style={{ display: "none" }}
                       accept="video/*"
                       id="video"
-                      onChange={handleChange}
                     />
 
                     {imgPreview.video && (
                       <div className=" object-cover w-full h-[224px] md:h-[373px] relative">
                         <ReactPlayer
-                          url={imgPreview.video}
+                          url={property?.media?.video}
                           width={"100%"}
                           height={"100%"}
                           controls
@@ -372,11 +496,10 @@ export const EditProperty = () => {
                       style={{ display: "none" }}
                       accept="image/*"
                       id="avatar"
-                      onChange={handleChange}
                     />
                     {imgPreview.avatar && (
                       <img
-                        src={imgPreview.avatar}
+                        src={property?.salesSupport?.avatar}
                         alt="Preview"
                         className=" object-cover w-[114px] mx-auto h-[114px] md:h-[114px] relative rounded-full"
                       />
@@ -397,6 +520,9 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Name"
+                    value={property?.salesSupport?.name}
+                    onChange={handleChange}
+                    name="name"
                   />
                 </div>
                 <div className="mb-4 flex flex-col mt-3 text-start">
@@ -408,6 +534,9 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select What'sApp Number"
+                    value={property?.salesSupport?.whatsappNumber}
+                    onChange={handleChange}
+                    name="whatsappNumber"
                   />
                 </div>
                 <div className="mb-4 flex flex-col mt-3 text-start">
@@ -419,6 +548,9 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Phone Number"
+                    value={property?.salesSupport?.phoneNumber}
+                    onChange={handleChange}
+                    name="phoneNumber"
                   />
                 </div>
               </div>

@@ -1,35 +1,16 @@
-import React, { useEffect } from "react";
-import { property } from "../../data/Property";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
-import net from "../../assets/Image/net.png";
-import fam from "../../assets/Image/fam.png";
+/* eslint-disable react/prop-types */
+import { Button } from "@material-tailwind/react";
 import { IoLocation } from "react-icons/io5";
 import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
 import { Pagination } from "./Pagination";
-import sold from "../../assets/Image/SOLD.png";
-import { useNavigate } from "react-router-dom";
-import { useGlobalContext } from "../../context/context";
+// import sold from "../../assets/Image/SOLD.png";
+import { useNavigate, useParams } from "react-router-dom";
 
-export const AllPropertyCard = ({ filterByType, setFilters }) => {
+export const AllPropertyCard = ({ filterByType }) => {
   const navigate = useNavigate();
-
-  // const { getProperties, properties } = useGlobalContext();
-
-  // console.log(properties);
-
-  // useEffect(() => {
-  //   getProperties();
-  // }, []);
 
   return (
     <main className="">
@@ -47,7 +28,7 @@ export const AllPropertyCard = ({ filterByType, setFilters }) => {
             squareFeet,
             updatedAt,
             tags,
-            propertyStatus,
+            // propertyStatus,
           } = p;
 
           return (
@@ -110,7 +91,9 @@ export const AllPropertyCard = ({ filterByType, setFilters }) => {
 
                 <Button
                   className="bg-[#F78214] w-[220px]  md:w-[250px]"
-                  onClick={() => navigate("/admin/propertyDetails")}
+                  onClick={() =>
+                    navigate(`/admin/propertyDetails/${_id}`)
+                  }
                 >
                   View Details
                 </Button>

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiArrowDropLeftFill } from "react-icons/ri";
 import { PiHouse } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import d1 from "../../assets/Image/d1.png";
 import vi from "../../assets/Image/vi.png";
 import d2 from "../../assets/Image/d2.png";
@@ -19,14 +19,37 @@ import { SimilarProperties } from "../../components/users/SimilarProperties";
 import { UserRating } from "../../components/users/UserRating";
 import { UsersNumHouses } from "../../components/users/UsersNumHouses";
 import { BackToTop } from "../../components/users/BackToTop";
+import axios from "axios";
+import ReactPlayer from "react-player";
 
 export const PropertyDetail = () => {
+  const { propertyId } = useParams();
+  const url = `http://localhost:3000/api/v1/properties/${propertyId}`;
+  const [single, setSingle] = useState();
+  const [similar, setSimilar] = useState();
+
+  const getSingleProperty = async () => {
+    try {
+      const { data } = await axios(url);
+      setSingle(data.property);
+      setSimilar(data.similarProperties);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  
+
+  useEffect(() => {
+    getSingleProperty();
+  }, [propertyId]);
+
   return (
     <main className="mt-24 p-5 container mx-auto w-full">
       <section className="flex gap-3 justify-center">
         <div className="">
           <img
-            src={d1}
+            src={single?.media?.images[0]}
             alt=""
             className=" object-cover w-[176px] h-[224px] md:w-[560px] md:h-[373px] pic-one"
           />
@@ -34,17 +57,17 @@ export const PropertyDetail = () => {
 
         <div className=" object-cover flex flex-col gap-3">
           <img
-            src={d2}
+            src={single?.media?.images[1]}
             alt=""
             className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
           <img
-            src={d2}
+            src={single?.media?.images[2]}
             alt=""
             className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
           <img
-            src={d2}
+            src={single?.media?.images[3]}
             alt=""
             className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
@@ -56,74 +79,81 @@ export const PropertyDetail = () => {
 
         <section>
           <div className="flex items-center gap-3 my-5">
-            <img src={net} alt="" />
-            <img src={fam} alt="" />
+            {/* <img src={net} alt="" />
+            <img src={fam} alt="" /> */}
+            <p>{single?.tags}</p>
           </div>
 
           <section className="flex justify-between">
             <div>
-              <h1 className="font-bold text-xl">Residential Land</h1>
+              <h1 className="font-bold text-xl">{single?.title}</h1>
               <p className="text-[#8D8D8D] text-xs flex gap-1 items-center">
                 <MdLocationOn />
-                3, Ogunlesi Street, Lagos 100252
+                {single?.location}
               </p>
             </div>
 
             <div>
               <p className="text-[#8D8D8D] text-sm">Sales Price</p>
-              <p className="font-semibold text-lg md:text-xl">$29,630</p>
+              <p className="font-semibold text-lg md:text-xl">
+                ${single?.price}
+              </p>
             </div>
           </section>
 
           <div className="border p-3 rounded-xl md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
             <p className="text-xl">Description</p>
-            <p className=" font-medium text-[#ABABAB]">
-              Lorem ipsum dolor sit amet consectetur. Id libero suspendisse eu
-              risus amet vel. Aliquet contur consectetur purus amet ultricies
-              facilisis a pelloique. Telus et cras urna vel vitae. Ornare
-              aliquam dolor enim consequat sapien odio cras integer. Conmentum
-              adipiscing duis morbi laoreet aliquet viverra est auctor. Aliquam
-              blandit adipiscing potenti enim non proin erat fringilla amet.
-              Congue sit ac vulputate scelerisque libero malesuada eget. Nulla
-              ultricies aenean tellus congue molestie molestie enim porta
-              quisque. Neque imperdiet magna maecenas gravida quisque duis porta
-              lacus. Consectetur enim.
-            </p>
+            <p className=" font-medium text-[#ABABAB]">{single?.description}</p>
           </div>
 
           <section className="border p-3 rounded-xl md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
             <p className="text-xl mb-5">Features</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 place-items-center items-center flex-wrap">
               <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
-                <IoBedOutline /> <p>3 Bedroom</p>
+                <IoBedOutline /> <p>{single?.bedroom} Bedroom</p>
               </div>
               <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
-                <LuBath /> <p>2 Bathroom</p>
-              </div>
-              <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
-                <GiHomeGarage /> <p>Garage</p>
-              </div>
-              <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
-                <FaRegSquare /> <p>Square Feet</p>
-              </div>
-              <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
-                <IoBedOutline /> <p>3 Bedroom</p>
-              </div>
-              <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
-                <LuBath /> <p>2 Bathroom</p>
+                <LuBath /> <p> {single?.bathroom} Bathroom</p>
               </div>
               <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
                 <GiHomeGarage /> <p>Garage</p>
               </div>
+              <div className="flex gap-3 items-center text-xs text-[#ABABAB]">
+                <FaRegSquare /> <p>{single?.squareFeet} Square Feet</p>
+              </div>
               <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
-                <FaRegSquare /> <p>Square Feet</p>
+                <IoBedOutline />{" "}
+                {single?.garage === "no" ? (
+                  <p>0 Garage</p>
+                ) : (
+                  <p>{single?.garage} Garage</p>
+                )}
+              </div>
+              <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
+                <LuBath /> <p> {single?.bathroom} Bathroom</p>
+              </div>
+              <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
+                <GiHomeGarage />{" "}
+                {single?.garage === "no" ? (
+                  <p>0 Garage</p>
+                ) : (
+                  <p>{single?.garage} Garage</p>
+                )}
+              </div>
+              <div className="flex gap-3 items-center text-xs text-[#ABABAB]">
+                <FaRegSquare /> <p>{single?.squareFeet} Square Feet</p>
               </div>
             </div>
           </section>
 
           <div className="border p-3 rounded-xl md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
             <p className="text-xl mb-5">Property Video</p>
-            <img src={vi} alt="" />
+            <ReactPlayer
+              url={single?.media?.video}
+              width="100%"
+              height="100%"
+              controls
+            />
           </div>
 
           <section className="border py-3 px-5 mt-5 border-[#343434] rounded-lg">
@@ -304,21 +334,27 @@ export const PropertyDetail = () => {
           <div className="border border-[#343434] w-[270px] md:w-[300px] h-[358px] md:mt-5 p-5 rounded-xl text-center">
             {/* sale support */}
 
-            <img src={sale} alt="" className="w-[100px] mx-auto" />
-            <h1 className="font-semibold text-xl mt-5">Ezra Aduramigba</h1>
+            <img
+              src={single?.salesSupport?.avatar}
+              alt=""
+              className="w-[100px] h-[100px] rounded-full mx-auto"
+            />
+            <h1 className="font-semibold text-xl mt-5">
+              {single?.salesSupport?.name}
+            </h1>
             <p className="text-sm text-[#ABABAB]">Sales Support</p>
             <p className="bg-white w-[247px] h-[44px] mx-auto mt-10 text-[#111111] flex justify-center items-center rounded-lg">
-              Message: 08130054558
+              Message: {single?.salesSupport?.whatsappNumber}
             </p>
             <p className="bg-[#F5D9BE] w-[247px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg">
-              Call: 08130054558
+              Call: {single?.salesSupport?.phoneNumber}
             </p>
           </div>
 
           <div className="mt-10">
             <h1 className="text-2xl font-semibold">Similar Properties</h1>
 
-            <SimilarProperties />
+            <SimilarProperties similar={similar} />
           </div>
         </section>
       </section>
@@ -327,7 +363,7 @@ export const PropertyDetail = () => {
         <UsersNumHouses />
       </div>
 
-      <BackToTop/>
+      <BackToTop />
     </main>
   );
 };

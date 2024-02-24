@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AppContext = createContext();
 
@@ -16,6 +17,7 @@ export const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState("");
   const [filters, setFilters] = useState("available");
+  
 
   const URL = "http://localhost:3000/api/v1/inspection";
   const BASE_URL = `http://localhost:3000/api/v1/properties?location=${location}&type=${type}&price=${price}`;
@@ -23,12 +25,16 @@ export const AppProvider = ({ children }) => {
   const getLatestProperties = async () => {
     // GETTING LATEST PROPERTIES
     try {
+      setLoading(true);
       const {
         data: { property },
       } = await axios(`${latestUrl}/latest`);
       setLatest(property);
+
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -72,11 +78,22 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const deleteProperty = async(propertyId) => {
+    try {
+      const { data } = await axios.delete(`${latestUrl}/${propertyId}`);
+      if (data) {
+        window.location.reload();
+      }
+    } catch (error) {
+       console.log(error);
+    }
+  }
+
   const getRecentProperty = async () => {
     try {
       const {
         data: { properties },
-      } = await axios(`${BASE_URL}/recent`);
+      } = await axios(`${latestUrl}/recent`);
       setRecent(properties);
     } catch (error) {
       console.log(error);
@@ -114,6 +131,8 @@ export const AppProvider = ({ children }) => {
         selected,
         filters,
         setFilters,
+        deleteProperty,
+     
       }}
     >
       {children}

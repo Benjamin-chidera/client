@@ -10,7 +10,7 @@ export const AllProperties = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const { getProperties, properties, handleSelect, type, filters, setFilters } =
+  const { properties, handleSelect, type, filters, setFilters } =
     useGlobalContext();
 
   const filterByType = properties.filter((t) => t.propertyStatus === filters);
@@ -65,10 +65,16 @@ export const AllProperties = () => {
               <option value="house">House</option>
               <option value="land">Land</option>
             </select>
-            <button className="border border-[#F78214] text-xl md:text-3xl w-[40px] h-[40px] md:w-[80px] md:h-[50px] rounded-2xl flex justify-center items-center shadow-inner active:shadow-white">
+            <button
+              className="border border-[#F78214] text-xl md:text-3xl w-[40px] h-[40px] md:w-[80px] md:h-[50px] rounded-2xl flex justify-center items-center shadow-inner active:shadow-white"
+              disabled={true}
+            >
               <LuRefreshCcw color="#F78214" />
             </button>
-            <Link className="bg-[#F78214] text-xs md:w-[100px] flex justify-center items-center font-semibold rounded-2xl md:h-[60px] w-[80px] h-[40px] px-1">
+            <Link
+              className="bg-[#F78214] text-xs md:w-[80px] flex justify-center items-center font-semibold rounded-2xl md:h-[50px] w-[80px] h-[40px] px-1"
+              to={"/admin/add-new-properties"}
+            >
               + Add New
             </Link>
           </section>

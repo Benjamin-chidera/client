@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RiArrowDropLeftFill } from "react-icons/ri";
 import { PiHouse } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import d1 from "../../assets/Image/d1.png";
 import black from "../../assets/Image/black.png";
 // import d2 from "../../assets/Image/d2.png";
@@ -14,9 +14,13 @@ import { IoCameraOutline } from "react-icons/io5";
 import ReactPlayer from "react-player";
 import { useGlobalContext } from "../../context/context";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 
 export const AddNewProperty = () => {
   const { BASE_URL } = useGlobalContext();
+  const [saved, setSave] = useState(false);
+  const redirect = useNavigate();
   const [imgPreview, setImgPreview] = useState({
     img1: black,
     img2: black,
@@ -79,6 +83,32 @@ export const AddNewProperty = () => {
 
   const handleAddNewProperty = async (e) => {
     e.preventDefault();
+    setSave(true);
+
+    if (
+      !property.title ||
+      !property.price ||
+      !property.location ||
+      !property.description ||
+      !property.tags ||
+      !property.propertyType ||
+      !property.bedroom ||
+      !property.bathroom ||
+      !property.squareFeet ||
+      !property.name ||
+      !property.whatsappNumber ||
+      !property.phoneNumber ||
+      !property.garage ||
+      !property.video ||
+      !property.avatar ||
+      !property.img1 ||
+      !property.img2 ||
+      !property.img3 ||
+      !property.img4
+    ) {
+      toast.error("Please fill all property information");
+      setSave(false);
+    }
 
     const formData = new FormData();
     formData.append("title", property.title);
@@ -104,15 +134,41 @@ export const AddNewProperty = () => {
     try {
       const { data } = await axios.post(BASE_URL, formData);
       if (data) {
+        setSave(false);
         console.log("data received", data);
+        setProperty({
+          title: "",
+          price: "",
+          location: "",
+          description: "",
+          tags: "",
+          propertyType: "",
+          bedroom: "",
+          bathroom: "",
+          squareFeet: "",
+          name: "",
+          whatsappNumber: "",
+          phoneNumber: "",
+          garage: "",
+          video: null,
+          avatar: null,
+          img1: null,
+          img2: null,
+          img3: null,
+          img4: null,
+        });
+        toast.success("Property successfully added");
+        redirect("/admin/all-properties");
       }
     } catch (error) {
+      setSave(false);
       console.log(error);
     }
   };
 
   return (
     <section className="container mx-auto w-full">
+      <Toaster />
       <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center ">
           <RiArrowDropLeftFill size={40} color="orange" />
@@ -145,7 +201,7 @@ export const AddNewProperty = () => {
                 className="bg-[#F78214] text-sm rounded-lg px-10"
                 type="submit"
               >
-                Save
+                {saved ? <AdminBtnSave /> : "Saved"}
               </Button>
             </div>
           </section>

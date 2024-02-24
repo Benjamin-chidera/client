@@ -37,7 +37,7 @@ export const Home = () => {
             </p>
 
             <div className="mt-7">
-              <Link className="bg-[#F78214] px-8 py-3 rounded-lg">
+              <Link className="bg-[#F78214] px-8 py-3 rounded-lg" to={"/properties"}>
                 View Properties
               </Link>
             </div>

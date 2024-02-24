@@ -17,12 +17,12 @@ import { PropertyDetail } from "./pages/users/PropertyDetails";
 import { Contact } from "./pages/users/Contact";
 import { Booking } from "./pages/users/Booking";
 import { Inspection } from "./pages/admin/Inspection";
-
-
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 function App() {
   return (
     <div>
+      {/* <SkeletonTheme baseColor="#202020" highlightColor="#444"> */}
       <BrowserRouter>
         <Routes>
           {/* this is for admin */}
@@ -30,8 +30,14 @@ function App() {
             <Route index element={<DashBoard />} />
             <Route path="all-properties" element={<AllProperties />} />
             <Route path="add-new-properties" element={<AddNewProperty />} />
-            <Route path="propertyDetails" element={<PropertyDetails />} />
-            <Route path="edit-property" element={<EditProperty />} />
+            <Route
+              path="propertyDetails/:propertyId"
+              element={<PropertyDetails />}
+            />
+            <Route
+              path="edit-property/:propertyId"
+              element={<EditProperty />}
+            />
             <Route path="*" element={<ErrorPage />} />
             <Route path="inspection" element={<Inspection />} />
           </Route>
@@ -45,12 +51,16 @@ function App() {
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="properties" element={<Properties />} />
-            <Route path="propertyDetails" element={<PropertyDetail />} />
+            <Route
+              path="propertyDetails/:propertyId"
+              element={<PropertyDetail />}
+            />
             <Route path="contact" element={<Contact />} />
             <Route path="booking" element={<Booking />} />
           </Route>
         </Routes>
       </BrowserRouter>
+      {/* </SkeletonTheme> */}
     </div>
   );
 }

@@ -8,10 +8,15 @@ import add from "../../assets/Image/add.png";
 import { IoSearchSharp } from "react-icons/io5";
 
 import { Squash as Hamburger } from "hamburger-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useGlobalContext } from "../../context/context";
 
 export const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
+  const location = useLocation();
+  const [search, setSearch] = useState("");
+
+  const { setType } = useGlobalContext();
 
   const handleClose = () => {
     setOpen(false);
@@ -19,7 +24,14 @@ export const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpen(false);
+   
+    if (search) {
+       setType(search);
+    }
+  };
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -28,20 +40,24 @@ export const Navbar = () => {
         <div className="flex items-center gap-20">
           <img src={logo} alt="Company-Logo" />
 
-          <div className="hidden md:block">
-            <form className="relative" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Search Here"
-                className="w-[391px] h-[35px] ps-3 pe-8 bg-transparent border border-gray-600 rounded-2xl relative outline-none"
-              />
+          {location.pathname === "/admin/all-properties" && (
+            <div className="hidden md:block">
+              <form className="relative" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="Search by the type of property"
+                  className="w-[391px] h-[35px] ps-3 pe-8 bg-transparent border border-gray-600 rounded-2xl relative outline-none"
+                  value={search}
+                  onChange={handleChange}
+                />
 
-              <IoSearchSharp
-                className="absolute top-2 right-3"
-                color="#F78214"
-              />
-            </form>
-          </div>
+                <IoSearchSharp
+                  className="absolute top-2 right-3"
+                  color="#F78214"
+                />
+              </form>
+            </div>
+          )}
         </div>
 
         <div className="hidden lg:flex gap-3 items-center">
