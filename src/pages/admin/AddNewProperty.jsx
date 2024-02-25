@@ -16,11 +16,13 @@ import { useGlobalContext } from "../../context/context";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
+import Cookies from "js-cookie";
 
 export const AddNewProperty = () => {
   const { BASE_URL } = useGlobalContext();
   const [saved, setSave] = useState(false);
   const redirect = useNavigate();
+  const token = Cookies.get("token");
   const [imgPreview, setImgPreview] = useState({
     img1: black,
     img2: black,
@@ -132,10 +134,12 @@ export const AddNewProperty = () => {
     formData.append("images", property.img4);
 
     try {
-      const { data } = await axios.post(BASE_URL, formData);
+      const { data } = await axios.post(BASE_URL, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (data) {
         setSave(false);
-        console.log("data received", data);
+        
         setProperty({
           title: "",
           price: "",
@@ -318,15 +322,32 @@ export const AddNewProperty = () => {
               <section className="flex items-center gap-5">
                 <div className="mb-4 flex flex-col">
                   <label className="text-[#8D8D8D] text-xs">Tags</label>
-                  <input
-                    type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
-                    placeholder="Select Tags"
+
+                  <select
                     name="tags"
                     value={property.tags}
                     onChange={handleChange}
-                  />
+                    id=""
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
+                  >
+                    <option value="" disabled className=" bg-black">
+                      Tags
+                    </option>
+                    <option value="luxury" className=" bg-black">
+                      Luxury
+                    </option>
+                    <option value="affordable" className=" bg-black">
+                      Affordable
+                    </option>
+                    <option value="comfortable" className=" bg-black">
+                      Comfortable
+                    </option>
+                    <option value="spacious" className=" bg-black">
+                      Spacious
+                    </option>
+                  </select>
                 </div>
+
                 <div className="mb-4 flex flex-col">
                   <label className="text-[#8D8D8D] text-xs">
                     Property Type

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const AppContext = createContext();
 
@@ -17,11 +17,12 @@ export const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState("");
   const [filters, setFilters] = useState("available");
-  
+  const token = Cookies.get("token");
 
   const URL = "http://localhost:3000/api/v1/inspection";
   const BASE_URL = `http://localhost:3000/api/v1/properties?location=${location}&type=${type}&price=${price}`;
   const latestUrl = "http://localhost:3000/api/v1/properties";
+
   const getLatestProperties = async () => {
     // GETTING LATEST PROPERTIES
     try {
@@ -57,7 +58,9 @@ export const AppProvider = ({ children }) => {
     try {
       const {
         data: { inspection },
-      } = await axios(URL);
+      } = await axios(URL, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setInspection(inspection);
     } catch (error) {
       console.log(error);
@@ -68,7 +71,9 @@ export const AppProvider = ({ children }) => {
     try {
       const {
         data: { inspection },
-      } = await axios.delete(`${URL}/${inspecId}`);
+      } = await axios.delete(`${URL}/${inspecId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (inspection) {
         window.location.reload();
@@ -78,16 +83,18 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const deleteProperty = async(propertyId) => {
+  const deleteProperty = async (propertyId) => {
     try {
-      const { data } = await axios.delete(`${latestUrl}/${propertyId}`);
+      const { data } = await axios.delete(`${latestUrl}/${propertyId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       if (data) {
         window.location.reload();
       }
     } catch (error) {
-       console.log(error);
+      console.log(error);
     }
-  }
+  };
 
   const getRecentProperty = async () => {
     try {
@@ -132,7 +139,6 @@ export const AppProvider = ({ children }) => {
         filters,
         setFilters,
         deleteProperty,
-     
       }}
     >
       {children}

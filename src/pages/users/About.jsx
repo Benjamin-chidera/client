@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import abt1 from "../../assets/Image/abt1.png";
 import abt2 from "../../assets/Image/abt2.png";
 import map from "../../assets/Image/map.png";
-import { Pagination } from "../../components/admin/Pagination";
 import { UsersNumHouses } from "../../components/users/UsersNumHouses";
 import { UserCustomerTestimonials } from "../../components/users/userCustomerTestimonials";
 import { BackToTop } from "../../components/users/BackToTop";
+import { Map } from "../../components/Map";
 
 export const About = () => {
   const teams = [
@@ -158,7 +158,7 @@ export const About = () => {
             })}
           </div>
         </div>
-        <Pagination />
+        
       </section>
 
       <section className="lg:flex justify-between container mx-auto my-20 md:px-20">
@@ -192,11 +192,7 @@ export const About = () => {
 
         <div>
           <div className=" mb-20">
-            <img
-              src={map}
-              alt=""
-              className="w-[250px] md:w-[450px] h-[350px] md:h-[450px]  md:rounded-[60px] relative mx-auto"
-            />
+           <Map/>
           </div>
         </div>
       </section>

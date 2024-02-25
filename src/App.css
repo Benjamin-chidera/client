@@ -299,3 +299,11 @@ body {
   opacity: 0;
   transition: all 200ms;
 }
+
+
+/* sizing of map container */
+
+.leaflet-container{
+  height: 100%;
+  z-index: 0;
+}

@@ -21,24 +21,28 @@ import { UsersNumHouses } from "../../components/users/UsersNumHouses";
 import { BackToTop } from "../../components/users/BackToTop";
 import axios from "axios";
 import ReactPlayer from "react-player";
+import Cookies from "js-cookie";
+import { CurrencyFormatter } from "../../components/CurrencyFormatter";
+
 
 export const PropertyDetail = () => {
   const { propertyId } = useParams();
   const url = `http://localhost:3000/api/v1/properties/${propertyId}`;
   const [single, setSingle] = useState();
   const [similar, setSimilar] = useState();
+  const token = Cookies.get("token");
 
   const getSingleProperty = async () => {
     try {
-      const { data } = await axios(url);
+      const { data } = await axios(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setSingle(data.property);
       setSimilar(data.similarProperties);
     } catch (error) {
       console.log(error.message);
     }
   };
-
-  
 
   useEffect(() => {
     getSingleProperty();
@@ -96,7 +100,7 @@ export const PropertyDetail = () => {
             <div>
               <p className="text-[#8D8D8D] text-sm">Sales Price</p>
               <p className="font-semibold text-lg md:text-xl">
-                ${single?.price}
+                {<CurrencyFormatter value={single?.price}/>}
               </p>
             </div>
           </section>

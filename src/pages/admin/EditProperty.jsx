@@ -18,36 +18,37 @@ import { IoCameraOutline } from "react-icons/io5";
 import ReactPlayer from "react-player";
 import axios from "axios";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
+import Cookies from "js-cookie";
 
 export const EditProperty = () => {
   const { propertyId } = useParams();
-   const [saved, setSave] = useState(false);
+  const [saved, setSave] = useState(false);
   const url = "http://localhost:3000/api/v1/properties";
+  const token = Cookies.get("token");
 
+  const [property, setProperty] = useState({
+    title: "",
+    price: "",
+    location: "",
+    description: "",
+    tags: "",
+    propertyType: "",
+    bedroom: 0, // Default value for numeric inputs
+    bathroom: 0, // Default value for numeric inputs
+    squareFeet: "",
+    name: "",
+    whatsappNumber: "",
+    phoneNumber: "",
+    garage: "",
+    video: "",
+    avatar: "",
+    img1: "",
+    img2: "",
+    img3: "",
+    img4: "",
+  });
 
- const [property, setProperty] = useState({
-   title: "",
-   price: "",
-   location: "",
-   description: "",
-   tags: "",
-   propertyType: "",
-   bedroom: 0, // Default value for numeric inputs
-   bathroom: 0, // Default value for numeric inputs
-   squareFeet: "",
-   name: "",
-   whatsappNumber: "",
-   phoneNumber: "",
-   garage: "",
-   video: "",
-   avatar: "",
-   img1: "",
-   img2: "",
-   img3: "",
-   img4: "",
- });
-
-   const [imgPreview, setImgPreview] = useState({
+  const [imgPreview, setImgPreview] = useState({
     img1: d1,
     img2: d1,
     img3: d1,
@@ -58,7 +59,6 @@ export const EditProperty = () => {
       "https://res.cloudinary.com/dlb8nbz13/video/upload/c_scale,h_390,q_91,w_618/v1706177257/WhatsApp_Video_2024-01-25_at_11.05.54_eb4762c7_paf2hg.mp4",
   });
 
-
   const handleChange = (e) => {
     const { name, value, type } = e.target;
     setProperty((prevProperty) => ({
@@ -67,34 +67,32 @@ export const EditProperty = () => {
     }));
   };
 
-const handleImage = (id) => {
-  let fileInput = document.getElementById(id);
-  fileInput.click();
-  fileInput.onchange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImgPreview((prevState) => ({
-        ...prevState,
-        [id]: URL.createObjectURL(file),
-      }));
+  const handleImage = (id) => {
+    let fileInput = document.getElementById(id);
+    fileInput.click();
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setImgPreview((prevState) => ({
+          ...prevState,
+          [id]: URL.createObjectURL(file),
+        }));
 
-      setProperty((prevProperty) => ({
-        ...prevProperty,
-        [id]: file,
-      }));
-    }
+        setProperty((prevProperty) => ({
+          ...prevProperty,
+          [id]: file,
+        }));
+      }
+    };
   };
-};
-
-
-
-  
 
   const getProperties = async () => {
     try {
       const {
         data: { property },
-      } = await axios(`${url}/${propertyId}`);
+      } = await axios(`${url}/${propertyId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setProperty(property);
     } catch (error) {
       console.log(error.message);
@@ -102,7 +100,7 @@ const handleImage = (id) => {
   };
 
   const handleEdit = async (e) => {
-    setSave(true)
+    setSave(true);
     e.preventDefault();
     try {
       const formData = new FormData();
@@ -126,12 +124,14 @@ const handleImage = (id) => {
       formData.append("img3", property.img3);
       formData.append("img4", property.img4);
 
-      await axios.put(`${url}/${propertyId}`, formData);
+      await axios.patch(`${url}/${propertyId}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       // Optionally, you can handle success or navigate to another page after editing.
       console.log("Property updated successfully!");
-      setSave(false)
+      setSave(false);
     } catch (error) {
-      setSave(false)
+      setSave(false);
       console.error("Error updating property:", error);
     }
   };

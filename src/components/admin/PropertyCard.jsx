@@ -7,6 +7,7 @@ import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
+import { CurrencyFormatter } from "../CurrencyFormatter";
 
 export function PropertyCard() {
   const { getRecentProperty, recent } = useGlobalContext();
@@ -58,7 +59,9 @@ export function PropertyCard() {
               <IoLocation /> <p className="text-[#8D8D8D]">{location}</p>
             </address>
 
-            <p className="text-[#8D8D8D] font-semibold text-2xl">${price}</p>
+            <p className="text-[#8D8D8D] font-semibold text-2xl">
+              {<CurrencyFormatter value={price} />}
+            </p>
 
             <section className="flex gap-3 flex-wrap text-sm">
               <div className="flex gap-2 items-center">
@@ -92,7 +95,7 @@ export function PropertyCard() {
 
               <Button
                 className="bg-[#F78214] w-[220px]  md:w-[270px]"
-                onClick={() => navigate("/admin/propertyDetails")}
+                onClick={() => navigate("/admin/propertyDetails/" + _id)}
               >
                 View Details
               </Button>

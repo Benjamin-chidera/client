@@ -13,18 +13,23 @@ import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import { useGlobalContext } from "../../context/context";
+import Cookies from "js-cookie";
+import { CurrencyFormatter } from "../../components/CurrencyFormatter";
 
 export const PropertyDetails = () => {
   const [single, setSingle] = useState();
   const { propertyId } = useParams();
   const { deleteProperty } = useGlobalContext();
   const navigate = useNavigate()
+    const token = Cookies.get("token");
 
   const url = `http://localhost:3000/api/v1/properties/${propertyId}`;
 
   const getSingleProperty = async () => {
     try {
-      const { data } = await axios(url);
+      const { data } = await axios(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       setSingle(data.property);
     } catch (error) {
       console.log(error);
@@ -123,7 +128,7 @@ export const PropertyDetails = () => {
             <div>
               <p className="text-[#8D8D8D] text-sm">Sales Price</p>
               <p className="font-semibold text-lg md:text-xl">
-                ${single?.price}
+                {<CurrencyFormatter value={single?.price} />}
               </p>
             </div>
           </section>
@@ -216,9 +221,14 @@ export const PropertyDetails = () => {
             <Button className="bg-[#F78214] w-[227px] h-[44px]  mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg">
               Mark as Sold
             </Button>
-            <Button className="border border-[#F78214] w-[227px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg" onClick={() => {deleteProperty(single._id)
-            navigate("/admin/all-properties")
-            }} type="button">
+            <Button
+              className="border border-[#F78214] w-[227px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg"
+              onClick={() => {
+                deleteProperty(single._id);
+                navigate("/admin/all-properties");
+              }}
+              type="button"
+            >
               Delete Property
             </Button>
           </div>

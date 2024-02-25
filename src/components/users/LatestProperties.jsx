@@ -1,6 +1,3 @@
-import { property } from "../../data/Property";
-import net from "../../assets/Image/net.png";
-import fam from "../../assets/Image/fam.png";
 import { IoLocation } from "react-icons/io5";
 import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
@@ -8,14 +5,12 @@ import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
 import { useGlobalContext } from "../../context/context";
 import { useEffect } from "react";
-import { SideLoading } from "../loading/sideLoading";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, } from "react-router-dom";
+import { CurrencyFormatter } from "../CurrencyFormatter";
 
 export const LatestProperties = () => {
   const { getLatestProperties, latest, loading } = useGlobalContext();
-  const { propertyId } = useParams();
 
   useEffect(() => {
     getLatestProperties();
@@ -65,7 +60,7 @@ export const LatestProperties = () => {
                     <IoLocation /> {location}
                   </address>
 
-                  <p className="font-bold text-[#8D8D8D] ">${price}</p>
+                  <p className="font-bold text-[#8D8D8D] ">{<CurrencyFormatter value={price}/>}</p>
 
                   <section className="flex flex-wrap  mb-5 gap-5 text-sm text-[#8D8D8D]">
                     <div className="flex gap-2 items-center">

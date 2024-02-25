@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogHeader,
   DialogBody,
-  DialogFooter,
 } from "@material-tailwind/react";
 
 export const SuccessFullBooking = ({ handleOpen }) => {

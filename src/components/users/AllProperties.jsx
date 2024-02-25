@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { property } from "../../data/Property";
 import net from "../../assets/Image/net.png";
 import fam from "../../assets/Image/fam.png";
@@ -7,11 +7,30 @@ import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { CurrencyFormatter } from "../CurrencyFormatter";
+
+import ReactPaginate from "react-paginate";
 
 export const AllProperties = () => {
   const { properties, loading } = useGlobalContext();
+  const [pageNumber, setPageNumber] = useState(0); //this is the current page
+  const usersPerPage = 2; // hw many item will be displayed per Page
+
+  const pagesVisited = pageNumber * usersPerPage;
+
+  const displayUsers = properties.slice(
+    pagesVisited,
+    pagesVisited + usersPerPage
+  );
+
+  const pageCount = Math.ceil(properties.length / usersPerPage);
+
+  const ChangePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <main>
@@ -19,14 +38,14 @@ export const AllProperties = () => {
         Property Listings - House
         {/* {properties.propertyType !== "house" && "Land"} */}
       </h2>
-      {properties.length < 1 && (
+      {displayUsers.length < 1 && (
         <p className="text-2xl text-center font-bold my-3">No Property found</p>
       )}
       <div className="grid md:grid-cols-2 place-items-center gap-10 mt-14">
         {loading ? (
           <p>Loading...</p>
         ) : (
-          properties.map((p) => {
+          displayUsers.map((p) => {
             const {
               _id,
               title,
@@ -62,7 +81,9 @@ export const AllProperties = () => {
                     <IoLocation /> {location}
                   </address>
 
-                  <p className="font-bold text-[#8D8D8D] ">${price}</p>
+                  <p className="font-bold text-[#8D8D8D] ">
+                    {<CurrencyFormatter value={price} />}
+                  </p>
 
                   <section className="flex flex-wrap  mb-2 gap-4 text-sm text-[#8D8D8D]">
                     <div className="flex gap-2 items-center">
@@ -109,6 +130,21 @@ export const AllProperties = () => {
             );
           })
         )}
+      </div>
+
+      <div>
+        <ReactPaginate
+          breakLabel="..."
+          previousLabel={<IoIosArrowBack size={20} />}
+          nextLabel={<IoIosArrowForward size={20} />}
+          pageCount={pageCount}
+          onPageChange={ChangePage}
+          containerClassName="flex justify-center gap-7 w-[80%] mx-auto mt-7"
+          previousLinkClassName=""
+          nextLinkClassName=""
+          disabledClassName=""
+          activeClassName="bg-white text-black h-fit w-fit rounded-full px-1"
+        />
       </div>
     </main>
   );

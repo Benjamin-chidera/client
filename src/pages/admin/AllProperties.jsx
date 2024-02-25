@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PiHouse } from "react-icons/pi";
 import { LuRefreshCcw } from "react-icons/lu";
@@ -14,6 +13,8 @@ export const AllProperties = () => {
     useGlobalContext();
 
   const filterByType = properties.filter((t) => t.propertyStatus === filters);
+
+ 
 
   return (
     <main className=" text-white container mx-auto w-full overflow-x-hidden">

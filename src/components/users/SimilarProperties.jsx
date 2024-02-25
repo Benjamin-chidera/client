@@ -2,6 +2,7 @@
 import React from "react";
 import { property } from "../../data/Property";
 import { Link, useNavigate } from "react-router-dom";
+import { CurrencyFormatter } from "../CurrencyFormatter";
 
 export const SimilarProperties = ({ similar }) => {
   const similars = property.slice(0, 6);
@@ -46,7 +47,9 @@ export const SimilarProperties = ({ similar }) => {
                 <address className=" not-italic text-xs text-[#8D8D8D]">
                   {location}
                 </address>
-                <p className="">${price}</p>
+                <p className="">
+                  {<CurrencyFormatter value={price} />}
+                </p>
               </div>
               <div className="mt-3">
                 <Link

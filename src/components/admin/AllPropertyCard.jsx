@@ -5,17 +5,36 @@ import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
-import { Pagination } from "./Pagination";
 // import sold from "../../assets/Image/SOLD.png";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+import ReactPaginate from "react-paginate";
+import { CurrencyFormatter } from "../CurrencyFormatter";
 
 export const AllPropertyCard = ({ filterByType }) => {
   const navigate = useNavigate();
+  const [pageNumber, setPageNumber] = useState(0); //this is the current page
+  const usersPerPage = 2; // hw many item will be displayed per Page
+
+   const pagesVisited = pageNumber * usersPerPage;
+
+   const displayUsers = filterByType.slice(
+     pagesVisited,
+     pagesVisited + usersPerPage
+   );
+
+   const pageCount = Math.ceil(filterByType.length / usersPerPage);
+
+   const ChangePage = ({ selected }) => {
+     setPageNumber(selected);
+   };
 
   return (
     <main className="">
       <div className=" grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 md:place-items-center w-full place-items-center mt-3 gap-5">
-        {filterByType.map((p) => {
+        {displayUsers.map((p) => {
           const {
             _id,
             title,
@@ -55,7 +74,9 @@ export const AllPropertyCard = ({ filterByType }) => {
                 <span className="text-[#8D8D8D]">{location}</span>
               </address>
 
-              <p className="text-[#8D8D8D] font-semibold text-2xl">${price}</p>
+              <p className="text-[#8D8D8D] font-semibold text-2xl">
+                {<CurrencyFormatter value={price} />}
+              </p>
 
               <section className="grid grid-cols-2 mb-5 gap-4 text-sm">
                 <div className="flex gap-2 items-center">
@@ -91,9 +112,7 @@ export const AllPropertyCard = ({ filterByType }) => {
 
                 <Button
                   className="bg-[#F78214] w-[220px]  md:w-[250px]"
-                  onClick={() =>
-                    navigate(`/admin/propertyDetails/${_id}`)
-                  }
+                  onClick={() => navigate(`/admin/propertyDetails/${_id}`)}
                 >
                   View Details
                 </Button>
@@ -110,7 +129,18 @@ export const AllPropertyCard = ({ filterByType }) => {
       </div>
 
       <div className="">
-        <Pagination />
+        <ReactPaginate
+          breakLabel="..."
+          previousLabel={<IoIosArrowBack size={20} />}
+          nextLabel={<IoIosArrowForward size={20} />}
+          pageCount={pageCount}
+          onPageChange={ChangePage}
+          containerClassName="flex justify-center gap-7 w-[80%] mx-auto mt-7"
+          previousLinkClassName=""
+          nextLinkClassName=""
+          disabledClassName=""
+          activeClassName="bg-white text-black h-fit w-fit rounded-full px-1"
+        />
       </div>
     </main>
   );
