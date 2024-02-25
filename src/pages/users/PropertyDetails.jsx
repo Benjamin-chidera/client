@@ -1,29 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { RiArrowDropLeftFill } from "react-icons/ri";
-import { PiHouse } from "react-icons/pi";
-import { Link, useParams } from "react-router-dom";
-import d1 from "../../assets/Image/d1.png";
-import vi from "../../assets/Image/vi.png";
-import d2 from "../../assets/Image/d2.png";
-import net from "../../assets/Image/net.png";
-import fam from "../../assets/Image/fam.png";
-import sale from "../../assets/Image/sale.png";
-import lineImg from "../../assets/Image/lineImg.png";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
 import { IoBedOutline } from "react-icons/io5";
-import { Button } from "@material-tailwind/react";
 import { SimilarProperties } from "../../components/users/SimilarProperties";
-import { UserRating } from "../../components/users/UserRating";
 import { UsersNumHouses } from "../../components/users/UsersNumHouses";
 import { BackToTop } from "../../components/users/BackToTop";
 import axios from "axios";
 import ReactPlayer from "react-player";
 import Cookies from "js-cookie";
 import { CurrencyFormatter } from "../../components/CurrencyFormatter";
-
+import { useGlobalContext } from "../../context/context";
+import { PostReveiws } from "../../components/users/PostReveiws";
+import { CustomersReviews } from "../../components/users/CustomersReviews";
 
 export const PropertyDetail = () => {
   const { propertyId } = useParams();
@@ -31,6 +22,8 @@ export const PropertyDetail = () => {
   const [single, setSingle] = useState();
   const [similar, setSimilar] = useState();
   const token = Cookies.get("token");
+  const { review } = useGlobalContext();
+
 
   const getSingleProperty = async () => {
     try {
@@ -100,7 +93,7 @@ export const PropertyDetail = () => {
             <div>
               <p className="text-[#8D8D8D] text-sm">Sales Price</p>
               <p className="font-semibold text-lg md:text-xl">
-                {<CurrencyFormatter value={single?.price}/>}
+                {<CurrencyFormatter value={single?.price} />}
               </p>
             </div>
           </section>
@@ -160,178 +153,15 @@ export const PropertyDetail = () => {
             />
           </div>
 
-          <section className="border py-3 px-5 mt-5 border-[#343434] rounded-lg">
-            {/* this is for the user rating */}
-            <div>
-              <h1 className="font-semibold text-[18px]">Visitor Ratings</h1>
-            </div>
-
-            <section className="flex justify-between items-center mt-5 bg-black md:h-[150px] flex-wrap px-3 py-3">
-              {/* this is for visitor ratings */}
-              <div className="text-center">
-                <h1 className="text-2xl md:text-3xl ">4.5</h1>
-                <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
-                <div>
-                  <UserRating rate={4} />
-                </div>
-              </div>
-
-              <div className="w-0.5 bg-[#ABABAB] md:h-[100px]"></div>
-
-              <section>
-                <div>
-                  <h1 className="font-semibold text-sm">Property</h1>
-                  <div className="flex gap-3 items-center">
-                    <img
-                      src={lineImg}
-                      alt=""
-                      className="w-[200px] md:w-[100px]"
-                    />
-                    <p>4</p>
-                  </div>
-                </div>
-                <div>
-                  <h1 className="font-semibold text-sm">Location</h1>
-                  <div className="flex gap-3 items-center">
-                    <img
-                      src={lineImg}
-                      alt=""
-                      className="w-[200px] md:w-[100px]"
-                    />
-                    <p>5</p>
-                  </div>
-                </div>
-              </section>
-
-              <section>
-                <div>
-                  <h1 className="font-semibold text-sm">Value for Money</h1>
-                  <div className="flex gap-3 items-center">
-                    <img
-                      src={lineImg}
-                      alt=""
-                      className="w-[200px] md:w-[100px]"
-                    />
-                    <p>4</p>
-                  </div>
-                </div>
-                <div>
-                  <h1 className="font-semibold text-sm">Support</h1>
-                  <div className="flex gap-3 items-center">
-                    <img
-                      src={lineImg}
-                      alt=""
-                      className="w-[200px] md:w-[100px]"
-                    />
-                    <p>4</p>
-                  </div>
-                </div>
-              </section>
-            </section>
-          </section>
+          <CustomersReviews review={review} />
 
           <section className="border border-[#343434] w-[270px] md:w-[540px]  md:mt-5 p-5 rounded-xl  mt-5">
-            {/* this is for reviews */}
-            <h1 className="font-semibold text-lg">Reviews</h1>
-            <p className="text-[#8D8D8D] text-sm">1 Review</p>
+            {/* this is for write a review */}
 
-            <p className="font-semibold">
-              Aisha Akinwumi{" "}
-              <span className="font-medium text-[#F78214]">
-                (oyelolaifeoluwa@gmail.com)
-              </span>
-            </p>
-            <p className="text-[#8D8D8D] text-sm">22-03-2023 09:30:20am</p>
+            <h1 className="font-semibold text-lg">Write A Review</h1>
 
-            <p className="text-[#8D8D8D] text-sm mt-3">
-              Lorem ipsum dolor sit amet consectetur. Id libero suspendisse eu
-              risus amet vel. Aliquet contur consectetur purus amet ultricies
-              facilisis a pelloique. Telus et cras urna vel vitae. Ornare
-              aliquam dolor enim consequat sapien odio cras integer.{" "}
-            </p>
+            <PostReveiws />
           </section>
-
-          <form>
-            <section className="border border-[#343434] w-[270px] md:w-[540px]  md:mt-5 p-5 rounded-xl  mt-5">
-              {/* this is for write a review */}
-
-              <h1 className="font-semibold text-lg">Write A Review</h1>
-
-              <div className="flex items-center flex-wrap md:flex-nowrap">
-                <section className="flex justify-between items-center flex-wrap mt-5">
-                  <div className="flex gap-10 items-center flex-wrap">
-                    <div>
-                      {/* property */}
-                      <h1 className="text-[#8D8D8D] text-sm">Property</h1>
-                      <UserRating />
-                    </div>
-
-                    <div>
-                      {/* Value for money */}
-                      <h1 className="text-[#8D8D8D] text-sm">
-                        Value for money
-                      </h1>
-                      <UserRating />
-                    </div>
-
-                    <div>
-                      {/* Location*/}
-                      <h1 className="text-[#8D8D8D] text-sm">Location</h1>
-                      <UserRating />
-                    </div>
-
-                    <div>
-                      {/* Support*/}
-                      <h1 className="text-[#8D8D8D] text-sm">Support</h1>
-                      <UserRating />
-                    </div>
-                  </div>
-                </section>
-                <section className="bg-black py-3 px-3">
-                  <div className="text-center">
-                    <h1 className="text-2xl md:text-3xl ">0.0</h1>
-                    <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
-                    <div>
-                      <UserRating rate={4} />
-                    </div>
-                  </div>
-                </section>
-              </div>
-
-              <section className="mt-5">
-                <div className="flex justify-center items-center flex-wrap gap-5">
-                  <input
-                    type="text"
-                    className="bg-transparent border border-[#343434] w-[230px] h-[40px] px-3 outline-none placeholder:text-sm rounded"
-                    placeholder="Your Name "
-                  />
-                  <input
-                    type="email"
-                    className="bg-transparent border border-[#343434] w-[230px] h-[40px] px-3 outline-none rounded placeholder:text-sm"
-                    placeholder="Email"
-                  />
-                </div>
-
-                <div className="mt-5 md:mx-3">
-                  <textarea
-                    name=""
-                    id=""
-                    cols="50"
-                    className="w-[227px] md:w-[475px] md:h-[200px] resize-none bg-transparent border border-[#343434] outline-none rounded placeholder:text-sm p-3"
-                    rows="10"
-                    placeholder="Compose your review"
-                  ></textarea>
-                </div>
-                <Button
-                  size=""
-                  className="md:ms-2 mt-3 bg-[#F78214]"
-                  type="submit"
-                >
-                  Submit Review
-                </Button>
-              </section>
-            </section>
-          </form>
         </section>
 
         <section>

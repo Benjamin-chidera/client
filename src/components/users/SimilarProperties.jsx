@@ -9,8 +9,6 @@ export const SimilarProperties = ({ similar }) => {
   // const history = useHistory();
   const navigate = useNavigate();
 
-  console.log(similar);
-
   const move = (_id) => {
     navigate(`/propertyDetails/${_id}`);
     window.location.reload();

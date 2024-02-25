@@ -11,6 +11,7 @@ export const AppProvider = ({ children }) => {
   const [properties, setProperties] = useState([]);
   const [inspection, setInspection] = useState([]);
   const [recent, setRecent] = useState([]);
+  const [review, setReview] = useState([]);
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
@@ -22,6 +23,18 @@ export const AppProvider = ({ children }) => {
   const URL = "http://localhost:3000/api/v1/inspection";
   const BASE_URL = `http://localhost:3000/api/v1/properties?location=${location}&type=${type}&price=${price}`;
   const latestUrl = "http://localhost:3000/api/v1/properties";
+  const reviewsUrl = "http://localhost:3000/api/v1";
+
+  const getReviews = async () => {
+    try {
+      const { data: {reviews} } = await axios.get(`${reviewsUrl}/reviews`);
+      if (reviews) {
+        setReview(reviews);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const getLatestProperties = async () => {
     // GETTING LATEST PROPERTIES
@@ -114,6 +127,7 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     getProperties();
+    getReviews();
   }, [location, type, price, selected, filters, type]);
 
   return (
@@ -139,6 +153,7 @@ export const AppProvider = ({ children }) => {
         filters,
         setFilters,
         deleteProperty,
+        review,
       }}
     >
       {children}
