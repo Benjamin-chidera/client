@@ -1,8 +1,24 @@
-import { Button } from '@material-tailwind/react';
-import React from 'react'
-import { PostRating } from './PostRating';
+import { Button } from "@material-tailwind/react";
+import React, { useState } from "react";
+import { PostRating } from "./PostRating";
 
 export const PostReveiws = () => {
+  const [rating, setRating] = useState({
+    property: 0,
+    value: 0,
+    location: 0,
+    support: 0,
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setRating({...rating, [e.target.name] : e.target.value})
+  }
+
+  const total = (rating.property + rating.value + rating.location + rating.support) / 4
+
   return (
     <main>
       <form>
@@ -13,34 +29,50 @@ export const PostReveiws = () => {
                 <div>
                   {/* property */}
                   <h1 className="text-[#8D8D8D] text-sm">Property</h1>
-                  <PostRating />
+                  <PostRating
+                    Change={handleChange}
+                    rate={rating.property}
+                    name={"property"}
+                  />
                 </div>
 
                 <div>
                   {/* Value for money */}
                   <h1 className="text-[#8D8D8D] text-sm">Value for money</h1>
-                  <PostRating />
+                  <PostRating
+                    Change={handleChange}
+                    rate={rating.value}
+                    name={"value"}
+                  />
                 </div>
 
                 <div>
                   {/* Location*/}
                   <h1 className="text-[#8D8D8D] text-sm">Location</h1>
-                  <PostRating />
+                  <PostRating
+                    Change={handleChange}
+                    rate={rating.location}
+                    name={"location"}
+                  />
                 </div>
 
                 <div>
                   {/* Support*/}
                   <h1 className="text-[#8D8D8D] text-sm">Support</h1>
-                  <PostRating />
+                  <PostRating
+                    Change={handleChange}
+                    rate={rating.support}
+                    name={"support"}
+                  />
                 </div>
               </div>
             </section>
             <section className="bg-black py-3 px-3">
               <div className="text-center">
-                <h1 className="text-2xl md:text-3xl ">0.0</h1>
+                <h1 className="text-2xl md:text-3xl ">{total.toFixed(1)}</h1>
                 <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
                 <div>
-                  <PostRating rate={4} />
+                  <PostRating rate={total} />
                 </div>
               </div>
             </section>
@@ -79,4 +111,4 @@ export const PostReveiws = () => {
       </form>
     </main>
   );
-}
+};
