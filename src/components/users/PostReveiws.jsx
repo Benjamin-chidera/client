@@ -1,6 +1,6 @@
 import { Button } from '@material-tailwind/react';
 import React from 'react'
-import { UserRating } from './UserRating';
+import { PostRating } from './PostRating';
 
 export const PostReveiws = () => {
   return (
@@ -13,25 +13,25 @@ export const PostReveiws = () => {
                 <div>
                   {/* property */}
                   <h1 className="text-[#8D8D8D] text-sm">Property</h1>
-                  <UserRating />
+                  <PostRating />
                 </div>
 
                 <div>
                   {/* Value for money */}
                   <h1 className="text-[#8D8D8D] text-sm">Value for money</h1>
-                  <UserRating />
+                  <PostRating />
                 </div>
 
                 <div>
                   {/* Location*/}
                   <h1 className="text-[#8D8D8D] text-sm">Location</h1>
-                  <UserRating />
+                  <PostRating />
                 </div>
 
                 <div>
                   {/* Support*/}
                   <h1 className="text-[#8D8D8D] text-sm">Support</h1>
-                  <UserRating />
+                  <PostRating />
                 </div>
               </div>
             </section>
@@ -40,7 +40,7 @@ export const PostReveiws = () => {
                 <h1 className="text-2xl md:text-3xl ">0.0</h1>
                 <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
                 <div>
-                  <UserRating rate={4} />
+                  <PostRating rate={4} />
                 </div>
               </div>
             </section>

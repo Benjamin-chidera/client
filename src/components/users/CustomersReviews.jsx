@@ -16,72 +16,66 @@ export const CustomersReviews = ({ review }) => {
 
         <section className="flex justify-between items-center mt-5 bg-black md:h-[150px] flex-wrap px-3 py-3">
           {/* this is for visitor ratings */}
-          <div className="text-center">
-            <h1 className="text-2xl md:text-3xl ">4.5</h1>
-            <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
-            <div>
-              <UserRating rate={4} />
-            </div>
-          </div>
-
-          <div className="w-0.5 bg-[#ABABAB] md:h-[100px]"></div>
 
           <main>
             {review.map((r) => {
-              const { property, _id } = r;
+              const { property, _id, location, value, support } = r;
+
+              const total = (property + location + value + support) / 4;
 
               return (
-                <div key={_id}>
-                  <div>
-                    <h1 className="font-semibold text-sm">Property</h1>
-                    <div className="flex gap-3 items-center">
-                      {/* <img
-                        src={lineImg}
-                        alt=""
-                        className="w-[200px] md:w-[100px]"
-                      /> */}
-                      <Ratings num={property}/>
-                      <p>{property}</p>
+                <div key={_id} className="flex gap-5 flex-wrap">
+                  <div className="text-center">
+                    <h1 className="text-2xl md:text-3xl ">
+                      {total.toFixed(1)}
+                    </h1>
+                    <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
+                    <div>
+                      <UserRating rate={total.toFixed(1)} />
                     </div>
                   </div>
+
+                  <div className="w-0.5 bg-[#ABABAB] md:h-[80px]"></div>
+
+                  <section>
+                    <div>
+                      <h1 className="font-semibold text-sm">Property</h1>
+                      <div className="flex gap-3 items-center">
+                        <Ratings num={property} />
+                        <p>{property}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h1 className="font-semibold text-sm">Location</h1>
+                      <div className="flex gap-3 items-center">
+                        <Ratings num={location} />
+                        <p>{location}</p>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section>
+                    <div>
+                      <h1 className="font-semibold text-sm">Value Of Money</h1>
+                      <div className="flex gap-3 items-center">
+                        <Ratings num={value} />
+                        <p>{value}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h1 className="font-semibold text-sm">Support</h1>
+                      <div className="flex gap-3 items-center">
+                        <Ratings num={support} />
+                        <p>{support}</p>
+                      </div>
+                    </div>
+                  </section>
                 </div>
               );
             })}
           </main>
-
-          <section>
-            {/* <div>
-              <h1 className="font-semibold text-sm">Property</h1>
-              <div className="flex gap-3 items-center">
-                <img src={lineImg} alt="" className="w-[200px] md:w-[100px]" />
-                <p>4</p>
-              </div>
-            </div> */}
-            {/* <div>
-              <h1 className="font-semibold text-sm">Location</h1>
-              <div className="flex gap-3 items-center">
-                <img src={lineImg} alt="" className="w-[200px] md:w-[100px]" />
-                <p>5</p>
-              </div>
-            </div> */}
-          </section>
-
-          <section>
-            {/* <div>
-              <h1 className="font-semibold text-sm">Value for Money</h1>
-              <div className="flex gap-3 items-center">
-                <img src={lineImg} alt="" className="w-[200px] md:w-[100px]" />
-                <p>4</p>
-              </div>
-            </div> */}
-            {/* <div>
-              <h1 className="font-semibold text-sm">Support</h1>
-              <div className="flex gap-3 items-center">
-                <img src={lineImg} alt="" className="w-[200px] md:w-[100px]" />
-                <p>4</p>
-              </div>
-            </div> */}
-          </section>
         </section>
       </section>
       {/* rating card  - above*/}
