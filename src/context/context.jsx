@@ -154,6 +154,7 @@ export const AppProvider = ({ children }) => {
         setFilters,
         deleteProperty,
         review,
+        reviewsUrl,
       }}
     >
       {children}

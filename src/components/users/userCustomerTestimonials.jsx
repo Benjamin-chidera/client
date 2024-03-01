@@ -6,40 +6,41 @@ import { Testimonial } from "../../data/CustomersTestimonials";
 import tes from "../../assets/Image/tes.png";
 
 export const UserCustomerTestimonials = () => {
-   var settings = {
-     dots: false,
-     infinite: true,
-     speed: 500,
-     slidesToShow: 2,
-     slidesToScroll: 2,
-     initialSlide: 0,
-     responsive: [
-       {
-         breakpoint: 1024,
-         settings: {
-           slidesToShow: 2,
-           slidesToScroll: 2,
-           infinite: true,
-           dots: true,
-         },
-       },
-       {
-         breakpoint: 600,
-         settings: {
-           slidesToShow: 1,
-           slidesToScroll: 1,
-           initialSlide: 1,
-         },
-       },
-       {
-         breakpoint: 400,
-         settings: {
-           slidesToShow: 1,
-           slidesToScroll: 1,
-         },
-       },
-     ],
-   };
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    initialSlide: 0,
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 400,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <main className="w-[70%] mx-auto space-y-4 text-center container mt-20">

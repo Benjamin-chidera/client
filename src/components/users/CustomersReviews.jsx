@@ -5,7 +5,6 @@ import { UserRating } from "./UserRating";
 import { Ratings } from "./Rating";
 
 export const CustomersReviews = ({ review }) => {
-  console.log(review);
   return (
     <main>
       <section className="border py-3 px-5 mt-5 border-[#343434] rounded-lg">
@@ -27,11 +26,11 @@ export const CustomersReviews = ({ review }) => {
                 <div key={_id} className="flex gap-5 flex-wrap">
                   <div className="text-center">
                     <h1 className="text-2xl md:text-3xl ">
-                      {total.toFixed(1)}
+                      {Math.round(total)}
                     </h1>
                     <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
                     <div>
-                      <UserRating rate={total.toFixed(1)} />
+                      <UserRating rate={Math.round(total)} />
                     </div>
                   </div>
 

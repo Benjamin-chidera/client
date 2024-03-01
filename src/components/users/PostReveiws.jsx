@@ -1,8 +1,11 @@
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { PostRating } from "./PostRating";
+import axios from "axios";
+import { useGlobalContext } from "../../context/context";
 
 export const PostReveiws = () => {
+  const { reviewsUrl } = useGlobalContext();
   const [rating, setRating] = useState({
     property: 0,
     value: 0,
@@ -13,15 +16,33 @@ export const PostReveiws = () => {
     message: "",
   });
 
-  const handleChange = (e) => {
-    setRating({...rating, [e.target.name] : e.target.value})
-  }
+  const handleChange = (obj) => {
+    setRating({ ...rating, ...obj });
+  };
+  const handleChangeInput = (e) => {
+    setRating({ ...rating, [e.target.name]: e.target.value });
+  };
 
-  const total = (rating.property + rating.value + rating.location + rating.support) / 4
+  const total =
+    (rating.property + rating.value + rating.location + rating.support) / 4;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { data } = await axios.post(`${reviewsUrl}/reviews`, { ...rating });
+
+      if (data) {
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <main>
-      <form>
+      <form onSubmit={handleSubmit}>
         <section>
           <div className="flex items-center flex-wrap md:flex-nowrap">
             <section className="flex justify-between items-center flex-wrap mt-5">
@@ -71,9 +92,7 @@ export const PostReveiws = () => {
               <div className="text-center">
                 <h1 className="text-2xl md:text-3xl ">{total.toFixed(1)}</h1>
                 <p className="text-[#ABABAB] text-xs mb-2">Out of 5.0</p>
-                <div>
-                  <PostRating rate={total} />
-                </div>
+                <div>{/* <PostRating rate={Math.round(total)} /> */}</div>
               </div>
             </section>
           </div>
@@ -86,22 +105,30 @@ export const PostReveiws = () => {
               type="text"
               className="bg-transparent border border-[#343434] w-[230px] h-[40px] px-3 outline-none placeholder:text-sm rounded"
               placeholder="Your Name "
+              value={rating.name}
+              onChange={handleChangeInput}
+              name="name"
             />
             <input
               type="email"
               className="bg-transparent border border-[#343434] w-[230px] h-[40px] px-3 outline-none rounded placeholder:text-sm"
               placeholder="Email"
+              value={rating.email}
+              onChange={handleChangeInput}
+              name="email"
             />
           </div>
 
           <div className="mt-5 md:mx-3">
             <textarea
-              name=""
               id=""
               cols="50"
               className="w-[227px] md:w-[475px] md:h-[200px] resize-none bg-transparent border border-[#343434] outline-none rounded placeholder:text-sm p-3"
               rows="10"
               placeholder="Compose your review"
+              value={rating.message}
+              onChange={handleChangeInput}
+              name="message"
             ></textarea>
           </div>
           <Button size="" className="md:ms-2 mt-3 bg-[#F78214]" type="submit">

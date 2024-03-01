@@ -25,6 +25,17 @@ export const EditProperty = () => {
   const [saved, setSave] = useState(false);
   const url = "http://localhost:3000/api/v1/properties";
   const token = Cookies.get("token");
+  const [support, setSupport] = useState({
+    name: "",
+    whatsappNumber: "",
+    phoneNumber: "",
+    avatar: "",
+  });
+  const [gallery, setGallery] = useState({
+    video:
+      "https://res.cloudinary.com/dlb8nbz13/video/upload/c_scale,h_390,q_91,w_618/v1706177257/WhatsApp_Video_2024-01-25_at_11.05.54_eb4762c7_paf2hg.mp4",
+    images: [d1, d1, d1, d1],
+  });
 
   const [property, setProperty] = useState({
     title: "",
@@ -36,16 +47,7 @@ export const EditProperty = () => {
     bedroom: 0, // Default value for numeric inputs
     bathroom: 0, // Default value for numeric inputs
     squareFeet: "",
-    name: "",
-    whatsappNumber: "",
-    phoneNumber: "",
     garage: "",
-    video: "",
-    avatar: "",
-    img1: "",
-    img2: "",
-    img3: "",
-    img4: "",
   });
 
   const [imgPreview, setImgPreview] = useState({
@@ -61,8 +63,17 @@ export const EditProperty = () => {
 
   const handleChange = (e) => {
     const { name, value, type } = e.target;
+
     setProperty((prevProperty) => ({
       ...prevProperty,
+      [name]: type === "file" ? e.target.files[0] : value,
+    }));
+  };
+  const handleSalesChange = (e) => {
+    const { name, value, type } = e.target;
+
+    setSupport((prev) => ({
+      ...prev,
       [name]: type === "file" ? e.target.files[0] : value,
     }));
   };
@@ -73,12 +84,12 @@ export const EditProperty = () => {
     fileInput.onchange = (e) => {
       const file = e.target.files[0];
       if (file) {
-        setImgPreview((prevState) => ({
+        setGallery((prevState) => ({
           ...prevState,
           [id]: URL.createObjectURL(file),
         }));
 
-        setProperty((prevProperty) => ({
+        setGallery((prevProperty) => ({
           ...prevProperty,
           [id]: file,
         }));
@@ -94,6 +105,9 @@ export const EditProperty = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProperty(property);
+      const { salesSupport, media } = property;
+      setSupport(salesSupport);
+      setGallery(media);
     } catch (error) {
       console.log(error.message);
     }
@@ -113,16 +127,16 @@ export const EditProperty = () => {
       formData.append("bedroom", property.bedroom);
       formData.append("bathroom", property.bathroom);
       formData.append("squareFeet", property.squareFeet);
-      formData.append("name", property.name);
-      formData.append("whatsappNumber", property.whatsappNumber);
-      formData.append("phoneNumber", property.phoneNumber);
+      formData.append("name", support.name);
+      formData.append("whatsappNumber", support.whatsappNumber);
+      formData.append("phoneNumber", support.phoneNumber);
       formData.append("garage", property.garage);
-      formData.append("video", property.video);
-      formData.append("avatar", property.avatar);
-      formData.append("img1", property.img1);
-      formData.append("img2", property.img2);
-      formData.append("img3", property.img3);
-      formData.append("img4", property.img4);
+      formData.append("video", gallery.video);
+      formData.append("avatar", support.avatar);
+      formData.append("img1", gallery.img1);
+      formData.append("img2", gallery.img2);
+      formData.append("img3", gallery.img3);
+      formData.append("img4", gallery.img4);
 
       await axios.patch(`${url}/${propertyId}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
@@ -194,7 +208,7 @@ export const EditProperty = () => {
                 />
                 {imgPreview.img1 && (
                   <img
-                    src={property?.media?.images[0]}
+                    src={gallery?.images[0]}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
@@ -222,7 +236,7 @@ export const EditProperty = () => {
                   />
                   {imgPreview.img2 && (
                     <img
-                      src={property?.media?.images[1]}
+                      src={gallery?.images[1]}
                       alt="Preview"
                       className="w-full h-full object-cover"
                     />
@@ -248,7 +262,7 @@ export const EditProperty = () => {
                   />
                   {imgPreview.img3 && (
                     <img
-                      src={property?.media?.images[2]}
+                      src={gallery?.images[2]}
                       alt="Preview"
                       className="w-full h-full object-cover"
                     />
@@ -274,7 +288,7 @@ export const EditProperty = () => {
                   />
                   {imgPreview.img4 && (
                     <img
-                      src={property?.media?.images[3]}
+                      src={gallery?.images[3]}
                       alt="Preview"
                       className="w-full h-full object-cover"
                     />
@@ -463,7 +477,7 @@ export const EditProperty = () => {
                     {imgPreview.video && (
                       <div className=" object-cover w-full h-[224px] md:h-[373px] relative">
                         <ReactPlayer
-                          url={property?.media?.video}
+                          url={gallery?.video}
                           width={"100%"}
                           height={"100%"}
                           controls
@@ -499,7 +513,7 @@ export const EditProperty = () => {
                     />
                     {imgPreview.avatar && (
                       <img
-                        src={property?.salesSupport?.avatar}
+                        src={support.avatar}
                         alt="Preview"
                         className=" object-cover w-[114px] mx-auto h-[114px] md:h-[114px] relative rounded-full"
                       />
@@ -520,8 +534,8 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Name"
-                    value={property?.salesSupport?.name}
-                    onChange={handleChange}
+                    value={support.name}
+                    onChange={handleSalesChange}
                     name="name"
                   />
                 </div>
@@ -534,8 +548,8 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select What'sApp Number"
-                    value={property?.salesSupport?.whatsappNumber}
-                    onChange={handleChange}
+                    value={support.whatsappNumber}
+                    onChange={handleSalesChange}
                     name="whatsappNumber"
                   />
                 </div>
@@ -548,8 +562,8 @@ export const EditProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Phone Number"
-                    value={property?.salesSupport?.phoneNumber}
-                    onChange={handleChange}
+                    value={support.phoneNumber}
+                    onChange={handleSalesChange}
                     name="phoneNumber"
                   />
                 </div>
