@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Card,
   Input,
   Button,
   Typography,
-  checkbox,
   Checkbox,
 } from "@material-tailwind/react";
 import logo from "../../assets/Image/logo.png";
@@ -13,6 +12,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export const SignIn = () => {
   const url = "http://localhost:3000/api/v1/signin";
@@ -40,14 +40,19 @@ export const SignIn = () => {
       const {
         data: { users },
       } = await axios.post(url, { ...user });
-      if (users) {
+
+      const decode = jwtDecode(users.token);
+
+      if (decode.role === "admin") {
         navigate("/admin");
         setSave(false);
         Cookies.set("token", users.token);
+      } else {
+        setSave(false);
+        toast.error("Only an Admin is allowed");
       }
     } catch (error) {
       setSave(false);
-      console.log(error?.response?.data?.err);
       toast.error(error?.response?.data?.err);
     }
   };

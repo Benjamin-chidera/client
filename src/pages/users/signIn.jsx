@@ -13,6 +13,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export const UserSignIn = () => {
   const url = "http://localhost:3000/api/v1/signin";
@@ -27,7 +28,7 @@ export const UserSignIn = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSignIn = async(e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
 
     if (!user.password || !user.email) {
@@ -36,17 +37,25 @@ export const UserSignIn = () => {
     }
 
     try {
-        setSave(true);
-      const {data: {users}} = await axios.post(url, {...user})
-      if (users) {
-        navigate("/")
-          setSave(false);
+      setSave(true);
+      const {
+        data: { users },
+      } = await axios.post(url, { ...user });
+
+      const decode = jwtDecode(users.token);
+
+      if (decode.role === "user") {
+        navigate("/");
+        setSave(false);
         Cookies.set("token", users.token);
+      } else {
+        setSave(false);
+        toast.error("Invalid credentials");
       }
     } catch (error) {
-        setSave(false);
-        console.log(error?.response?.data?.err);
-        toast.error(error?.response?.data?.err);
+      setSave(false);
+
+      toast.error(error?.response?.data?.err);
     }
   };
 
@@ -68,7 +77,7 @@ export const UserSignIn = () => {
           </Link>
         </Typography>
         <Typography color="gray" className="mt-3 font-normal text-center">
-          Sign into your admin account.
+          Sign into your account.
         </Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -139,10 +148,7 @@ export const UserSignIn = () => {
             className="mt-4 text-center font-normal text-white"
           >
             New User?
-            <Link
-              className="font-medium ms-3 text-[#F78214]"
-              to={"/admin/signUp"}
-            >
+            <Link className="font-medium ms-3 text-[#F78214]" to={"/signUp"}>
               Sign Up
             </Link>
           </Typography>

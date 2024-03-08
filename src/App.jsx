@@ -32,9 +32,10 @@ function App() {
         <Routes>
           {/* this is for admin */}
           <Route path="/admin" element={<AdminLayout />}>
-            <Route index element={<DashBoard />} />
-            <Route path="all-properties" element={<AllProperties />} />
             <Route element={<AdminPrivate />}>
+              <Route index element={<DashBoard />} />
+              <Route path="all-properties" element={<AllProperties />} />
+
               <Route path="add-new-properties" element={<AddNewProperty />} />
               <Route
                 path="propertyDetails/:propertyId"
@@ -47,10 +48,11 @@ function App() {
               <Route path="inspection" element={<Inspection />} />
             </Route>
           </Route>
-          <Route path="admin/*" element={<ErrorPage />} />
 
+          <Route path="admin/*" element={<ErrorPage />} />
           <Route path="admin/signUp" element={<SignUp />} />
           <Route path="admin/signIn" element={<SignIn />} />
+
           {/* this is for admin */}
 
           {/* this is for user */}

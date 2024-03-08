@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
   const [inspection, setInspection] = useState([]);
   const [recent, setRecent] = useState([]);
   const [review, setReview] = useState([]);
+  const [AllReview, setAllReview] = useState([]);
   const [location, setLocation] = useState("");
   const [type, setType] = useState("");
   const [price, setPrice] = useState("");
@@ -25,16 +26,29 @@ export const AppProvider = ({ children }) => {
   const latestUrl = "http://localhost:3000/api/v1/properties";
   const reviewsUrl = "http://localhost:3000/api/v1";
 
-  const getReviews = async () => {
+  const getAllReviews = async () => {
     try {
       const { data: {reviews} } = await axios.get(`${reviewsUrl}/reviews`);
       if (reviews) {
-        setReview(reviews);
+        setAllReview(reviews);
       }
     } catch (error) {
       console.log(error.message);
     }
   };
+
+    const getReviews = async () => {
+      try {
+        const {
+          data: { recentReview },
+        } = await axios.get(`${reviewsUrl}/reviews/recent`);
+        if (recentReview) {
+          setReview(recentReview);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
   const getLatestProperties = async () => {
     // GETTING LATEST PROPERTIES
@@ -128,6 +142,7 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     getProperties();
     getReviews();
+    getAllReviews()
   }, [location, type, price, selected, filters, type]);
 
   return (
@@ -155,6 +170,7 @@ export const AppProvider = ({ children }) => {
         deleteProperty,
         review,
         reviewsUrl,
+        AllReview,
       }}
     >
       {children}

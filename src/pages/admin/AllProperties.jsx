@@ -9,12 +9,10 @@ export const AllProperties = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const { properties, handleSelect, type, filters, setFilters } =
+  const { properties, handleSelect, type, filters, setFilters, getProperties } =
     useGlobalContext();
 
   const filterByType = properties.filter((t) => t.propertyStatus === filters);
-
- 
 
   return (
     <main className=" text-white container mx-auto w-full overflow-x-hidden">
@@ -68,7 +66,8 @@ export const AllProperties = () => {
             </select>
             <button
               className="border border-[#F78214] text-xl md:text-3xl w-[40px] h-[40px] md:w-[80px] md:h-[50px] rounded-2xl flex justify-center items-center shadow-inner active:shadow-white"
-              disabled={true}
+              // disabled={true}
+              onClick={getProperties}
             >
               <LuRefreshCcw color="#F78214" />
             </button>

@@ -12,36 +12,37 @@ export const UserSignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    // role: "admin",
   });
-  const navigate = useNavigate()
-  const [save, setSave] = useState(false)
+  const navigate = useNavigate();
+  const [save, setSave] = useState(false);
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSignUp = async(e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
 
     if (!user.password || !user.confirmPassword || !user.email) {
-       toast.error("Please fill all required fields");
-       setSave(false)
+      toast.error("Please fill all required fields");
+      setSave(false);
     }
 
     if (user.password !== user.confirmPassword) {
       setSave(false);
-       toast.error("Passwords do not match");
+      toast.error("Passwords do not match");
     }
 
     if (user.password.length < 7) {
       setSave(false);
-       toast.error("Password must be at least 7 characters");
+      toast.error("Password must be at least 7 characters");
     }
 
     try {
       setSave(true);
-      const {data: {users}} = await axios.post(url, {...user})
+      const {
+        data: { users },
+      } = await axios.post(url, { ...user });
 
       if (users) {
         console.log(users);
@@ -51,7 +52,6 @@ export const UserSignUp = () => {
           email: "",
           password: "",
           confirmPassword: "",
-          // role: "admin",
         });
       }
     } catch (error) {
@@ -79,7 +79,7 @@ export const UserSignUp = () => {
           </Link>
         </Typography>
         <Typography color="gray" className="mt-3 font-normal text-center">
-          Create an admin account
+          Create an account
         </Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -153,7 +153,7 @@ export const UserSignUp = () => {
             Already a user?
             <Link
               className="font-medium ms-3 text-[#F78214]"
-              to={"/admin/signIn"}
+              to={"/signIn"}
             >
               Sign In
             </Link>

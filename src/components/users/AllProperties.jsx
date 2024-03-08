@@ -17,7 +17,7 @@ import ReactPaginate from "react-paginate";
 export const AllProperties = () => {
   const { properties, loading } = useGlobalContext();
   const [pageNumber, setPageNumber] = useState(0); //this is the current page
-  const usersPerPage = 2; // hw many item will be displayed per Page
+  const usersPerPage = 6; // hw many item will be displayed per Page
 
   const pagesVisited = pageNumber * usersPerPage;
 

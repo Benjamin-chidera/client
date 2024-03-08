@@ -4,8 +4,13 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Testimonial } from "../../data/CustomersTestimonials";
 import tes from "../../assets/Image/tes.png";
+import { useGlobalContext } from "../../context/context";
 
 export const UserCustomerTestimonials = () => {
+  const { AllReview } = useGlobalContext();
+
+  console.log(AllReview);
+
   var settings = {
     dots: false,
     infinite: true,
@@ -50,23 +55,23 @@ export const UserCustomerTestimonials = () => {
           That’s what our client says
         </h2>
       </div>
-      <Slider {...settings} className="bg-[#1F1F1F] rounded-3xl">
-        {Testimonial.map((t) => {
-          const { name, review, image, _id } = t;
+      <Slider {...settings} className="bg-[#1F1F1F] rounded-3xl w-[500px] mx-auto">
+        {AllReview.map((t) => {
+          const { name, message, _id } = t;
 
           return (
-            <div key={_id} className=" w-[100px] h-[250px] p-5 pb-3  relative">
+            <div key={_id} className=" w-[100px] h-[250px] p-5 pb-3  relative mx-auto">
               <div className="text-start mt-14">
                 <p className="text-sm max-w-sm text-start mx-auto text-[#8D8D8D]">
-                  {review}
+                  {message}
                 </p>
 
                 <div className="mt-5 flex gap-2 items-center">
-                  <img
+                  {/* <img
                     src={image}
                     alt=""
                     className="w-[44px] h-[44px] object-cover"
-                  />
+                  /> */}
                   <div className="text-start">
                     <p className="text-sm font-semibold">{name}</p>
                     <p className="text-xs text-[#8D8D8D]">Happy Customer</p>
