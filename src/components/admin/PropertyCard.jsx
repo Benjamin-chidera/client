@@ -39,12 +39,12 @@ export function PropertyCard() {
         return (
           <div
             key={_id}
-            className=" space-y-3  py-5 px-3 rounded-xl md:w-[300px] mt-3 md:mt-0 "
+            className=" space-y-1  py-5 px-3 rounded-xl md:w-[300px] mt-3 md:mt-0 "
           >
             <img
               src={images[0]}
               alt=""
-              className="w-[300px] h-[250px] rounded-[15.14px]"
+              className="w-[350px] h-[250px] md:w-[300px] md:h-[200px] object-cover rounded-[15.14px]"
             />
             <p className=" text-xs text-red-700 font-semibold">
               Posted on {new Date(updatedAt).toDateString()}
@@ -59,7 +59,7 @@ export function PropertyCard() {
               <IoLocation /> <p className="text-[#8D8D8D]">{location}</p>
             </address>
 
-            <p className="text-[#8D8D8D] font-semibold text-2xl">
+            <p className="text-[#8D8D8D] font-semibold text-xl">
               {<CurrencyFormatter value={price} />}
             </p>
 
@@ -94,7 +94,7 @@ export function PropertyCard() {
               </div>
 
               <Button
-                className="bg-[#F78214] w-[220px]  md:w-[270px]"
+                className="bg-[#F78214] w-[330px]  md:w-[300px] h-[35px] flex justify-center items-center"
                 onClick={() => navigate("/admin/propertyDetails/" + _id)}
               >
                 View Details

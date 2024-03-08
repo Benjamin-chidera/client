@@ -16,7 +16,7 @@ export const CustomerCard = () => {
     <div className="bg-[#181818] p-3 w-[669px] pb-5  rounded-[10px]">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold my-5">Recent Customers</h1>
-        <Link className="text-sm" to={"/admin/inspection"}>
+        <Link className="text-sm focus:text-orange-600" to={"/admin/inspection"}>
           View All
         </Link>
       </div>
@@ -50,9 +50,7 @@ export const CustomerCard = () => {
 
             <div>
               <p className="mb-3 font-[700] text-[16px]">Location</p>
-              <p className="text-[20px] font-semibold text-[16px]">
-                {location}
-              </p>
+              <p className=" font-semibold text-[16px]">{location}</p>
               <p className="text-[#8D8D8D] [text-[16px]">LGA</p>
             </div>
 

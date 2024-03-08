@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 export const SideBar = () => {
   return (
-    <div className="bg-[#181818] z-10 h-screen w-[240px] text-center space-y-7 hidden md:block container fixed top-24 pt-5 ">
+    <div className="bg-[#181818] z-10 h-screen w-[240px] text-center space-y-7 hidden md:block container fixed top-20 pt-5 ">
       <div className="active:bg-black">
         <Link
           to={"/admin"}

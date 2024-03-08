@@ -15,7 +15,7 @@ export const AllProperties = () => {
   const filterByType = properties.filter((t) => t.propertyStatus === filters);
 
   return (
-    <main className=" text-white container mx-auto w-full overflow-x-hidden">
+    <main className=" text-white xl:container xl:mx-auto  xl:w-[950px] overflow-x-hidden">
       <header className="flex items-center justify-between">
         <h1 className="font-semibold text-2xl">Properties</h1>
         <div className="flex gap-2 items-center">
@@ -27,7 +27,7 @@ export const AllProperties = () => {
       </header>
 
       <section className="mt-4">
-        <div className="md:flex justify-between items-center gap-5 ">
+        <div className="md:flex flex-wrap justify-between items-center gap-5 ">
           <section className="flex items-center gap-10 md:gap-20 bg-[#181818] md:w-[378px] h-[60px] rounded-xl justify-center">
             <div className="focus:border-b-4 cursor-pointer text-sm md:text-[20px] font-semibold">
               <button
@@ -82,6 +82,11 @@ export const AllProperties = () => {
       </section>
 
       <section>
+        {properties.length < 1 && (
+          <h1 className="text-white text-center text-3xl font-semibold mt-5">
+            No Result Found
+          </h1>
+        )}
         <AllPropertyCard filterByType={filterByType} />
       </section>
 

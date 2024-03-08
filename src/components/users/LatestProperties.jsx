@@ -39,7 +39,7 @@ export const LatestProperties = () => {
               {loading ? (
                 <Skeleton className="w-[240px] md:w-[355px] md:h-[240px] rounded-3xl bg-gray-100" />
               ) : (
-                <div className="md:flex gap-5  p-3  w-[240px]  md:w-[355px] md:h-[240px] rounded-3xl bg-white text-sm">
+                <div className="md:flex gap-5  p-3  w-[240px] h-[330px] md:w-[355px] md:h-[240px] rounded-3xl bg-white text-sm">
                   {loading ? (
                     <Skeleton className="w-[100%] h- md:h-[200px] md:w-[500px] bg-gray-100" />
                   ) : (
@@ -101,7 +101,7 @@ export const LatestProperties = () => {
                         </p>
                       </div>
                       <Link
-                        className="bg-[#F78214] py-1 px-3 text-white font-semibold capitalize rounded-md text-xs"
+                        className="bg-[#F78214] py-1 px-3 text-white font-semibold capitalize rounded-md text-xs w-full text-center"
                         to={`/propertyDetails/${_id}`}
                       >
                         view property

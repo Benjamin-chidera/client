@@ -171,7 +171,7 @@ export const AddNewProperty = () => {
   };
 
   return (
-    <section className="container mx-auto w-full">
+    <section className="xl:container xl:mx-auto w-full">
       <Toaster />
       <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center ">
@@ -190,7 +190,7 @@ export const AddNewProperty = () => {
       </div>
       <form onSubmit={handleAddNewProperty}>
         <main>
-          <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] p-5 rounded-lg w-screen max-w-full mx-auto">
+          <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] h-[80px] px-5 rounded-lg w-full max-w-full mx-auto">
             <div>
               <h1 className="font-semibold text-xl">New Title</h1>
               <div className="flex items-center gap-2 mt-3">

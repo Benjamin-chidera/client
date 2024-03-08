@@ -25,7 +25,7 @@ export const ReviewsCard = () => {
         return (
           <section key={id}>
             <div className="flex justify-between items-center gap-5">
-              <h1 className="text-xl font-semibold">{name}</h1>
+              <h1 className="text-md font-semibold capitalize">{name}</h1>
               <p className="text-[#8D8D8D] text-xs ms-3">
                 {new Date(updatedAt).toDateString()}
               </p>

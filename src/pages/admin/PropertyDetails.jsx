@@ -20,8 +20,8 @@ export const PropertyDetails = () => {
   const [single, setSingle] = useState();
   const { propertyId } = useParams();
   const { deleteProperty } = useGlobalContext();
-  const navigate = useNavigate()
-    const token = Cookies.get("token");
+  const navigate = useNavigate();
+  const token = Cookies.get("token");
 
   const url = `http://localhost:3000/api/v1/properties/${propertyId}`;
 
@@ -42,7 +42,7 @@ export const PropertyDetails = () => {
   }, [propertyId]);
 
   return (
-    <main className="container mx-auto w-full">
+    <main className="xl:container xl:mx-auto w-full">
       <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center ">
           <RiArrowDropLeftFill size={40} color="orange" />
@@ -59,7 +59,7 @@ export const PropertyDetails = () => {
         </header>
       </div>
 
-      <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] p-5 rounded-lg ">
+      <section className="flex justify-between items-center my-3 flex-wrap bg-[#181818] w-[100%] h-[200px] max-w-full px-5 rounded-lg pb-3 md:h-[80px]">
         <div>
           <h1 className="font-semibold text-xl">{single?.title}</h1>
           <p className="text-[#F78214] font-semibold mt-3">Listed Property</p>
@@ -73,7 +73,7 @@ export const PropertyDetails = () => {
             Edit
           </Link>
 
-          <Link className="border text-[#F78214] border-[#F78214] rounded-lg w-[130px] text-sm h-[50px] p-3 font-semibold flex justify-center items-center">
+          <Link className="border text-[#F78214] border-[#F78214] rounded-lg md:w-[130px] text-sm h-[50px] max-w-full p-3 font-semibold flex justify-center items-center">
             Unlist Property
           </Link>
         </div>
@@ -84,7 +84,7 @@ export const PropertyDetails = () => {
           <img
             src={single?.media?.images[0]}
             alt=""
-            className=" object-cover w-[176px] h-[224px] md:w-[560px] md:h-[373px] pic-one"
+            className=" object-cover w-[176px] h-[224px] md:w-[760px] md:h-[373px] lg:w-[500px] xl:h-[600px] xl:w-[750px] pic-one"
           />
         </div>
 
@@ -92,28 +92,25 @@ export const PropertyDetails = () => {
           <img
             src={single?.media?.images[1]}
             alt=""
-            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
+            className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[192px] xl:w-[570px] pic-two"
           />
           <img
             src={single?.media?.images[2]}
             alt=""
-            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
+            className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[192px] xl:w-[570px] pic-two"
           />
           <img
             src={single?.media?.images[3]}
             alt=""
-            className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
+            className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[192px] xl:w-[570px] pic-two"
           />
         </div>
       </section>
 
       <section className="flex gap-7 md:gap-12 flex-wrap">
-        {/* after images */}
-
         <section>
-          <div className="flex items-center gap-3 my-5">
+          <div className="flex items-center gap-3 mt-5">
             <img src={single?.tags} alt="" />
-            {/* <img src={fam} alt="" /> */}
           </div>
 
           <section className="flex justify-between">
@@ -133,12 +130,12 @@ export const PropertyDetails = () => {
             </div>
           </section>
 
-          <div className="border p-3 rounded-xl md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
+          <div className="border p-3 rounded-xl md:w-[440px] lg:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
             <p className="text-xl">Description</p>
             <p className=" font-medium text-[#ABABAB]">{single?.description}</p>
           </div>
 
-          <section className="border p-3 rounded-xl md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
+          <section className="border p-3 rounded-xl md:w-[440px] lg:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
             <p className="text-xl mb-5">Features</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5 place-items-center items-center flex-wrap">
               <div className="flex gap-3 items-center text-sm text-[#ABABAB]">
@@ -178,7 +175,7 @@ export const PropertyDetails = () => {
             </div>
           </section>
 
-          <div className="border p-3 rounded-xl md:w-[440px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
+          <div className="border p-3 rounded-xl md:w-[440px] lg:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold">
             <p className="text-xl mb-5">Property Video</p>
             <ReactPlayer
               url={single?.media?.video}
@@ -191,8 +188,6 @@ export const PropertyDetails = () => {
 
         <section>
           <div className="border border-[#343434] w-[270px] md:w-[300px] h-[358px] md:mt-5 p-5 rounded-xl text-center">
-            {/* sale support */}
-
             <img
               src={single?.salesSupport?.avatar}
               alt=""
@@ -211,8 +206,6 @@ export const PropertyDetails = () => {
           </div>
 
           <div className="border border-[#343434] ww-[270px] md:w-[300px] h-[320px] mt-5 p-5 rounded-xl text-center">
-            {/* sale support */}
-
             <h1 className="font-semibold text-xl mt-5 max-w-60 mx-auto">
               Old Property? Would you like to delete this property or mark as
               sold?

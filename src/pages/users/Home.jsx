@@ -115,7 +115,7 @@ export const Home = () => {
       <UsersNumHouses />
 
       <section className="text-center  ">
-        <h1 className="text-4xl font-semibold">Latest Properties</h1>
+        <h1 className="text-2xl md:text-4xl font-semibold">Latest Properties</h1>
         <p className="text-[#8D8D8D] text-sm">
           Lörem ipsum mikrograf plusjobb i depäskama käde dihäs. Bemör kvasilig{" "}
         </p>

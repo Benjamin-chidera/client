@@ -27,6 +27,8 @@ export const Navbar = () => {
    
     if (search) {
        setType(search);
+    }else if(!search){
+      setType("")
     }
   };
 
@@ -36,7 +38,7 @@ export const Navbar = () => {
 
   return (
     <nav>
-      <main className=" flex justify-between px-5 bg-[#181818] h-24 items-center fixed w-full top-0 z-10">
+      <main className=" flex justify-between px-5 bg-[#181818] h-20 items-center fixed w-full top-0 z-10">
         <div className="flex items-center gap-20">
           <img src={logo} alt="Company-Logo" />
 
@@ -60,15 +62,15 @@ export const Navbar = () => {
           )}
         </div>
 
-        <div className="hidden lg:flex gap-3 items-center">
-          <img src={bell} alt="" />
+        <div className="hidden md:flex gap-3 items-center">
+          <img src={bell} alt="" className="hidden lg:block" />
 
           <div>
             <h1 className="font-semibold text-lg">Chidera</h1>
             <p className="text-sm text-[#BDB7B7]">Admin</p>
           </div>
 
-          <img src={admin} alt="admin-pic" />
+          <img src={admin} alt="admin-pic" className="hidden lg:block" />
         </div>
 
         <div className=" md:hidden">

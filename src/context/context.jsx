@@ -177,6 +177,7 @@ export const AppProvider = ({ children }) => {
         review,
         reviewsUrl,
         AllReview,
+        type
       }}
     >
       {children}

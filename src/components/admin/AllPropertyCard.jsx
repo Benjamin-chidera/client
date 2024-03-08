@@ -18,22 +18,24 @@ export const AllPropertyCard = ({ filterByType }) => {
   const [pageNumber, setPageNumber] = useState(0); //this is the current page
   const usersPerPage = 6; // hw many item will be displayed per Page
 
-   const pagesVisited = pageNumber * usersPerPage;
+  const pagesVisited = pageNumber * usersPerPage;
 
-   const displayUsers = filterByType.slice(
-     pagesVisited,
-     pagesVisited + usersPerPage
-   );
+  const displayUsers = filterByType.slice(
+    pagesVisited,
+    pagesVisited + usersPerPage
+  );
 
-   const pageCount = Math.ceil(filterByType.length / usersPerPage);
+  const pageCount = Math.ceil(filterByType.length / usersPerPage);
 
-   const ChangePage = ({ selected }) => {
-     setPageNumber(selected);
-   };
+  const ChangePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   return (
     <main className="">
-      <div className=" grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 md:place-items-center w-full place-items-center mt-3 gap-5">
+      
+
+      <div className=" grid md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 md:place-items-center w-full place-items-center mt-3 gap-5">
         {displayUsers.map((p) => {
           const {
             _id,
@@ -78,7 +80,7 @@ export const AllPropertyCard = ({ filterByType }) => {
                 {<CurrencyFormatter value={price} />}
               </p>
 
-              <section className="grid grid-cols-2 mb-5 gap-4 text-sm">
+              <section className="grid grid-cols-2 mb-5 gap-4 text-sm w-[250px]">
                 <div className="flex gap-2 items-center">
                   {/* 1 */}
                   <IoBedOutline />
