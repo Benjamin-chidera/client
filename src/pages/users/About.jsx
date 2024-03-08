@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import abt1 from "../../assets/Image/abt1.png";
 import abt2 from "../../assets/Image/abt2.png";
 import map from "../../assets/Image/map.png";
-import { Pagination } from "../../components/admin/Pagination";
 import { UsersNumHouses } from "../../components/users/UsersNumHouses";
 import { UserCustomerTestimonials } from "../../components/users/userCustomerTestimonials";
 import { BackToTop } from "../../components/users/BackToTop";
+import { Map } from "../../components/Map";
 
 export const About = () => {
   const teams = [
@@ -55,14 +55,11 @@ export const About = () => {
   ];
 
   return (
-    <main className="w-full">
-      <section className="about-bg pt-40 ps-5 md:ps-10">
+    <main className="w-full my-20">
+      <section className="about-bg pt-10 md:pt-20  ps-5 md:ps-10">
         {/* this is the full bg image */}
-        <div className=" container mx-auto">
-          <h1
-            className=" text-3xl text-[#fff] md:text-[56px] font-semibold md:max-w-[600px] md:leading-[60px]"
-           
-          >
+        <div className=" xl:container xl:mx-auto">
+          <h1 className=" text-2xl text-[#fff] md:text-[56px] font-semibold">
             We Provide The Best Property For You
           </h1>
 
@@ -70,11 +67,14 @@ export const About = () => {
             <p className="md:mt-5 mt-3 max-w-lg text-[#fff]">
               Lörem ipsum minat därar. Infras nuling. Preplanas. Polysion tin.
               Visper paraniling lanat. Tritrenade semingar lasovok. Visper
-              paraniling lanat. Tritrenade semingar lasovok.{" "}
+              paraniling lanat. Tritrenade semingar lasovok.
             </p>
 
             <div className="mt-7">
-              <Link className="bg-[#F78214] px-8 py-3 rounded-lg">
+              <Link
+                className="bg-[#F78214] px-8 py-3 rounded-lg"
+                to={"/properties"}
+              >
                 View Properties
               </Link>
             </div>
@@ -84,7 +84,7 @@ export const About = () => {
         {/* this is the full bg image above*/}
       </section>
 
-      <section className="lg:flex justify-between container mx-auto my-20 md:px-20">
+      <section className="lg:flex justify-between xl:container xl:mx-auto my-20 md:px-20">
         <div className="mx-8">
           <h1 className="text-[#F78214]">About Yemsays</h1>
           <h2 className="mt-4 text-3xl md:text-5xl font-semibold">
@@ -129,8 +129,8 @@ export const About = () => {
         </div>
       </section>
 
-      <section className="bg-[#070707] py-16 md:py-20 text-center w-full">
-        <div className="container mx-auto">
+      <section className="bg-[#070707] py-16 md:py-20 text-center">
+        <div className=" xl:container xl:mx-auto">
           <h1 className="mb-10 text-3xl md:text-4xl font-semibold">
             Our Leadership Team
           </h1>
@@ -144,7 +144,7 @@ export const About = () => {
                   <img
                     src={image}
                     alt=""
-                    className="w-[250px] h-[230px] md:w-[300px] md:h-[230px] object-cover mx-auto relative"
+                    className="w-[250px] h-[230px] md:w-[300px] md:h-[230px] object-cover mx-auto relative max-w-full"
                   />
 
                   <div className="bg-[#F5D9BE] w-[250px] h-[100px] md:w-[300px] mx-auto md:h-[100px] flex flex-col justify-center ">
@@ -158,10 +158,9 @@ export const About = () => {
             })}
           </div>
         </div>
-        <Pagination />
       </section>
 
-      <section className="lg:flex justify-between container mx-auto my-20 md:px-20">
+      <section className="lg:flex justify-between  xl:container xl:mx-auto my-20 md:px-20">
         <div className="mx-8">
           <h1 className="text-[#F78214]">About Yemsays</h1>
           <h2 className="mt-4 text-3xl md:text-5xl font-semibold">
@@ -192,18 +191,14 @@ export const About = () => {
 
         <div>
           <div className=" mb-20">
-            <img
-              src={map}
-              alt=""
-              className="w-[250px] md:w-[450px] h-[350px] md:h-[450px]  md:rounded-[60px] relative mx-auto"
-            />
+            <Map />
           </div>
         </div>
       </section>
 
       <UsersNumHouses />
       <UserCustomerTestimonials />
-      <BackToTop/>
+      <BackToTop />
     </main>
   );
 };

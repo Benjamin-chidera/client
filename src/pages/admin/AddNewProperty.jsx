@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RiArrowDropLeftFill } from "react-icons/ri";
 import { PiHouse } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import d1 from "../../assets/Image/d1.png";
 import black from "../../assets/Image/black.png";
 // import d2 from "../../assets/Image/d2.png";
@@ -12,8 +12,17 @@ import { IoBedOutline } from "react-icons/io5";
 import { Button } from "@material-tailwind/react";
 import { IoCameraOutline } from "react-icons/io5";
 import ReactPlayer from "react-player";
+import { useGlobalContext } from "../../context/context";
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
+import Cookies from "js-cookie";
 
 export const AddNewProperty = () => {
+  const { BASE_URL } = useGlobalContext();
+  const [saved, setSave] = useState(false);
+  const redirect = useNavigate();
+  const token = Cookies.get("token");
   const [imgPreview, setImgPreview] = useState({
     img1: black,
     img2: black,
@@ -25,8 +34,34 @@ export const AddNewProperty = () => {
       "https://res.cloudinary.com/dlb8nbz13/video/upload/c_scale,h_390,q_91,w_618/v1706177257/WhatsApp_Video_2024-01-25_at_11.05.54_eb4762c7_paf2hg.mp4",
   });
 
+  const [property, setProperty] = useState({
+    title: "",
+    price: "",
+    location: "",
+    description: "",
+    tags: "",
+    propertyType: "",
+    bedroom: "",
+    bathroom: "",
+    squareFeet: "",
+    name: "",
+    whatsappNumber: "",
+    phoneNumber: "",
+    garage: "",
+    video: null,
+    avatar: null,
+    img1: null,
+    img2: null,
+    img3: null,
+    img4: null,
+  });
+
   const handleChange = (e) => {
-    // Handle changes if needed
+    const { name, value, type } = e.target;
+    setProperty((prevProperty) => ({
+      ...prevProperty,
+      [name]: type === "file" ? e.target.files[0] : value,
+    }));
   };
 
   const handleImage = (id) => {
@@ -39,16 +74,105 @@ export const AddNewProperty = () => {
           ...prevState,
           [id]: URL.createObjectURL(file),
         }));
+
+        setProperty((prevProperty) => ({
+          ...prevProperty,
+          [id]: file,
+        }));
       }
     };
   };
 
-  const handleAddNewProperty = (e) => {
+  const handleAddNewProperty = async (e) => {
     e.preventDefault();
+    setSave(true);
+
+    if (
+      !property.title ||
+      !property.price ||
+      !property.location ||
+      !property.description ||
+      !property.tags ||
+      !property.propertyType ||
+      !property.bedroom ||
+      !property.bathroom ||
+      !property.squareFeet ||
+      !property.name ||
+      !property.whatsappNumber ||
+      !property.phoneNumber ||
+      !property.garage ||
+      !property.video ||
+      !property.avatar ||
+      !property.img1 ||
+      !property.img2 ||
+      !property.img3 ||
+      !property.img4
+    ) {
+      toast.error("Please fill all property information");
+      setSave(false);
+    }
+
+    const formData = new FormData();
+    formData.append("title", property.title);
+    formData.append("price", property.price);
+    formData.append("description", property.description);
+    formData.append("location", property.location);
+    formData.append("tags", property.tags);
+    formData.append("propertyType", property.propertyType);
+    formData.append("bedroom", property.bedroom);
+    formData.append("bathroom", property.bathroom);
+    formData.append("garage", property.garage);
+    formData.append("squareFeet", property.squareFeet);
+    formData.append("name", property.name);
+    formData.append("whatsappNumber", property.whatsappNumber);
+    formData.append("phoneNumber", property.phoneNumber);
+    formData.append("video", property.video);
+    formData.append("avatar", property.avatar);
+    formData.append("images", property.img1);
+    formData.append("images", property.img2);
+    formData.append("images", property.img3);
+    formData.append("images", property.img4);
+
+    try {
+      const { data } = await axios.post(BASE_URL, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (data) {
+        setSave(false);
+        
+        setProperty({
+          title: "",
+          price: "",
+          location: "",
+          description: "",
+          tags: "",
+          propertyType: "",
+          bedroom: "",
+          bathroom: "",
+          squareFeet: "",
+          name: "",
+          whatsappNumber: "",
+          phoneNumber: "",
+          garage: "",
+          video: null,
+          avatar: null,
+          img1: null,
+          img2: null,
+          img3: null,
+          img4: null,
+        });
+        toast.success("Property successfully added");
+        redirect("/admin/all-properties");
+      }
+    } catch (error) {
+      setSave(false);
+      console.log(error);
+    }
   };
 
   return (
-    <section className="container mx-auto w-full">
+    <section className="xl:container xl:mx-auto w-full">
+      <Toaster />
       <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center ">
           <RiArrowDropLeftFill size={40} color="orange" />
@@ -66,7 +190,7 @@ export const AddNewProperty = () => {
       </div>
       <form onSubmit={handleAddNewProperty}>
         <main>
-          <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] p-5 rounded-lg w-screen max-w-full mx-auto">
+          <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] h-[80px] px-5 rounded-lg w-full max-w-full mx-auto">
             <div>
               <h1 className="font-semibold text-xl">New Title</h1>
               <div className="flex items-center gap-2 mt-3">
@@ -81,7 +205,7 @@ export const AddNewProperty = () => {
                 className="bg-[#F78214] text-sm rounded-lg px-10"
                 type="submit"
               >
-                Save
+                {saved ? <AdminBtnSave /> : "Saved"}
               </Button>
             </div>
           </section>
@@ -94,7 +218,6 @@ export const AddNewProperty = () => {
                   style={{ display: "none" }}
                   accept="image/*"
                   id="img1"
-                  onChange={handleChange} // If you need handleChange, you can keep it here
                 />
                 {imgPreview.img1 && (
                   <img
@@ -122,7 +245,6 @@ export const AddNewProperty = () => {
                     style={{ display: "none" }}
                     accept="image/*"
                     id="img2"
-                    onChange={handleChange}
                   />
                   {imgPreview.img2 && (
                     <img
@@ -148,7 +270,6 @@ export const AddNewProperty = () => {
                     style={{ display: "none" }}
                     accept="image/*"
                     id="img3"
-                    onChange={handleChange}
                   />
                   {imgPreview.img3 && (
                     <img
@@ -174,7 +295,6 @@ export const AddNewProperty = () => {
                     style={{ display: "none" }}
                     accept="image/*"
                     id="img4"
-                    onChange={handleChange}
                   />
                   {imgPreview.img4 && (
                     <img
@@ -202,28 +322,50 @@ export const AddNewProperty = () => {
               <section className="flex items-center gap-5">
                 <div className="mb-4 flex flex-col">
                   <label className="text-[#8D8D8D] text-xs">Tags</label>
-                  <input
-                    type="text"
+
+                  <select
+                    name="tags"
+                    value={property.tags}
+                    onChange={handleChange}
+                    id=""
                     className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
-                    placeholder="Select Tags"
-                  />
+                  >
+                    <option value="" disabled className=" bg-black">
+                      Tags
+                    </option>
+                    <option value="luxury" className=" bg-black">
+                      Luxury
+                    </option>
+                    <option value="affordable" className=" bg-black">
+                      Affordable
+                    </option>
+                    <option value="comfortable" className=" bg-black">
+                      Comfortable
+                    </option>
+                    <option value="spacious" className=" bg-black">
+                      Spacious
+                    </option>
+                  </select>
                 </div>
+
                 <div className="mb-4 flex flex-col">
                   <label className="text-[#8D8D8D] text-xs">
                     Property Type
                   </label>
                   <select
-                    name=""
+                    name="propertyType"
+                    value={property.propertyType}
+                    onChange={handleChange}
                     id=""
                     className=" bg-transparent border rounded-md border-[#8D8D8D] h-[43px] w-[150px] md:w-[200px] py-2 px-3 outline-none my-1"
                   >
                     <option value="" className=" bg-black" disabled>
                       Select Property Type
                     </option>
-                    <option value="" className=" bg-black">
+                    <option value="land" className=" bg-black">
                       Land
                     </option>
-                    <option value="" className=" bg-black">
+                    <option value="house" className=" bg-black">
                       House
                     </option>
                   </select>
@@ -238,6 +380,9 @@ export const AddNewProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D] w-[180px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
                     placeholder="Select Title"
+                    name="title"
+                    value={property.title}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -248,6 +393,9 @@ export const AddNewProperty = () => {
                     type="text"
                     className=" bg-transparent max-w-full border rounded-md border-[#8D8D8D] w-[120px] md:w-[200px] py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Price"
+                    name="price"
+                    value={property.price}
+                    onChange={handleChange}
                   />
                 </div>
               </section>
@@ -259,6 +407,9 @@ export const AddNewProperty = () => {
                   type="text"
                   className=" bg-transparent border rounded-md border-[#8D8D8D] w-[320px] md:w-[540px] max-w-full py-2 px-3 outline-none my-1 placeholder:text-xs location"
                   placeholder="Select Location"
+                  name="location"
+                  value={property.location}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -270,6 +421,9 @@ export const AddNewProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 h-[320px] max-w-full resize-none placeholder:text-xs "
                     placeholder="Select Descriptions..."
+                    name="description"
+                    value={property.description}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -282,6 +436,9 @@ export const AddNewProperty = () => {
                       type="number"
                       className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
                       placeholder="Select Bedroom"
+                      name="bedroom"
+                      value={property.bedroom}
+                      onChange={handleChange}
                     />
                     <IoBedOutline className="absolute top-4 left-2" />
                   </div>
@@ -290,15 +447,36 @@ export const AddNewProperty = () => {
                       type="number"
                       className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
                       placeholder="Select Bathroom"
+                      name="bathroom"
+                      value={property.bathroom}
+                      onChange={handleChange}
                     />
                     <LuBath className="absolute top-4 left-2" />
                   </div>
                   <div className=" relative">
-                    <input
+                    {/* <input
                       type="text"
                       className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
                       placeholder="Select Garage"
-                    />
+                    /> */}
+
+                    <select
+                      id=""
+                      className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2  outline-none my-1 relative px-6 placeholder:text-xs w-[100px]"
+                      name="garage"
+                      value={property.garage}
+                      onChange={handleChange}
+                    >
+                      <option value="" className="bg-black">
+                        Select Garage
+                      </option>
+                      <option value="yes" className="bg-black">
+                        Yes
+                      </option>
+                      <option value="no" className="bg-black">
+                        No
+                      </option>
+                    </select>
                     <GiHomeGarage className="absolute top-4 left-2" />
                   </div>
                   <div className=" relative">
@@ -306,6 +484,9 @@ export const AddNewProperty = () => {
                       type="number"
                       className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] py-2  outline-none my-1 relative px-6 placeholder:text-xs"
                       placeholder="Select Square Feet"
+                      name="squareFeet"
+                      value={property.squareFeet}
+                      onChange={handleChange}
                     />
                     <FaRegSquare className="absolute top-4 left-2" />
                   </div>
@@ -324,7 +505,6 @@ export const AddNewProperty = () => {
                       style={{ display: "none" }}
                       accept="video/*"
                       id="video"
-                      onChange={handleChange}
                     />
 
                     {imgPreview.video && (
@@ -363,7 +543,6 @@ export const AddNewProperty = () => {
                       style={{ display: "none" }}
                       accept="image/*"
                       id="avatar"
-                      onChange={handleChange}
                     />
                     {imgPreview.avatar && (
                       <img
@@ -388,6 +567,9 @@ export const AddNewProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Name"
+                    name="name"
+                    value={property.name}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-4 flex flex-col mt-3 text-start">
@@ -399,6 +581,9 @@ export const AddNewProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select What'sApp Number"
+                    name="whatsappNumber"
+                    value={property.whatsappNumber}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className="mb-4 flex flex-col mt-3 text-start">
@@ -410,6 +595,9 @@ export const AddNewProperty = () => {
                     type="text"
                     className=" bg-transparent border rounded-md border-[#8D8D8D]  py-2 px-3 outline-none my-1 placeholder:text-xs"
                     placeholder="Select Phone Number"
+                    name="phoneNumber"
+                    value={property.phoneNumber}
+                    onChange={handleChange}
                   />
                 </div>
               </div>

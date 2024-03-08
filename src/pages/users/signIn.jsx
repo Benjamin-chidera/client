@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Card,
   Input,
   Button,
   Typography,
+  checkbox,
   Checkbox,
 } from "@material-tailwind/react";
 import logo from "../../assets/Image/logo.png";
@@ -14,7 +15,7 @@ import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
-export const SignIn = () => {
+export const UserSignIn = () => {
   const url = "http://localhost:3000/api/v1/signin";
   const [user, setUser] = useState({
     email: "",
@@ -43,16 +44,17 @@ export const SignIn = () => {
 
       const decode = jwtDecode(users.token);
 
-      if (decode.role === "admin") {
-        navigate("/admin");
+      if (decode.role === "user") {
+        navigate("/");
         setSave(false);
         Cookies.set("token", users.token);
       } else {
         setSave(false);
-        toast.error("Only an Admin is allowed");
+        toast.error("Invalid credentials");
       }
     } catch (error) {
       setSave(false);
+
       toast.error(error?.response?.data?.err);
     }
   };
@@ -70,12 +72,12 @@ export const SignIn = () => {
           color="blue-gray"
           className="flex justify-center"
         >
-          <Link to={"/admin"}>
+          <Link to={"/"}>
             <img src={logo} alt="company-logo" />
           </Link>
         </Typography>
         <Typography color="gray" className="mt-3 font-normal text-center">
-          Sign into your admin account.
+          Sign into your account.
         </Typography>
         <form
           className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
@@ -146,10 +148,7 @@ export const SignIn = () => {
             className="mt-4 text-center font-normal text-white"
           >
             New User?
-            <Link
-              className="font-medium ms-3 text-[#F78214]"
-              to={"/admin/signUp"}
-            >
+            <Link className="font-medium ms-3 text-[#F78214]" to={"/signUp"}>
               Sign Up
             </Link>
           </Typography>

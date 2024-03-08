@@ -43,9 +43,6 @@ body {
     width: 380px !important;
   }
 
-  /* .sales {
-    width: 380px !important;
-  } */
 }
 
 @media (min-width: 720px) {
@@ -110,10 +107,6 @@ body {
     width: 480px !important;
   }
 
-  /* .sales {
-    width: 480px !important;
-  } */
-
   .pic-one-cam {
     top: 30% !important;
     left: 10% !important;
@@ -150,10 +143,6 @@ body {
   .location {
     width: 600px !important;
   }
-
-  /* .sales {
-    width: 600px !important;
-  } */
 
   .pic-one-cam {
     top: 35% !important;
@@ -232,10 +221,6 @@ body {
     width: 700px !important;
   }
 
-  /* .sales {
-    width: 400px !important;
-  } */
-
   .sales-cam {
     top: 30% !important;
     left: 45% !important;
@@ -266,10 +251,6 @@ body {
     width: 800px !important;
   }
 
-  /* .sales {
-    width: 450px !important;
-  } */
-
   .sales-cam {
     top: 30% !important;
     left: 45% !important;
@@ -298,4 +279,16 @@ body {
   transform: translateX(-100%);
   opacity: 0;
   transition: all 200ms;
+}
+
+
+/* sizing of map container */
+
+.leaflet-container{
+  height: 100%;
+  z-index: 0;
+}
+
+.skeleton{
+  background-color: rgba(255, 255, 255, 0.046);
 }

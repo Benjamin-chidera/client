@@ -10,11 +10,15 @@ import { useGlobalContext } from "../../context/context";
 import axios from "axios";
 import { SuccessFullBooking } from "../../components/Modal/user/SuccessfulBooking";
 import toast, { Toaster } from "react-hot-toast";
+import Cookies from "js-cookie";
+import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 
 export const Booking = () => {
-  const { BASE_URL } = useGlobalContext();
+  const { URL } = useGlobalContext();
   const [open, setOpen] = useState(false);
   const [successData, setSuccessData] = useState(null);
+  const token = Cookies.get("token");
+  const [save, setSave] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
@@ -35,6 +39,7 @@ export const Booking = () => {
   };
 
   const handleBooking = async (e) => {
+    setSave(true);
     e.preventDefault();
     try {
       if (
@@ -45,24 +50,34 @@ export const Booking = () => {
         !bookings.inspectionDate ||
         !bookings.inspectionTime
       ) {
-        return toast.error("Please fill all required fields");
+        setSave(false);
+        toast.error("Please fill all required fields");
       }
 
-      const { data } = await axios.post(BASE_URL, { ...bookings });
+      const { data } = await axios.post(
+        URL,
+        { ...bookings },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (data) {
         if (data) {
           // If data is received, set the success data and open the modal
           setSuccessData(data);
           setOpen(true);
+          setSave(false);
         }
       }
     } catch (error) {
       console.log(error?.response?.data?.error);
+      console.log(error);
+      setSave(false);
     }
   };
 
   return (
-    <main className="mt-20 p-5">
+    <main className="mt-28 px-5 md:px-2 overflow-x-hidden">
       <Toaster />
       {successData && (
         <SuccessFullBooking data={successData} onClose={() => setOpen(false)} />
@@ -81,7 +96,7 @@ export const Booking = () => {
           className="flex flex-col gap-4 mt-10 justify-center"
           onSubmit={handleBooking}
         >
-          <section className=" md:flex items-center gap-5 space-y-3 justify-center md:space-y-0 ">
+          <section className=" md:flex items-center flex-wrap gap-5 space-y-3 justify-center md:space-y-0 ">
             <div className="relative">
               <input
                 type="text"
@@ -101,7 +116,7 @@ export const Booking = () => {
             <div className="relative">
               <input
                 type="text"
-                className=" bg-transparent border w-[400px] max-w-full h-[40px] ps-8 pe-3 relative outline-none rounded"
+                className=" bg-transparent border w-[400px] max-w-full h-[40px] ps-8 pe-3 relative outline-none rounded max-w-full"
                 placeholder="LastName"
                 name="lastName"
                 value={bookings.lastName}
@@ -224,8 +239,9 @@ export const Booking = () => {
           <Button
             className="w-[493px] max-w-full mx-auto bg-[#F78214]"
             type=" submit"
+            disabled={save}
           >
-            Submit
+            {save ? <AdminBtnSave /> : "Submit"}
           </Button>
         </form>
       </section>

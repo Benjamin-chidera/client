@@ -1,9 +1,6 @@
-import React from 'react'
-import { UserSearch } from '../../components/users/UserSearch';
-import { AllProperties } from '../../components/users/AllProperties';
-import { Pagination } from '../../components/admin/Pagination';
-import { BackToTop } from '../../components/users/BackToTop';
-
+import { UserSearch } from "../../components/users/UserSearch";
+import { AllProperties } from "../../components/users/AllProperties";
+import { BackToTop } from "../../components/users/BackToTop";
 
 export const Properties = () => {
   return (
@@ -17,20 +14,17 @@ export const Properties = () => {
       <UserSearch />
 
       <section>
-        <h2 className="font-semibold text-xl md:text-3xl mt-14">
-          Property Listings - Lands
-        </h2>
+        {/* <h2 className="font-semibold text-xl md:text-3xl mt-14">
+          Property Listings -{" "}
+          {properties.propertyType === "house" ? "House" : "Land"}
+        </h2> */}
 
         <div>
           <AllProperties />
         </div>
       </section>
 
-      <div>
-        <Pagination />
-      </div>
-
-      <BackToTop/>
+      <BackToTop />
     </main>
   );
-}
+};

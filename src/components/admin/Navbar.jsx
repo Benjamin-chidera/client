@@ -8,10 +8,15 @@ import add from "../../assets/Image/add.png";
 import { IoSearchSharp } from "react-icons/io5";
 
 import { Squash as Hamburger } from "hamburger-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useGlobalContext } from "../../context/context";
 
 export const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
+  const location = useLocation();
+  const [search, setSearch] = useState("");
+
+  const { setType } = useGlobalContext();
 
   const handleClose = () => {
     setOpen(false);
@@ -19,40 +24,53 @@ export const Navbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setOpen(false);
+   
+    if (search) {
+       setType(search);
+    }else if(!search){
+      setType("")
+    }
+  };
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
     <nav>
-      <main className=" flex justify-between px-5 bg-[#181818] h-24 items-center fixed w-full top-0 z-10">
+      <main className=" flex justify-between px-5 bg-[#181818] h-20 items-center fixed w-full top-0 z-10">
         <div className="flex items-center gap-20">
           <img src={logo} alt="Company-Logo" />
 
-          <div className="hidden md:block">
-            <form className="relative" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Search Here"
-                className="w-[391px] h-[35px] ps-3 pe-8 bg-transparent border border-gray-600 rounded-2xl relative outline-none"
-              />
+          {location.pathname === "/admin/all-properties" && (
+            <div className="hidden md:block">
+              <form className="relative" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="Search by the type of property"
+                  className="w-[391px] h-[35px] ps-3 pe-8 bg-transparent border border-gray-600 rounded-2xl relative outline-none"
+                  value={search}
+                  onChange={handleChange}
+                />
 
-              <IoSearchSharp
-                className="absolute top-2 right-3"
-                color="#F78214"
-              />
-            </form>
-          </div>
+                <IoSearchSharp
+                  className="absolute top-2 right-3"
+                  color="#F78214"
+                />
+              </form>
+            </div>
+          )}
         </div>
 
-        <div className="hidden lg:flex gap-3 items-center">
-          <img src={bell} alt="" />
+        <div className="hidden md:flex gap-3 items-center">
+          <img src={bell} alt="" className="hidden lg:block" />
 
           <div>
             <h1 className="font-semibold text-lg">Chidera</h1>
             <p className="text-sm text-[#BDB7B7]">Admin</p>
           </div>
 
-          <img src={admin} alt="admin-pic" />
+          <img src={admin} alt="admin-pic" className="hidden lg:block" />
         </div>
 
         <div className=" md:hidden">
@@ -62,7 +80,7 @@ export const Navbar = () => {
       </main>
 
       {isOpen && (
-        <section className="p-5 bg-[#403b3b] h-full w-[250px] fixed top-0 md:hidden z-10 ">
+        <section className="p-5 bg-[#403b3b] h-full w-[230px] fixed top-0 md:hidden z-10 ">
           {/* menu bar for admin-mobile devices */}
           <div className="flex gap-3 items-center">
             <img src={bell} alt="" />
@@ -90,7 +108,7 @@ export const Navbar = () => {
             </form>
           </div>
 
-          <section className="mt-5 text-center space-y-14">
+          <section className="mt-5 text-center space-y-10">
             <div className="active:bg-black">
               <Link
                 to={"/admin"}
