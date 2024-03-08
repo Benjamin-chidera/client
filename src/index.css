@@ -2,41 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+.home-bg {
+  background-image: url(../src/assets/Image/home-bg.png);
+  height: 400px;
+  max-width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
-.home-bg{
+.home-user {
+  background-image: url(../src/assets/Image/home-user.png);
+  height: 150px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 318px) {
+  .home-bg {
     background-image: url(../src/assets/Image/home-bg.png);
-    height: 470px;
-  
+    height: 500px !important;
+    width: 100%;
+    max-width: 100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+  }
 }
 
-.home-user{
-     background-image: url(../src/assets/Image/home-user.png);
-    height: 150px;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-@media(max-width: 318px) {
-    .home-bg{
-    background-image: url(../src/assets/Image/home-bg.png);
-    height: 650px !important;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-}
-
-.about-bg{
-    background-image: url(../src/assets/Image/about-bg.png);
-    height: 470px;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+.about-bg {
+  background-image: url(../src/assets/Image/about-bg.png);
+ height: 400px;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

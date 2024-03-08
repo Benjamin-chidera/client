@@ -48,19 +48,25 @@ export const UserCustomerTestimonials = () => {
   };
 
   return (
-    <main className="w-[70%] mx-auto space-y-4 text-center container mt-20">
+    <main className=" mx-auto space-y-4 text-center container mt-20">
       <div>
         <h1 className="text-[#F78214] font-semibold">Testimonials</h1>
         <h2 className="font-semibold text-lg md:text-3xl">
           That’s what our client says
         </h2>
       </div>
-      <Slider {...settings} className="bg-[#1F1F1F] rounded-3xl w-[500px] mx-auto">
+      <Slider
+        {...settings}
+        className="bg-[#1F1F1F] rounded-3xl w-[400px] h-[200px] md:w-[500px] mx-auto max-w-full px-5"
+      >
         {AllReview.map((t) => {
           const { name, message, _id } = t;
 
           return (
-            <div key={_id} className=" w-[100px] h-[250px] p-5 pb-3  relative mx-auto">
+            <div
+              key={_id}
+              className=" w-[100px] h-[250px] p-5 pb-3  relative mx-auto"
+            >
               <div className="text-start mt-14">
                 <p className="text-sm max-w-sm text-start mx-auto text-[#8D8D8D]">
                   {message}

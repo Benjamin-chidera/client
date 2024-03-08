@@ -12,8 +12,8 @@ import { BackToTop } from "../../components/users/BackToTop";
 
 export const Home = () => {
   return (
-    <main className="my-20 ">
-      <section className="home-bg pt-20 ps-5 md:ps-10">
+    <main className="my-20">
+      <section className="home-bg pt-20 md:ps-10">
         {/* this is the full bg image */}
         <div className=" container mx-auto">
           <h1 className=" text-4xl text-[#070707] md:text-[56px] font-semibold">
@@ -49,10 +49,10 @@ export const Home = () => {
         {/* this is the full bg image above*/}
       </section>
 
-      <section className="mt-40 container mx-auto text-center">
+      <section className="mt-14  text-center">
         <h1 className="text-2xl font-semibold text-[#FCEEE2]">Why Choose Us</h1>
         <div className="flex justify-center items-center mt-5 flex-wrap gap-10">
-          {/* tax */}
+         
           <div>
             <img src={tax} alt="Tax" className=" mx-auto" />
             <h1 className="font-semibold text-[18px]">Tax Advantage</h1>
@@ -62,7 +62,7 @@ export const Home = () => {
           </div>
 
           <div>
-            {/* insurance */}
+          
             <img src={insurance} alt="Tax" className=" mx-auto" />
             <h1 className="font-semibold text-[18px]">Property Insurance</h1>
             <p className=" max-w-[250px] text-sm">
@@ -71,7 +71,7 @@ export const Home = () => {
           </div>
 
           <div>
-            {/* commission */}
+          
             <img src={lowest} alt="Tax" className=" mx-auto" />
             <h1 className="font-semibold text-[18px]">Lowest Commission</h1>
             <p className=" max-w-[250px] text-sm">
@@ -81,7 +81,7 @@ export const Home = () => {
         </div>
       </section>
 
-      <section className="md:flex justify-center gap-20 mt-24 mb-20 md:mb-40">
+      <section className="md:flex justify-center gap-20 mt-24 mb-14">
         <div className="relative w-[350px] mb-20 hidden md:block">
           <img
             src={us1}
@@ -114,7 +114,7 @@ export const Home = () => {
 
       <UsersNumHouses />
 
-      <section className="text-center space-y-5 mb-20 container mx-auto">
+      <section className="text-center  ">
         <h1 className="text-4xl font-semibold">Latest Properties</h1>
         <p className="text-[#8D8D8D] text-sm">
           Lörem ipsum mikrograf plusjobb i depäskama käde dihäs. Bemör kvasilig{" "}

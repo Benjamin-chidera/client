@@ -77,7 +77,7 @@ export const Booking = () => {
   };
 
   return (
-    <main className="mt-20 p-5">
+    <main className="mt-28 px-5 md:px-2 overflow-x-hidden">
       <Toaster />
       {successData && (
         <SuccessFullBooking data={successData} onClose={() => setOpen(false)} />
@@ -96,7 +96,7 @@ export const Booking = () => {
           className="flex flex-col gap-4 mt-10 justify-center"
           onSubmit={handleBooking}
         >
-          <section className=" md:flex items-center gap-5 space-y-3 justify-center md:space-y-0 ">
+          <section className=" md:flex items-center flex-wrap gap-5 space-y-3 justify-center md:space-y-0 ">
             <div className="relative">
               <input
                 type="text"
@@ -116,7 +116,7 @@ export const Booking = () => {
             <div className="relative">
               <input
                 type="text"
-                className=" bg-transparent border w-[400px] max-w-full h-[40px] ps-8 pe-3 relative outline-none rounded"
+                className=" bg-transparent border w-[400px] max-w-full h-[40px] ps-8 pe-3 relative outline-none rounded max-w-full"
                 placeholder="LastName"
                 name="lastName"
                 value={bookings.lastName}

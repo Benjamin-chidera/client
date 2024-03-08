@@ -6,7 +6,7 @@ export const Private = () => {
   const token = Cookies.get("token");
   const decode = jwtDecode(token);
 
-  console.log(decode.role);
+  
 
   return (
     <div>

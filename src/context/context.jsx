@@ -28,7 +28,9 @@ export const AppProvider = ({ children }) => {
 
   const getAllReviews = async () => {
     try {
-      const { data: {reviews} } = await axios.get(`${reviewsUrl}/reviews`);
+      const {
+        data: { reviews },
+      } = await axios.get(`${reviewsUrl}/reviews`);
       if (reviews) {
         setAllReview(reviews);
       }
@@ -37,29 +39,31 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-    const getReviews = async () => {
-      try {
-        const {
-          data: { recentReview },
-        } = await axios.get(`${reviewsUrl}/reviews/recent`);
-        if (recentReview) {
-          setReview(recentReview);
-        }
-      } catch (error) {
-        console.log(error.message);
+  const getReviews = async () => {
+    try {
+      const {
+        data: { recentReview },
+      } = await axios.get(`${reviewsUrl}/reviews/recent`);
+      if (recentReview) {
+        setReview(recentReview);
       }
-    };
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const getLatestProperties = async () => {
     // GETTING LATEST PROPERTIES
     try {
-      setLoading(true);
+      setLoading(false);
       const {
         data: { property },
       } = await axios(`${latestUrl}/latest`);
       setLatest(property);
 
-      setLoading(false);
+       setTimeout(() => {
+         setLoading(false);
+       }, 4000);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -74,7 +78,9 @@ export const AppProvider = ({ children }) => {
         data: { properties },
       } = await axios(BASE_URL);
       setProperties(properties);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -142,7 +148,7 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     getProperties();
     getReviews();
-    getAllReviews()
+    getAllReviews();
   }, [location, type, price, selected, filters, type]);
 
   return (

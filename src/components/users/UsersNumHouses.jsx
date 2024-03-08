@@ -21,13 +21,13 @@ export const UsersNumHouses = () => {
         </div>
 
         <div>
-          <p className="text-2xl md:text-4xl font-semibold text-[#F78214]">
+          <p className="text-lg md:text-4xl font-semibold text-[#F78214]">
             33
           </p>
           <p className="font-semibold text-[#070707]">Open Houses</p>
         </div>
         <div>
-          <p className="text-2xl md:text-4xl font-semibold text-[#F78214]">
+          <p className="text-lg md:text-4xl font-semibold text-[#F78214]">
             33
           </p>
           <p className="font-semibold text-[#070707]">Open Houses</p>
