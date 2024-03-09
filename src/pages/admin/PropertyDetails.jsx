@@ -23,7 +23,7 @@ export const PropertyDetails = () => {
   const navigate = useNavigate();
   const token = Cookies.get("token");
 
-  const url = `http://localhost:3000/api/v1/properties/${propertyId}`;
+  const url = `https://yemsyays-realestate-server.onrender.com/api/v1/properties/${propertyId}`;
 
   const getSingleProperty = async () => {
     try {

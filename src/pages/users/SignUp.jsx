@@ -7,7 +7,7 @@ import axios from "axios";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 
 export const UserSignUp = () => {
-  const url = "http://localhost:3000/api/v1/signup";
+  const url = "https://yemsyays-realestate-server.onrender.com/api/v1/signup";
   const [user, setUser] = useState({
     email: "",
     password: "",

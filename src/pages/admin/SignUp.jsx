@@ -7,7 +7,7 @@ import toast, {Toaster} from "react-hot-toast";
 import { AdminBtnSave } from "../../components/admin/AdminBtnSave";
 
 export const SignUp = () => {
-  const url = "http://localhost:3000/api/v1/signup";
+  const url = "https://yemsyays-realestate-server.onrender.com/api/v1/signup";
   const [user, setUser] = useState({
     email: "",
     password: "",

@@ -9,7 +9,6 @@ export const CustomerCard = () => {
     getRecentInspection();
   }, []);
 
-  console.log(recentInspection);
 
   return (
     <div className="bg-[#181818] p-3 w-[669px] pb-5  rounded-[10px]">

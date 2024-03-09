@@ -22,10 +22,11 @@ export const AppProvider = ({ children }) => {
   const [filters, setFilters] = useState("available");
   const token = Cookies.get("token");
 
-  const URL = "http://localhost:3000/api/v1/inspection";
-  const BASE_URL = `http://localhost:3000/api/v1/properties?location=${location}&type=${type}&price=${price}`;
-  const latestUrl = "http://localhost:3000/api/v1/properties";
-  const reviewsUrl = "http://localhost:3000/api/v1";
+  const URL =
+    "https://yemsyays-realestate-server.onrender.com/api/v1/inspection";
+  const BASE_URL = `https://yemsyays-realestate-server.onrender.com/api/v1/properties?location=${location}&type=${type}&price=${price}`;
+  const latestUrl = "https://yemsyays-realestate-server.onrender.com/api/v1/properties";
+  const reviewsUrl = "https://yemsyays-realestate-server.onrender.com/api/v1";
 
   const getAllReviews = async () => {
     try {
