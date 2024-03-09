@@ -82,11 +82,11 @@ export const Navbar = () => {
           <img src={bell} alt="" className="hidden lg:block" />
 
           <div>
-            <h1 className="font-semibold text-lg">{decode.name}</h1>
-            <p className="text-sm text-[#BDB7B7]">{decode.role}</p>
+            <h1 className="font-semibold text-lg">{decode?.name}</h1>
+            <p className="text-sm text-[#BDB7B7]">{decode?.role}</p>
           </div>
 
-          <img src={decode.image} alt="admin-pic" className="hidden lg:block w-[50px] h-[50px] rounded-full" />
+          <img src={decode?.image} alt="admin-pic" className="hidden lg:block w-[50px] h-[50px] rounded-full" />
         </div>
 
         <div className=" md:hidden">

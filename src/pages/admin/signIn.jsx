@@ -43,7 +43,7 @@ export const SignIn = () => {
 
       const decode = jwtDecode(users.token);
 
-      if (decode.role === "admin") {
+      if (decode?.role === "admin") {
         navigate("/admin");
         setSave(false);
         Cookies.set("token", users.token);

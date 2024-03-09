@@ -44,7 +44,7 @@ export const UserSignIn = () => {
 
       const decode = jwtDecode(users.token);
 
-      if (decode.role === "user") {
+      if (decode?.role === "user") {
         navigate("/");
         setSave(false);
         Cookies.set("token", users.token);
