@@ -23,7 +23,8 @@ import Cookies from "js-cookie";
 export const EditProperty = () => {
   const { propertyId } = useParams();
   const [saved, setSave] = useState(false);
-  const url = "http://localhost:3000/api/v1/properties";
+  const url =
+    "https://yemsyays-realestate-server.onrender.com/api/v1/properties";
   const token = Cookies.get("token");
   const [support, setSupport] = useState({
     name: "",

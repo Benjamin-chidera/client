@@ -10,6 +10,7 @@ export const AppProvider = ({ children }) => {
   const [latest, setLatest] = useState([]);
   const [properties, setProperties] = useState([]);
   const [inspection, setInspection] = useState([]);
+  const [recentInspection, setRecentInspection] = useState([]);
   const [recent, setRecent] = useState([]);
   const [review, setReview] = useState([]);
   const [AllReview, setAllReview] = useState([]);
@@ -21,10 +22,11 @@ export const AppProvider = ({ children }) => {
   const [filters, setFilters] = useState("available");
   const token = Cookies.get("token");
 
-  const URL = "http://localhost:3000/api/v1/inspection";
-  const BASE_URL = `http://localhost:3000/api/v1/properties?location=${location}&type=${type}&price=${price}`;
-  const latestUrl = "http://localhost:3000/api/v1/properties";
-  const reviewsUrl = "http://localhost:3000/api/v1";
+  const URL =
+    "https://yemsyays-realestate-server.onrender.com/api/v1/inspection";
+  const BASE_URL = `https://yemsyays-realestate-server.onrender.com/api/v1/properties?location=${location}&type=${type}&price=${price}`;
+  const latestUrl = "https://yemsyays-realestate-server.onrender.com/api/v1/properties";
+  const reviewsUrl = "https://yemsyays-realestate-server.onrender.com/api/v1";
 
   const getAllReviews = async () => {
     try {
@@ -95,6 +97,19 @@ export const AppProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setInspection(inspection);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getRecentInspection = async () => {
+    try {
+      const {
+        data: { recent },
+      } = await axios(`${URL}/recent`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setRecentInspection(recent);
     } catch (error) {
       console.log(error);
     }
@@ -177,7 +192,9 @@ export const AppProvider = ({ children }) => {
         review,
         reviewsUrl,
         AllReview,
-        type
+        type,
+        recentInspection,
+        getRecentInspection,
       }}
     >
       {children}

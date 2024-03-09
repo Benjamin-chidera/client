@@ -6,6 +6,8 @@ import dash from "../../assets/Image/dash.png";
 import all from "../../assets/Image/all.png";
 import add from "../../assets/Image/add.png";
 import { IoSearchSharp } from "react-icons/io5";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 import { Squash as Hamburger } from "hamburger-react";
 import { Link, useLocation } from "react-router-dom";
@@ -18,17 +20,31 @@ export const Navbar = () => {
 
   const { setType } = useGlobalContext();
 
+  const token = Cookies.get("token");
+  let decode = null;
+
+
+  try {
+    if (token) {
+      decode = jwtDecode(token);
+
+      console.log(decode);
+    }
+  } catch (error) {
+    console.log("Error decoding token", error);
+  }
+
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   
+
     if (search) {
-       setType(search);
-    }else if(!search){
-      setType("")
+      setType(search);
+    } else if (!search) {
+      setType("");
     }
   };
 
@@ -66,11 +82,11 @@ export const Navbar = () => {
           <img src={bell} alt="" className="hidden lg:block" />
 
           <div>
-            <h1 className="font-semibold text-lg">Chidera</h1>
-            <p className="text-sm text-[#BDB7B7]">Admin</p>
+            <h1 className="font-semibold text-lg">{decode.name}</h1>
+            <p className="text-sm text-[#BDB7B7]">{decode.role}</p>
           </div>
 
-          <img src={admin} alt="admin-pic" className="hidden lg:block" />
+          <img src={decode.image} alt="admin-pic" className="hidden lg:block w-[50px] h-[50px] rounded-full" />
         </div>
 
         <div className=" md:hidden">

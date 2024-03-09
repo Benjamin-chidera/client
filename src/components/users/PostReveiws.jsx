@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { PostRating } from "./PostRating";
 import axios from "axios";
 import { useGlobalContext } from "../../context/context";
+import Cookies from "js-cookie";
 
 export const PostReveiws = () => {
   const { reviewsUrl } = useGlobalContext();
@@ -15,6 +16,7 @@ export const PostReveiws = () => {
     email: "",
     message: "",
   });
+  const token = Cookies.get("token");
 
   const handleChange = (obj) => {
     setRating({ ...rating, ...obj });
@@ -30,7 +32,13 @@ export const PostReveiws = () => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post(`${reviewsUrl}/reviews`, { ...rating });
+      const { data } = await axios.post(
+        `${reviewsUrl}/reviews`,
+        { ...rating },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (data) {
         console.log(data);

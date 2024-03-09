@@ -1,29 +1,30 @@
-import React, { useEffect } from "react";
-import { customer } from "../../data/RecentCustomers";
+import { useEffect } from "react";
 import { useGlobalContext } from "../../context/context";
 import { Link } from "react-router-dom";
 
 export const CustomerCard = () => {
-  const { getInspection, inspection, deleteInspection } = useGlobalContext();
+  const { recentInspection, getRecentInspection } = useGlobalContext();
 
   useEffect(() => {
-    getInspection();
+    getRecentInspection();
   }, []);
 
-  console.log(inspection);
 
   return (
     <div className="bg-[#181818] p-3 w-[669px] pb-5  rounded-[10px]">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold my-5">Recent Customers</h1>
-        <Link className="text-sm focus:text-orange-600" to={"/admin/inspection"}>
+        <Link
+          className="text-sm focus:text-orange-600"
+          to={"/admin/inspection"}
+        >
           View All
         </Link>
       </div>
-      {inspection.length < 1 && (
+      {recentInspection.length < 1 && (
         <p className="md:text-center text-xl font-bold">No Customer Yet</p>
       )}
-      {inspection.map((c) => {
+      {recentInspection.map((c) => {
         const {
           firstName,
           phoneNumber,
@@ -31,13 +32,13 @@ export const CustomerCard = () => {
           inspectionTime,
           inspectionDate,
           _id,
-          img,
+          image,
         } = c;
 
         return (
           <section key={_id} className="flex gap-14 mt-5 items-center">
             <div>
-              <img src={img} alt="" className="w-[100px] h-[100px]" />
+              <img src={image} alt="" className="w-[100px] h-[100px] object-cover rounded-md" />
             </div>
 
             <div>

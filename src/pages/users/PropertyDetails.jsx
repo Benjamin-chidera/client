@@ -18,7 +18,7 @@ import { CustomersReviews } from "../../components/users/CustomersReviews";
 
 export const PropertyDetail = () => {
   const { propertyId } = useParams();
-  const url = `http://localhost:3000/api/v1/properties/${propertyId}`;
+  const url = `https://yemsyays-realestate-server.onrender.com/api/v1/properties/${propertyId}`;
   const [single, setSingle] = useState();
   const [similar, setSimilar] = useState();
   const token = Cookies.get("token");
@@ -40,6 +40,8 @@ export const PropertyDetail = () => {
   useEffect(() => {
     getSingleProperty();
   }, [propertyId]);
+
+  console.log(single);
 
   return (
     <main className="mt-24 p-5 container mx-auto w-full">
