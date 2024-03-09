@@ -65,7 +65,7 @@ export const Contact = () => {
           />
           <textarea
             type="tel"
-            className="w-[350px] max-w-full h-[200px] border border-[#C4C4C4] px-3 outline-none text-[#0008] pt-1"
+            className="w-[350px] max-w-full h-[200px] border border-[#C4C4C4] px-3 outline-none text-[#0008] pt-1 resize-none"
             placeholder=" Message "
           />
           <Button type="submit" className="bg-[#F78214]">

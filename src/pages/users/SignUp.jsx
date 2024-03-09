@@ -12,62 +12,87 @@ export const UserSignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    image: "",
+    name: "",
   });
   const navigate = useNavigate();
   const [save, setSave] = useState(false);
 
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-
-    if (!user.password || !user.confirmPassword || !user.email) {
-      toast.error("Please fill all required fields");
-      setSave(false);
-    }
-
-    if (user.password !== user.confirmPassword) {
-      setSave(false);
-      toast.error("Passwords do not match");
-    }
-
-    if (user.password.length < 7) {
-      setSave(false);
-      toast.error("Password must be at least 7 characters");
-    }
-
-    try {
-      setSave(true);
-      const {
-        data: { users },
-      } = await axios.post(url, { ...user });
-
-      if (users) {
-        console.log(users);
-        setSave(false);
-        navigate("/signIn")
-        setUser({
-          email: "",
-          password: "",
-          confirmPassword: "",
-        });
-      }
-    } catch (error) {
-      setSave(false);
-      console.log(error?.response?.data?.err);
-      toast.error(error?.response?.data?.err);
+    if (e.target.name === "image") {
+      // Handle image upload separately
+      setUser({ ...user, image: e.target.files[0] });
+    } else {
+      // Handle other form fields
+      setUser({ ...user, [e.target.name]: e.target.value });
     }
   };
+
+const handleSignUp = async (e) => {
+  e.preventDefault();
+
+  if (
+    !user.password ||
+    !user.confirmPassword ||
+    !user.email ||
+    !user.name ||
+    !user.image
+  ) {
+    toast.error("Please fill all required fields");
+    setSave(false);
+  }
+
+  if (user.password !== user.confirmPassword) {
+    setSave(false);
+    toast.error("Passwords do not match");
+  }
+
+  if (user.password.length < 7) {
+    setSave(false);
+    toast.error("Password must be at least 7 characters");
+  }
+
+  try {
+    setSave(true);
+
+    const formData = new FormData();
+
+    formData.append("email", user.email);
+    formData.append("password", user.password);
+    formData.append("confirmPassword", user.confirmPassword);
+    formData.append("name", user.name);
+    formData.append("image", user.image);
+
+    const {
+      data: { users },
+    } = await axios.post(url, formData);
+
+    if (users) {
+      console.log(users);
+      setSave(false);
+      navigate("/signIn");
+      setUser({
+        email: "",
+        password: "",
+        confirmPassword: "",
+        image: "",
+        name: "",
+      });
+    }
+  } catch (error) {
+    setSave(false);
+    console.log(error?.response?.data?.err);
+    toast.error(error?.response?.data?.err);
+  }
+};
 
   return (
-    <main className="flex justify-center items-center h-screen">
+    <main className="flex justify-center items-center h-screen ">
       <Toaster />
       <Card
         color="transparent"
         shadow={false}
-        className="bg-[#1F1F1F] w-fit h-[510px] py-5 px-5 md:px-14 mx-auto"
+        className="bg-[#1F1F1F] w-fit mt-40 h-[670px] py-5 px-5 md:px-14 mx-auto"
       >
         <Typography
           variant="h4"
@@ -142,8 +167,44 @@ export const UserSignUp = () => {
                 className: "before:content-none after:content-none",
               }}
             />
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3 text-white"
+            >
+              UserName
+            </Typography>
+            <Input
+              type="text"
+              size="lg"
+              placeholder="Your username"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-white"
+              name="name"
+              value={user.name}
+              onChange={handleChange}
+              labelProps={{
+                className: "before:content-none after:content-none",
+              }}
+            />
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3 text-white"
+            >
+              Profile
+            </Typography>
+            <Input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleChange}
+             
+            />
+
+           
           </div>
-          <Button className="mt-6 bg-[#F78214]" fullWidth type="submit">
+
+          <Button className="mt-8 bg-[#F78214]" fullWidth type="submit">
             {save ? <AdminBtnSave /> : "sign up"}
           </Button>
           <Typography
@@ -151,10 +212,7 @@ export const UserSignUp = () => {
             className="mt-4 text-center font-normal text-white"
           >
             Already a user?
-            <Link
-              className="font-medium ms-3 text-[#F78214]"
-              to={"/signIn"}
-            >
+            <Link className="font-medium ms-3 text-[#F78214]" to={"/signIn"}>
               Sign In
             </Link>
           </Typography>

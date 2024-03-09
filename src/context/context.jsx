@@ -10,6 +10,7 @@ export const AppProvider = ({ children }) => {
   const [latest, setLatest] = useState([]);
   const [properties, setProperties] = useState([]);
   const [inspection, setInspection] = useState([]);
+  const [recentInspection, setRecentInspection] = useState([]);
   const [recent, setRecent] = useState([]);
   const [review, setReview] = useState([]);
   const [AllReview, setAllReview] = useState([]);
@@ -100,6 +101,19 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const getRecentInspection = async () => {
+    try {
+      const {
+        data: { recent },
+      } = await axios(`${URL}/recent`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setRecentInspection(recent);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const deleteInspection = async (inspecId) => {
     try {
       const {
@@ -177,7 +191,9 @@ export const AppProvider = ({ children }) => {
         review,
         reviewsUrl,
         AllReview,
-        type
+        type,
+        recentInspection,
+        getRecentInspection,
       }}
     >
       {children}

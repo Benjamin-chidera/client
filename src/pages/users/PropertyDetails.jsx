@@ -41,6 +41,8 @@ export const PropertyDetail = () => {
     getSingleProperty();
   }, [propertyId]);
 
+  console.log(single);
+
   return (
     <main className="mt-24 p-5 container mx-auto w-full">
       <section className="flex gap-3 justify-center">
