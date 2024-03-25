@@ -12,6 +12,8 @@ import { useGlobalContext } from "../../context/context";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { CurrencyFormatter } from "../CurrencyFormatter";
 import { Skeleton } from "@/components/ui/skeleton";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 import ReactPaginate from "react-paginate";
 
@@ -66,10 +68,12 @@ export const AllProperties = () => {
                   {loading ? (
                     <Skeleton className="w-[100%] h- md:h-[200px] md:w-[500px] bg-gray-100" />
                   ) : (
-                    <img
+                    <LazyLoadImage
+                    loading="lazy"
+                    effect="blur"
                       src={images[0]}
                       alt=""
-                      className=" h- md:h-[220px] md:w-[170px] object-cover mb-3 md:mb-0"
+                      className=" h- md:h-[220px] md:w-[470px] object-cover mb-3 md:mb-0"
                     />
                   )}
 

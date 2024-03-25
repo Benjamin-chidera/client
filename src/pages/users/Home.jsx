@@ -9,6 +9,8 @@ import { UsersNumHouses } from "../../components/users/UsersNumHouses";
 import { LatestProperties } from "../../components/users/LatestProperties";
 import { UserCustomerTestimonials } from "../../components/users/userCustomerTestimonials";
 import { BackToTop } from "../../components/users/BackToTop";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const Home = () => {
   return (
@@ -37,7 +39,10 @@ export const Home = () => {
             </p>
 
             <div className="mt-7">
-              <Link className="bg-[#F78214] px-8 py-3 rounded-lg" to={"/properties"}>
+              <Link
+                className="bg-[#F78214] px-8 py-3 rounded-lg"
+                to={"/properties"}
+              >
                 View Properties
               </Link>
             </div>
@@ -52,9 +57,14 @@ export const Home = () => {
       <section className="mt-14  text-center">
         <h1 className="text-2xl font-semibold text-[#FCEEE2]">Why Choose Us</h1>
         <div className="flex justify-center items-center mt-5 flex-wrap gap-10">
-         
           <div>
-            <img src={tax} alt="Tax" className=" mx-auto" />
+            <LazyLoadImage
+              loading="lazy"
+              effect="blur"
+              src={tax}
+              alt="Tax"
+              className=" mx-auto"
+            />
             <h1 className="font-semibold text-[18px]">Tax Advantage</h1>
             <p className=" max-w-[250px] text-sm">
               Lörem ipsum riteck prekin att ysade. Makrosm rud visorade.{" "}
@@ -62,8 +72,13 @@ export const Home = () => {
           </div>
 
           <div>
-          
-            <img src={insurance} alt="Tax" className=" mx-auto" />
+            <LazyLoadImage
+              loading="lazy"
+              effect="blur"
+              src={insurance}
+              alt="Tax"
+              className=" mx-auto"
+            />
             <h1 className="font-semibold text-[18px]">Property Insurance</h1>
             <p className=" max-w-[250px] text-sm">
               Lörem ipsum riteck prekin att ysade. Makrosm rud visorade.{" "}
@@ -71,8 +86,13 @@ export const Home = () => {
           </div>
 
           <div>
-          
-            <img src={lowest} alt="Tax" className=" mx-auto" />
+            <LazyLoadImage
+              loading="lazy"
+              effect="blur"
+              src={lowest}
+              alt="Tax"
+              className=" mx-auto"
+            />
             <h1 className="font-semibold text-[18px]">Lowest Commission</h1>
             <p className=" max-w-[250px] text-sm">
               Lörem ipsum riteck prekin att ysade. Makrosm rud visorade.{" "}
@@ -83,7 +103,9 @@ export const Home = () => {
 
       <section className="md:flex justify-center gap-20 mt-24 mb-14">
         <div className="relative w-[350px] mb-20 hidden md:block">
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={us1}
             alt=""
             className="w-[200px] md:w-[350px] h-[350px] md:h-[500px] object-cover md:rounded-[40px] relative mx-auto"
@@ -115,7 +137,9 @@ export const Home = () => {
       <UsersNumHouses />
 
       <section className="text-center  ">
-        <h1 className="text-2xl md:text-4xl font-semibold">Latest Properties</h1>
+        <h1 className="text-2xl md:text-4xl font-semibold">
+          Latest Properties
+        </h1>
         <p className="text-[#8D8D8D] text-sm">
           Lörem ipsum mikrograf plusjobb i depäskama käde dihäs. Bemör kvasilig{" "}
         </p>
@@ -123,7 +147,7 @@ export const Home = () => {
       </section>
 
       <UserCustomerTestimonials />
-      <BackToTop/>
+      <BackToTop />
     </main>
   );
 };

@@ -87,12 +87,12 @@ const handleSignUp = async (e) => {
 };
 
   return (
-    <main className="flex justify-center items-center h-screen ">
+    <main className="flex justify-center items-center h-screen max-w-full">
       <Toaster />
       <Card
         color="transparent"
         shadow={false}
-        className="bg-[#1F1F1F] w-fit mt-40 h-[670px] py-5 px-5 md:px-14 mx-auto"
+        className="bg-[#1F1F1F] w-fit mt-40 h-[670px] py-5 px-5 md:px-14 mx-auto max-w-full"
       >
         <Typography
           variant="h4"
@@ -107,7 +107,7 @@ const handleSignUp = async (e) => {
           Create an account
         </Typography>
         <form
-          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          className="mt-8 mb-2 w-80 max-w-full sm:w-96"
           onSubmit={handleSignUp}
         >
           <div className="mb-1 flex flex-col gap-4">

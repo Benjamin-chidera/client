@@ -158,7 +158,7 @@ export const EditProperty = () => {
   // console.log(property);
 
   return (
-    <section className="container mx-auto w-full">
+    <section className="lg:container lg:mx-auto ">
       <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center ">
           <RiArrowDropLeftFill size={40} color="orange" />
@@ -211,7 +211,7 @@ export const EditProperty = () => {
                   <img
                     src={gallery?.images[0]}
                     alt="Preview"
-                    className="w-full h-full object-cover"
+                    className=" object-cover w-[176px] h-[214px] md:w-[760px] md:h-[323px] lg:w-[500px] xl:h-[400px] xl:w-[750px] pic-one"
                   />
                 )}
               </div>
@@ -239,7 +239,7 @@ export const EditProperty = () => {
                     <img
                       src={gallery?.images[1]}
                       alt="Preview"
-                      className="w-full h-full object-cover"
+                      className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[125px] xl:w-[570px] pic-two"
                     />
                   )}
                 </div>
@@ -265,7 +265,7 @@ export const EditProperty = () => {
                     <img
                       src={gallery?.images[2]}
                       alt="Preview"
-                      className="w-full h-full object-cover"
+                      className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[125px] xl:w-[570px] pic-two"
                     />
                   )}
                 </div>
@@ -291,7 +291,7 @@ export const EditProperty = () => {
                     <img
                       src={gallery?.images[3]}
                       alt="Preview"
-                      className="w-full h-full object-cover"
+                      className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[125px] xl:w-[570px] pic-two"
                     />
                   )}
                 </div>
@@ -315,7 +315,7 @@ export const EditProperty = () => {
                   <label className="text-[#8D8D8D] text-xs">Tags</label>
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[150px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[130px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
                     placeholder="Select Tags"
                     value={property?.tags}
                     onChange={handleChange}
@@ -328,7 +328,7 @@ export const EditProperty = () => {
                   </label>
                   <select
                     id=""
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] h-[43px] w-[150px] md:w-[200px] py-2 px-3 outline-none my-1"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] h-[43px] w-[130px] md:w-[200px] py-2 px-3 outline-none my-1"
                     value={property?.propertyType}
                     onChange={handleChange}
                     name="propertyType"
@@ -352,7 +352,7 @@ export const EditProperty = () => {
 
                   <input
                     type="text"
-                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[180px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
+                    className=" bg-transparent border rounded-md border-[#8D8D8D] w-[130px] md:w-[320px] py-2 px-3 outline-none my-1 placeholder:text-xs tags"
                     placeholder="Select Title"
                     value={property?.title}
                     onChange={handleChange}
@@ -379,7 +379,7 @@ export const EditProperty = () => {
 
                 <input
                   type="text"
-                  className=" bg-transparent border rounded-md border-[#8D8D8D] w-[320px] md:w-[540px] max-w-full py-2 px-3 outline-none my-1 placeholder:text-xs location"
+                  className=" bg-transparent border rounded-md border-[#8D8D8D] w-[220px] md:w-[540px] max-w-full py-2 px-3 outline-none my-1 placeholder:text-xs location"
                   placeholder="Select Location"
                   value={property?.location}
                   onChange={handleChange}
@@ -387,7 +387,7 @@ export const EditProperty = () => {
                 />
               </div>
 
-              <div className="border p-3 rounded-xl w-[320px] md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold max-w-full location">
+              <div className="border p-3 rounded-xl w-[240px] md:w-[540px] mt-4 border-[#343434] text-sm flex flex-col font-semibold max-w-full location">
                 <div className="mb-4 flex flex-col">
                   <label className="text-[#8D8D8D] text-xs">Description</label>
 
@@ -402,7 +402,7 @@ export const EditProperty = () => {
                 </div>
               </div>
 
-              <section className="border p-3 rounded-xl w-[320px] md:w-[540px] max-w-full mt-4 border-[#343434] text-sm flex flex-col font-semibold location">
+              <section className="border p-3 rounded-xl w-[240px] md:w-[540px] max-w-full mt-4 border-[#343434] text-sm flex flex-col font-semibold location">
                 <p className="text-xl mb-5">Features</p>
                 <div className="flex justify-center gap-8 items-center flex-wrap">
                   <div className=" relative">
@@ -461,7 +461,7 @@ export const EditProperty = () => {
                 </div>
               </section>
 
-              <div className="border p-3 rounded-xl w-[320px] md:w-[540px] max-w-full  mt-4 border-[#343434] text-sm flex flex-col font-semibold location">
+              <div className="border p-3 rounded-xl w-[240px] md:w-[540px] max-w-full  mt-4 border-[#343434] text-sm flex flex-col font-semibold location">
                 <p className="text-xl mb-5">Property Video</p>
                 <div className=" relative cursor-pointer">
                   <div
@@ -498,7 +498,7 @@ export const EditProperty = () => {
             </section>
 
             <section>
-              <div className="border border-[#343434] w-[320px] md:w-[300px] h-[400px] md:mt-5 p-5 rounded-xl text-center sales">
+              <div className="border border-[#343434] w-[240px] md:w-[300px] h-[400px] md:mt-5 p-5 rounded-xl text-center sales">
                 {/* sale support */}
 
                 <div className=" relative cursor-pointer">

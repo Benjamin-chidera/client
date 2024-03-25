@@ -9,20 +9,23 @@ import { IoSearchSharp } from "react-icons/io5";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
+import { Button } from "@material-tailwind/react";
+
 import { Squash as Hamburger } from "hamburger-react";
 import { Link, useLocation } from "react-router-dom";
 import { useGlobalContext } from "../../context/context";
+import { Logout } from "../logout/Logout";
 
 export const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const location = useLocation();
   const [search, setSearch] = useState("");
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const { setType } = useGlobalContext();
 
   const token = Cookies.get("token");
   let decode = null;
-
 
   try {
     if (token) {
@@ -43,13 +46,19 @@ export const Navbar = () => {
 
     if (search) {
       setType(search);
+      setOpen(false);
     } else if (!search) {
       setType("");
+      setOpen(true);
     }
   };
 
   const handleChange = (e) => {
     setSearch(e.target.value);
+  };
+
+  const openLogout = () => {
+    setIsLoggingOut(!isLoggingOut);
   };
 
   return (
@@ -86,7 +95,14 @@ export const Navbar = () => {
             <p className="text-sm text-[#BDB7B7]">{decode?.role}</p>
           </div>
 
-          <img src={decode?.image} alt="admin-pic" className="hidden lg:block w-[50px] h-[50px] rounded-full" />
+          {/* <Button onClick={openLogout}>
+            <img
+              src={decode?.image}
+              alt="admin-pic"
+              className="hidden md:block w-[50px] h-[50px] rounded-full"
+            />
+          </Button> */}
+          <Logout />
         </div>
 
         <div className=" md:hidden">
@@ -99,14 +115,19 @@ export const Navbar = () => {
         <section className="p-5 bg-[#403b3b] h-full w-[230px] fixed top-0 md:hidden z-10 ">
           {/* menu bar for admin-mobile devices */}
           <div className="flex gap-3 items-center">
-            <img src={bell} alt="" />
-
             <div>
-              <h1>Chidera</h1>
-              <p>Admin</p>
+              <h1 className="font-semibold text-lg">{decode?.name}</h1>
+              <p className="text-sm text-[#BDB7B7]">{decode?.role}</p>
             </div>
 
-            <img src={admin} alt="admin-pic" />
+            {/* <Button onClick={openLogout}>
+              <img
+                src={decode?.image}
+                alt="admin-pic"
+                className=" w-[50px] h-[50px] rounded-full"
+              />
+            </Button> */}
+            <Logout />
           </div>
 
           <div className="mt-5">
@@ -115,6 +136,8 @@ export const Navbar = () => {
                 type="text"
                 placeholder="Search Here"
                 className="w-[391px] h-[35px] max-w-full ps-3 pe-8 bg-transparent border border-gray-600 rounded-2xl relative outline-none"
+                value={search}
+                onChange={handleChange}
               />
 
               <IoSearchSharp

@@ -15,6 +15,8 @@ import { CurrencyFormatter } from "../../components/CurrencyFormatter";
 import { useGlobalContext } from "../../context/context";
 import { PostReveiws } from "../../components/users/PostReveiws";
 import { CustomersReviews } from "../../components/users/CustomersReviews";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const PropertyDetail = () => {
   const { propertyId } = useParams();
@@ -23,7 +25,6 @@ export const PropertyDetail = () => {
   const [similar, setSimilar] = useState();
   const token = Cookies.get("token");
   const { review } = useGlobalContext();
-
 
   const getSingleProperty = async () => {
     try {
@@ -47,7 +48,9 @@ export const PropertyDetail = () => {
     <main className="mt-24 p-5 container mx-auto w-full">
       <section className="flex gap-3 justify-center">
         <div className="">
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[0]}
             alt=""
             className=" object-cover w-[176px] h-[224px] md:w-[560px] md:h-[373px] pic-one"
@@ -55,17 +58,23 @@ export const PropertyDetail = () => {
         </div>
 
         <div className=" object-cover flex flex-col gap-3">
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[1]}
             alt=""
             className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[2]}
             alt=""
             className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
           />
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[3]}
             alt=""
             className=" object-cover w-[176px] h-[66px] md:w-[360px] md:h-[116px] pic-two"
@@ -78,8 +87,8 @@ export const PropertyDetail = () => {
 
         <section>
           <div className="flex items-center gap-3 my-5">
-            {/* <img src={net} alt="" />
-            <img src={fam} alt="" /> */}
+            {/* <LazyLoadImage loading="lazy" effect="blur" src={net} alt="" />
+            <LazyLoadImage loading="lazy" effect="blur" src={fam} alt="" /> */}
             <p>{single?.tags}</p>
           </div>
 
@@ -170,7 +179,9 @@ export const PropertyDetail = () => {
           <div className="border border-[#343434] w-[270px] md:w-[300px] h-[358px] md:mt-5 p-5 rounded-xl text-center">
             {/* sale support */}
 
-            <img
+            <LazyLoadImage
+              loading="lazy"
+              effect="blur"
               src={single?.salesSupport?.avatar}
               alt=""
               className="w-[100px] h-[100px] rounded-full mx-auto"

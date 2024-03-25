@@ -4,6 +4,7 @@ import { LuRefreshCcw } from "react-icons/lu";
 import { AllPropertyCard } from "../../components/admin/AllPropertyCard";
 import { useGlobalContext } from "../../context/context";
 
+
 export const AllProperties = () => {
   const handleToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

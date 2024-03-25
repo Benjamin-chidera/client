@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useGlobalContext } from "../../context/context";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const CustomerCard = () => {
   const { recentInspection, getRecentInspection } = useGlobalContext();
@@ -9,13 +11,12 @@ export const CustomerCard = () => {
     getRecentInspection();
   }, []);
 
-
   return (
     <div className="bg-[#181818] p-3 w-[669px] pb-5  rounded-[10px]">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold my-5">Recent Customers</h1>
         <Link
-          className="text-sm focus:text-orange-600"
+          className="text-sm focus:text-orange-600  text-orange-500"
           to={"/admin/inspection"}
         >
           View All
@@ -38,7 +39,13 @@ export const CustomerCard = () => {
         return (
           <section key={_id} className="flex gap-14 mt-5 items-center">
             <div>
-              <img src={image} alt="" className="w-[100px] h-[100px] object-cover rounded-md" />
+              <LazyLoadImage
+                loading="lazy"
+                effect="blur"
+                src={image}
+                alt=""
+                className="w-[100px] h-[100px] object-cover rounded-md"
+              />
             </div>
 
             <div>

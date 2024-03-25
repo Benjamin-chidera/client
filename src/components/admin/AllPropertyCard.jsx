@@ -12,6 +12,8 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 import ReactPaginate from "react-paginate";
 import { CurrencyFormatter } from "../CurrencyFormatter";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const AllPropertyCard = ({ filterByType }) => {
   const navigate = useNavigate();
@@ -33,9 +35,7 @@ export const AllPropertyCard = ({ filterByType }) => {
 
   return (
     <main className="">
-      
-
-      <div className=" grid md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 md:place-items-center w-full place-items-center mt-3 gap-5">
+      <div className=" grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 md:place-items-center w-full place-items-center mt-3 gap-5">
         {displayUsers.map((p) => {
           const {
             _id,
@@ -57,7 +57,9 @@ export const AllPropertyCard = ({ filterByType }) => {
               key={_id}
               className=" space-y-3 bg-[#181818] py-5 px-3 rounded-xl"
             >
-              <img
+              <LazyLoadImage
+                loading="lazy"
+                effect="blur"
                 src={images[0]}
                 alt=""
                 className="w-[250px] h-[250px] rounded-[15.14px]"
