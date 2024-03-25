@@ -15,6 +15,8 @@ import ReactPlayer from "react-player";
 import { useGlobalContext } from "../../context/context";
 import Cookies from "js-cookie";
 import { CurrencyFormatter } from "../../components/CurrencyFormatter";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const PropertyDetails = () => {
   const [single, setSingle] = useState();
@@ -49,7 +51,7 @@ export const PropertyDetails = () => {
           <h1 className=" font-semibold text-xl">Properties Details</h1>
         </div>
 
-        <header className="flex items-center justify-between">
+        <header className="flex flex-wrap text-sm items-center justify-between">
           <div className="flex gap-2 items-center">
             <Link className="flex gap-2 items-center">
               <PiHouse size={20} /> Home
@@ -81,7 +83,9 @@ export const PropertyDetails = () => {
 
       <section className="flex gap-3">
         <div className="">
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[0]}
             alt=""
             className=" object-cover w-[176px] h-[224px] md:w-[760px] md:h-[373px] lg:w-[500px] xl:h-[600px] xl:w-[750px] pic-one"
@@ -89,17 +93,23 @@ export const PropertyDetails = () => {
         </div>
 
         <div className=" object-cover flex flex-col gap-3">
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[1]}
             alt=""
             className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[192px] xl:w-[570px] pic-two"
           />
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[2]}
             alt=""
             className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[192px] xl:w-[570px] pic-two"
           />
-          <img
+          <LazyLoadImage
+            loading="lazy"
+            effect="blur"
             src={single?.media?.images[3]}
             alt=""
             className=" object-cover w-[226px] h-[66px] md:w-[360px] md:h-[116px] lg:w-[420px] xl:h-[192px] xl:w-[570px] pic-two"
@@ -110,7 +120,12 @@ export const PropertyDetails = () => {
       <section className="flex gap-7 md:gap-12 flex-wrap">
         <section>
           <div className="flex items-center gap-3 mt-5">
-            <img src={single?.tags} alt="" />
+            <LazyLoadImage
+              loading="lazy"
+              effect="blur"
+              src={single?.tags}
+              alt=""
+            />
           </div>
 
           <section className="flex justify-between">
@@ -188,7 +203,9 @@ export const PropertyDetails = () => {
 
         <section>
           <div className="border border-[#343434] w-[270px] md:w-[300px] h-[358px] md:mt-5 p-5 rounded-xl text-center">
-            <img
+            <LazyLoadImage
+              loading="lazy"
+              effect="blur"
               src={single?.salesSupport?.avatar}
               alt=""
               className="w-[100px] h-[100px] mx-auto rounded-full"

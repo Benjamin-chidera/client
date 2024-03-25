@@ -25,7 +25,8 @@ export const AppProvider = ({ children }) => {
   const URL =
     "https://yemsyays-realestate-server.onrender.com/api/v1/inspection";
   const BASE_URL = `https://yemsyays-realestate-server.onrender.com/api/v1/properties?location=${location}&type=${type}&price=${price}`;
-  const latestUrl = "https://yemsyays-realestate-server.onrender.com/api/v1/properties";
+  const latestUrl =
+    "https://yemsyays-realestate-server.onrender.com/api/v1/properties";
   const reviewsUrl = "https://yemsyays-realestate-server.onrender.com/api/v1";
 
   const getAllReviews = async () => {
@@ -63,9 +64,9 @@ export const AppProvider = ({ children }) => {
       } = await axios(`${latestUrl}/latest`);
       setLatest(property);
 
-       setTimeout(() => {
-         setLoading(false);
-       }, 4000);
+      setTimeout(() => {
+        setLoading(false);
+      }, 4000);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -103,6 +104,7 @@ export const AppProvider = ({ children }) => {
   };
 
   const getRecentInspection = async () => {
+    setLoading(true);
     try {
       const {
         data: { recent },
@@ -110,6 +112,9 @@ export const AppProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRecentInspection(recent);
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
     } catch (error) {
       console.log(error);
     }

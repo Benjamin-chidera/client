@@ -190,7 +190,7 @@ export const AddNewProperty = () => {
       </div>
       <form onSubmit={handleAddNewProperty}>
         <main>
-          <section className="flex justify-between items-center my-5 flex-wrap bg-[#181818] h-[80px] px-5 rounded-lg w-full max-w-full mx-auto">
+          <section className="flex justify-between items-center my-5  bg-[#181818] h-[80px] px-3 rounded-lg w-full max-w-full mx-auto">
             <div>
               <h1 className="font-semibold text-xl">New Title</h1>
               <div className="flex items-center gap-2 mt-3">
@@ -205,7 +205,7 @@ export const AddNewProperty = () => {
                 className="bg-[#F78214] text-sm rounded-lg px-10"
                 type="submit"
               >
-                {saved ? <AdminBtnSave /> : "Saved"}
+                {saved ? <AdminBtnSave /> : "Save"}
               </Button>
             </div>
           </section>

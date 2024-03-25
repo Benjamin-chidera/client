@@ -3,6 +3,8 @@ import React from "react";
 import { property } from "../../data/Property";
 import { Link, useNavigate } from "react-router-dom";
 import { CurrencyFormatter } from "../CurrencyFormatter";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const SimilarProperties = ({ similar }) => {
   const similars = property.slice(0, 6);
@@ -36,7 +38,13 @@ export const SimilarProperties = ({ similar }) => {
             className="flex justify-center items-center gap-5 border mt-5 py-5 rounded-lg border-[#343434] px-3"
           >
             <div>
-              <img src={images[0]} alt="" className="w-[100px] h-[100px]" />
+              <LazyLoadImage
+                loading="lazy"
+                effect="blur"
+                src={images[0]}
+                alt=""
+                className="w-[100px] h-[100px]"
+              />
             </div>
 
             <div className=" space-y-2">
@@ -45,9 +53,7 @@ export const SimilarProperties = ({ similar }) => {
                 <address className=" not-italic text-xs text-[#8D8D8D]">
                   {location}
                 </address>
-                <p className="">
-                  {<CurrencyFormatter value={price} />}
-                </p>
+                <p className="">{<CurrencyFormatter value={price} />}</p>
               </div>
               <div className="mt-3">
                 <Link

@@ -5,14 +5,35 @@ import { Squash as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import "animate.css";
+import { Button } from "@material-tailwind/react";
+
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
+
+  const token = Cookies.get("token");
+  let decode = null;
+
+  try {
+    if (token) {
+      decode = jwtDecode(token);
+    }
+  } catch (error) {
+    console.log("Error decoding token", error);
+  }
 
   const handleClose = () => {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    Cookies.remove("token");
+    window.location.reload();
+  };
+
+ 
   return (
     <nav>
       <main className=" flex justify-between px-5 bg-[#181818] h-24 items-center fixed w-full top-0 z-10">
@@ -40,7 +61,10 @@ export const Navbar = () => {
           >
             Book Now
           </Link>
-          
+
+          {decode?.role === "user" && (
+            <Button onClick={handleLogout}>Logout</Button>
+          )}
         </section>
 
         <div className=" md:hidden">
@@ -95,6 +119,10 @@ export const Navbar = () => {
             >
               Book Now
             </Link>
+
+            {decode?.role === "user" && (
+              <Button onClick={handleLogout}>Logout</Button>
+            )}
           </section>
         </section>
       </CSSTransition>

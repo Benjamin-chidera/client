@@ -2,6 +2,7 @@
 body {
   background: #121212;
   color: white !important;
+  overflow-x: hidden !important;
 }
 
 .scroll-hidden::-webkit-scrollbar {

@@ -3,7 +3,7 @@ import React from 'react'
 export const UsersNumHouses = () => {
   return (
     <div className="mb-5 relative home-user flex justify-center">
-      <section className="grid grid-cols-2 md:flex justify-center items-center gap-5 md:gap-40  flex-wrap text-center">
+      <section className="text-sm grid grid-cols-2 md:flex justify-center items-center gap-5 md:gap-20  flex-wrap text-center">
         <div>
           <p className="text-lg md:text-3xl font-semibold text-[#F78214]">
             2349

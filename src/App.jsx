@@ -22,12 +22,12 @@ import { UserSignIn } from "./pages/users/signIn";
 import { Private } from "./pages/users/Private";
 import { AdminPrivate } from "./pages/admin/Private";
 import { Error } from "./pages/users/Error";
-// import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+
 
 function App() {
   return (
     <div>
-      {/* <SkeletonTheme baseColor="#202020" highlightColor="#444"> */}
+      
       <BrowserRouter>
         <Routes>
           {/* this is for admin */}
@@ -74,7 +74,7 @@ function App() {
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>
-      {/* </SkeletonTheme> */}
+   
     </div>
   );
 }

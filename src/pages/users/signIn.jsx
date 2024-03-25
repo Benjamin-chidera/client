@@ -65,7 +65,7 @@ export const UserSignIn = () => {
       <Card
         color="transparent"
         shadow={false}
-        className="bg-[#1F1F1F] w-fit h-[510px] py-5 px-5 md:px-14 mx-auto"
+        className="bg-[#1F1F1F] w-fit max-w-full h-[510px] py-5 px-5 md:px-14 mx-auto"
       >
         <Typography
           variant="h4"
@@ -80,7 +80,7 @@ export const UserSignIn = () => {
           Sign into your account.
         </Typography>
         <form
-          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+          className="mt-8 mb-2 w-80  sm:w-96 max-w-full"
           onSubmit={handleSignIn}
         >
           <div className="mb-1 flex flex-col gap-4">
@@ -94,7 +94,7 @@ export const UserSignIn = () => {
             <Input
               size="lg"
               placeholder="name@mail.com"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-white"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-white max-w-full"
               name="email"
               value={user.email}
               onChange={handleChange}
@@ -113,7 +113,7 @@ export const UserSignIn = () => {
               type="password"
               size="lg"
               placeholder="********"
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-white"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 text-white max-w-full w-[100px]"
               name="password"
               value={user.password}
               onChange={handleChange}
@@ -140,7 +140,7 @@ export const UserSignIn = () => {
               <Link className="text-[#E92727]">Forgot Password?</Link>
             </div>
           </div>
-          <Button className="mt-6 bg-[#F78214]" fullWidth type="submit">
+          <Button className="mt-6 bg-[#F78214] max-w-full" fullWidth type="submit">
             {save ? <AdminBtnSave /> : "sign in"}
           </Button>
           <Typography

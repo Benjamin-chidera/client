@@ -8,9 +8,9 @@ import { CustomerCard } from "../../components/admin/CustomerCard";
 export const DashBoard = () => {
   return (
     <section className=" text-white xl:container xl:mx-auto w-full">
-      <header className="flex items-center justify-between">
+      <header className="md:flex items-center justify-between">
         <h1 className="font-semibold text-2xl">Dashboard</h1>
-        <div className="md:flex gap-2 items-center">
+        <div className="flex gap-2 items-center">
           <Link className="flex gap-2 items-center">
             <PiHouse /> Home
           </Link>{" "}
@@ -19,11 +19,11 @@ export const DashBoard = () => {
       </header>
       <DashboardPro />
 
-      <main className=" gap-5 md:flex my-5">
+      <main className=" gap-5 xl:flex my-5">
         <section className="md:w-[700px]">
           <div className="flex justify-between gap-5 items-center text-sm ms-3  max-w-full">
             <h1 className="font-bold text-lg">Recently Added Properties</h1>
-            <Link className="text-[#F78214] mr-3" to={"/admin/all-properties"}>
+            <Link className="text-[#F78214] mr-3 whitespace-nowrap text-xs md:text-sm" to={"/admin/all-properties"}>
               View All Properties
             </Link>
           </div>
@@ -42,7 +42,7 @@ export const DashBoard = () => {
           {/* customers reviews */}
           <div className="flex justify-between gap-5 items-center text-sm">
             <h1 className="font-bold text-lg">Reviews</h1>
-            <Link className="text-[#F78214]">View All</Link>
+            <Link className="text-[#F78214] cursor-not-allowed">View All</Link>
           </div>
 
           <ReviewsCard />
