@@ -38,23 +38,29 @@ export const PropertyDetails = () => {
     }
   };
 
-  const updatePropertyStatus = async () => {
-    try {
-      const { data } = await axios.patch(
-        soldUrl,
-        { propertyStatus: "sold" },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      Cookies.set("propertyStatus", data.property.propertyStatus);
-      navigate("/admin/all-properties");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const updatePropertyStatus = async () => {
+  try {
+    const { data } = await axios.patch(
+      soldUrl,
+      { propertyStatus: "sold" },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    // Fetch the updated property status from the server
+    const updatedProperty = await axios.get(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setSingle(updatedProperty.data.property);
+    navigate("/admin/all-properties");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-  const sold = Cookies.get("propertyStatus");
+  // const sold = Cookies.get("propertyStatus");
+
+  // console.log(sold);
 
   useEffect(() => {
     getSingleProperty();
@@ -247,16 +253,18 @@ export const PropertyDetails = () => {
             </h1>
 
             <Button
-              disabled={sold}
-              className="bg-[#F78214] w-[227px] h-[44px]  mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg"
+              disabled={single?.propertyStatus === "sold"}
+              className="bg-[#F78214] w-[227px] h-[44px] mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg"
               onClick={updatePropertyStatus}
               style={
-                sold === "sold"
+                single?.propertyStatus === "sold"
                   ? { backgroundColor: "gray" }
                   : { backgroundColor: "#F78214" }
               }
             >
-              {sold === "sold" ? "Property Sold" : "Mark as Sold"}
+              {single?.propertyStatus === "sold"
+                ? "Property Sold"
+                : "Mark as Sold"}
             </Button>
             <Button
               className="border border-[#F78214] w-[227px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg"

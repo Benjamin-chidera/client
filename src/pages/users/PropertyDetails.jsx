@@ -184,7 +184,7 @@ export const PropertyDetail = () => {
               effect="blur"
               src={single?.salesSupport?.avatar}
               alt=""
-              className="w-[100px] h-[100px] rounded-full mx-auto"
+              className="w-[100px] h-[100px] rounded-full mx-auto object-cover"
             />
             <h1 className="font-semibold text-xl mt-5">
               {single?.salesSupport?.name}

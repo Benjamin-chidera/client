@@ -84,7 +84,7 @@ export const AllProperties = () => {
                       </p>
                     </div>
                     <h1 className="text-black text-sm md:text-lg text-start font-semibold">
-                      {title}
+                      {title.substring(0, 10)}
                     </h1>
                     <address className="text-[#8D8D8D] text-xs md:text-sm text-start font-semibold not-italic flex items-center">
                       <IoLocation /> {location}
