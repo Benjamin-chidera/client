@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { RiArrowDropLeftFill } from "react-icons/ri";
 import { PiHouse } from "react-icons/pi";
 import { Link, useParams, useNavigate } from "react-router-dom";
-
-import vi from "../../assets/Image/vi.png";
 import { MdLocationOn } from "react-icons/md";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
@@ -20,7 +18,6 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const PropertyDetails = () => {
   const [single, setSingle] = useState();
-  const [sold, setSold] = useState([]);
   const { propertyId } = useParams();
   const { deleteProperty } = useGlobalContext();
   const navigate = useNavigate();
@@ -50,15 +47,18 @@ export const PropertyDetails = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setSold(data.property);
+      Cookies.set("propertyStatus", data.property.propertyStatus);
       navigate("/admin/all-properties");
     } catch (error) {
       console.log(error);
     }
   };
 
+  const sold = Cookies.get("propertyStatus");
+
   useEffect(() => {
     getSingleProperty();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propertyId]);
 
   return (
@@ -226,7 +226,7 @@ export const PropertyDetails = () => {
               effect="blur"
               src={single?.salesSupport?.avatar}
               alt=""
-              className="w-[100px] h-[100px] mx-auto rounded-full"
+              className="w-[100px] h-[100px] mx-auto rounded-full object-cover"
             />
             <h1 className="font-semibold text-xl mt-5">
               {single?.salesSupport?.name}
@@ -247,18 +247,16 @@ export const PropertyDetails = () => {
             </h1>
 
             <Button
-              disabled={sold.propertyStatus}
+              disabled={sold}
               className="bg-[#F78214] w-[227px] h-[44px]  mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg"
               onClick={updatePropertyStatus}
               style={
-                sold.propertyStatus === "sold"
+                sold === "sold"
                   ? { backgroundColor: "gray" }
-                  : {}
+                  : { backgroundColor: "#F78214" }
               }
             >
-              {sold.propertyStatus === "sold"
-                ? "Property Sold"
-                : "Mark as Sold"}
+              {sold === "sold" ? "Property Sold" : "Mark as Sold"}
             </Button>
             <Button
               className="border border-[#F78214] w-[227px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg"
