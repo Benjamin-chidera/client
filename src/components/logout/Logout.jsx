@@ -17,7 +17,7 @@ export const Logout = () => {
     if (token) {
       decode = jwtDecode(token);
 
-      console.log(decode);
+     
     }
   } catch (error) {
     console.log("Error decoding token", error);
