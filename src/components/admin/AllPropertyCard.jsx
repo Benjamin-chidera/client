@@ -5,7 +5,7 @@ import { IoBedOutline } from "react-icons/io5";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
 import { FaRegSquare } from "react-icons/fa";
-// import sold from "../../assets/Image/SOLD.png";
+import sold from "../../assets/Image/SOLD.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -49,13 +49,13 @@ export const AllPropertyCard = ({ filterByType }) => {
             squareFeet,
             updatedAt,
             tags,
-            // propertyStatus,
+            propertyStatus,
           } = p;
 
           return (
             <div
               key={_id}
-              className=" space-y-3 bg-[#181818] py-5 px-3 rounded-xl"
+              className=" space-y-3 bg-[#181818] py-5 px-3 rounded-xl relative"
             >
               <LazyLoadImage
                 loading="lazy"
@@ -64,6 +64,8 @@ export const AllPropertyCard = ({ filterByType }) => {
                 alt=""
                 className="w-[250px] h-[250px] rounded-[15.14px] object-cover object-center"
               />
+
+            {propertyStatus === "sold" &&  <LazyLoadImage src={sold} width={150} className=" mx-auto absolute top-20 left-0 right-0"/>}
               <p className=" text-xs text-red-700 font-semibold">
                 Posted on {new Date(updatedAt).toDateString()}
               </p>
