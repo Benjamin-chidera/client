@@ -28,7 +28,7 @@ export const PropertyDetails = () => {
 
   const url = `https://yemsyays-realestate-server.onrender.com/api/v1/properties/${propertyId}`;
 
-  const soldUrl = `http://localhost:3000/api/v1/properties/propertyStatus/${propertyId}`;
+  const soldUrl = `https://yemsyays-realestate-server.onrender.com/api/v1/properties/propertyStatus/${propertyId}`;
 
   const getSingleProperty = async () => {
     try {
@@ -51,13 +51,11 @@ export const PropertyDetails = () => {
         }
       );
       setSold(data.property);
-      // navigate("/admin/all-properties");
+      navigate("/admin/all-properties");
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(sold.propertyStatus);
 
   useEffect(() => {
     getSingleProperty();
