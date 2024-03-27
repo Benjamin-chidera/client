@@ -31,7 +31,6 @@ export const Navbar = () => {
     if (token) {
       decode = jwtDecode(token);
 
-      console.log(decode);
     }
   } catch (error) {
     console.log("Error decoding token", error);
@@ -57,9 +56,7 @@ export const Navbar = () => {
     setSearch(e.target.value);
   };
 
-  const openLogout = () => {
-    setIsLoggingOut(!isLoggingOut);
-  };
+
 
   return (
     <nav>

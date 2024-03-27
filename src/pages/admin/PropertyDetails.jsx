@@ -20,12 +20,15 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const PropertyDetails = () => {
   const [single, setSingle] = useState();
+  const [sold, setSold] = useState([]);
   const { propertyId } = useParams();
   const { deleteProperty } = useGlobalContext();
   const navigate = useNavigate();
   const token = Cookies.get("token");
 
   const url = `https://yemsyays-realestate-server.onrender.com/api/v1/properties/${propertyId}`;
+
+  const soldUrl = `http://localhost:3000/api/v1/properties/propertyStatus/${propertyId}`;
 
   const getSingleProperty = async () => {
     try {
@@ -37,7 +40,24 @@ export const PropertyDetails = () => {
       console.log(error);
     }
   };
-  console.log(single);
+
+  const updatePropertyStatus = async () => {
+    try {
+      const { data } = await axios.patch(
+        soldUrl,
+        { propertyStatus: "sold" },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setSold(data.property);
+      // navigate("/admin/all-properties");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(sold.propertyStatus);
 
   useEffect(() => {
     getSingleProperty();
@@ -228,8 +248,19 @@ export const PropertyDetails = () => {
               sold?
             </h1>
 
-            <Button className="bg-[#F78214] w-[227px] h-[44px]  mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg">
-              Mark as Sold
+            <Button
+              disabled={sold.propertyStatus}
+              className="bg-[#F78214] w-[227px] h-[44px]  mx-auto mt-10 text-[#fff] flex justify-center items-center rounded-lg"
+              onClick={updatePropertyStatus}
+              style={
+                sold.propertyStatus === "sold"
+                  ? { backgroundColor: "gray" }
+                  : {}
+              }
+            >
+              {sold.propertyStatus === "sold"
+                ? "Property Sold"
+                : "Mark as Sold"}
             </Button>
             <Button
               className="border border-[#F78214] w-[227px] h-[44px] mx-auto mt-4 text-[#F78214] flex justify-center items-center rounded-lg"
