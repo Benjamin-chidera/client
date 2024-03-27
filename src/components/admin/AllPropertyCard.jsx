@@ -62,7 +62,7 @@ export const AllPropertyCard = ({ filterByType }) => {
                 effect="blur"
                 src={images[0]}
                 alt=""
-                className="w-[250px] h-[250px] rounded-[15.14px]"
+                className="w-[250px] h-[250px] rounded-[15.14px] object-cover object-center"
               />
               <p className=" text-xs text-red-700 font-semibold">
                 Posted on {new Date(updatedAt).toDateString()}
@@ -71,7 +71,9 @@ export const AllPropertyCard = ({ filterByType }) => {
               <div className="flex">
                 <p className="text-sm">{tags.toUpperCase()}</p>
               </div>
-              <h1 className="text-lg font-semibold">{title}</h1>
+              <h1 className="text-lg font-semibold">
+                {title.substring(0, 23)}...
+              </h1>
 
               <address className="flex gap-2 items-center text-sm font-semibold not-italic">
                 <IoLocation />{" "}
