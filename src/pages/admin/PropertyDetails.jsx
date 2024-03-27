@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { RiArrowDropLeftFill } from "react-icons/ri";
 import { PiHouse } from "react-icons/pi";
 import { Link, useParams, useNavigate } from "react-router-dom";
-
-import vi from "../../assets/Image/vi.png";
 import { MdLocationOn } from "react-icons/md";
 import { LuBath } from "react-icons/lu";
 import { GiHomeGarage } from "react-icons/gi";
@@ -20,7 +18,6 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const PropertyDetails = () => {
   const [single, setSingle] = useState();
-  // const [sold, setSold] = useState([]);
   const { propertyId } = useParams();
   const { deleteProperty } = useGlobalContext();
   const navigate = useNavigate();
@@ -51,7 +48,7 @@ export const PropertyDetails = () => {
         }
       );
       Cookies.set("propertyStatus", data.property.propertyStatus);
-      // navigate("/admin/all-properties");
+      navigate("/admin/all-properties");
     } catch (error) {
       console.log(error);
     }
