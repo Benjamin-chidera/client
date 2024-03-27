@@ -58,6 +58,7 @@ export const PropertyDetails = () => {
 
   useEffect(() => {
     getSingleProperty();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [propertyId]);
 
   return (
