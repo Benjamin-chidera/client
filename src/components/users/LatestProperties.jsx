@@ -50,7 +50,7 @@ export const LatestProperties = () => {
                       effect="blur"
                       src={images[0]}
                       alt=""
-                      className=" h- md:h-[220px] md:w-[470px] object-cover mb-3 md:mb-0"
+                      className=" h-[140px] w-[300px] md:h-[220px] md:w-[470px] object-cover mb-3 md:mb-0"
                     />
                   )}
 
